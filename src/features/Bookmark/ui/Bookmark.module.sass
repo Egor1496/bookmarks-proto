@@ -1,0 +1,101 @@
+@import url("../../../app/styles/base-params.css")
+
+.bookamrkWrap
+  position: relative
+  &:hover .changeBookmark, &:hover .deleteBookmark
+    visibility: block
+    opacity: 1
+  .changeBookmark, .deleteBookmark
+    position: absolute
+    top: 7px
+    right: 7px
+    z-index: 1
+    visibility: none
+    opacity: 0
+    transition: opacity 0.5s
+    &:hover
+      cursor: pointer
+      transform: scale(1.2)
+      path
+        fill: var(--color3)
+    svg
+      width: 25px
+      height: 25px
+      path
+        fill: var(--color4)
+  .deleteBookmark
+    top: 7px
+    left: 7px
+    right: auto
+
+.bookmark
+  position: relative
+  display: block
+  align-self: flex-start
+  width: 250px
+  padding-bottom: 5px
+  border-radius: 8px
+  border: 2px solid var(--color4)
+  background-color: var(--color3)
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px
+  text-decoration: none
+  overflow: hidden
+  &:hover
+    filter: contrast(1.5)
+
+.main-inner
+  position: relative
+  &:nth-child(3)
+    border-top: 1px solid var(--color4)
+
+.inner
+  padding: 0 10px
+
+.preview
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  width: 100%
+  min-height: 94px
+  background-color: var(--color5)
+  img
+    width: 30%
+    height: 30%
+    margin: 10px
+    border-radius: 50%
+
+.title
+  text-align: center
+  padding: 10px 10px
+  background-color: var(--color5)
+
+.description
+  margin: 5px 0
+  margin-bottom: 0
+  color: var(--color5)
+
+.tags
+  display: flex
+  flex-wrap: wrap
+  column-gap: 10px
+  margin: 5px 0
+  padding: 0
+  list-style-type: none
+  .tags-item
+    margin: 0
+
+.group
+  display: flex
+  flex-wrap: wrap
+  column-gap: 10px
+  margin: 5px 0
+  margin-bottom: 0
+  padding: 0
+  list-style-type: none
+  .group-item
+    margin: -5px
+
+.time
+  margin: 5px 0
+  margin-bottom: 0
