@@ -1042,3 +1042,167 @@
     }
   ]
 }
+
+
+
+
+
+
+
+
+{
+  "bookmarks": [
+    {
+      "link": "https://www.youtube.com/",
+      "description": "Видеохостинг, предоставляющий пользователям услуги хранения, доставки и показа видео.",
+      "tags": "Видео, Соц. сеть",
+      "group": "избранное"
+    },
+    {
+      "link": "https://dzen.ru",
+      "description": "Это Дзен — платформа для создания и просмотра контента.",
+      "tags": "Видео, Соц. сеть",
+      "group": "избранное"
+    },
+    {
+      "link": "https://vk.com/",
+      "description": "ВКонта́кте — российская социальная сеть",
+      "tags": "Соц. сеть",
+      "group": "избранное"
+    },
+    {
+      "link": "https://mail.ru/",
+      "description": "Почта Mail.ru — крупнейшая бесплатная почта",
+      "tags": "Почта",
+      "group": "избранное"
+    },
+    {
+      "link": "https://translate.yandex.ru/",
+      "description": "Перевод с английского",
+      "tags": "Переводчик",
+      "group": "избранное, Инструменты"
+    },
+    {
+      "link": "https://www.deepl.com/en/translator#ru",
+      "description": "онлайн-переводчик, работающий на основе машинного перевода",
+      "tags": "Переводчик",
+      "group": "Инструменты"
+    },
+    {
+      "link": "https://sbsplay.net/index.php?do=favorites",
+      "description": "Мои закладки » Самые БезБашенные Сериалы",
+      "tags": "Видео",
+      "group": "Смотреть"
+    },
+    {
+      "link": "https://dvd.vse-chasti-filmov.biz/",
+      "description": "Смотреть онлайн все части фильмов",
+      "tags": "Видео",
+      "group": "Смотреть"
+    },
+    {
+      "link": "https://tardis.fandom.com/ru/wiki/Снеговики_(ТВ_история)",
+      "description": "Снеговики (ТВ история)",
+      "tags": "Видео",
+      "group": "Смотреть"
+    },
+    {
+      "link": "https://vse-filmy-akterov.ru/",
+      "description": "Фильмы актеров смотреть онлайн",
+      "tags": "Видео",
+      "group": "Смотреть"
+    },
+    {
+      "link": "https://tf2pickup.ru/",
+      "tags": "Пикап, 6v6",
+      "group": "TF2"
+    },
+    {
+      "link": "https://sib.tf2pickup.ru/",
+      "tags": "Пикап, 6v6",
+      "group": "TF2"
+    },
+    {
+      "link": "https://tf2center.com/lobbies",
+      "description": "TF2. TF2Center - это место, где можно играть в игры TF2, основанные на особых режимах соревновательной игры",
+      "tags": "9v9, 6v6, 4v4, 2v2",
+      "group": "TF2"
+    },
+    {
+      "link": "https://logs.tf/",
+      "description": "Статистика соревнований Team Fortress 2 Автоматически генерируемая статистика из журналов сервера Игроки",
+      "tags": "Статистика",
+      "group": "TF2"
+    },
+    {
+      "link": "https://tempus2.xyz/",
+      "description": "Мониторинг серверов tempus",
+      "tags": "Статистика, Мониторинг",
+      "group": "TF2"
+    },
+    {
+      "link": "https://cfg.tf/angle/",
+      "description": "CFG.TF - это бесплатный кроссплатформенный генератор конфигураций Team Fortress 2 ",
+      "tags": "Конфигуратор",
+      "group": "TF2"
+    },
+    {
+      "link": "https://hl.tf2pickup.eu/",
+      "tags": "Пикап, 9v9",
+      "group": "TF2"
+    },
+    {
+      "link": "https://tempushub.xyz/recentrecords",
+      "description": "Мониторинг серверов tempus",
+      "tags": "Статистика, Мониторинг",
+      "group": "TF2"
+    },
+    {
+      "link": "https://essentials.tf/beyond/jump",
+      "description": "DreamHack: Beyond The Limit - TF2 (2022)",
+      "tags": "Турнир",
+      "group": "TF2"
+    },
+    {
+      "link": "https://etf2l.org/recruitment/276926/",
+      "tags": "ETF2L",
+      "group": "TF2"
+    },
+    {
+      "link": "https://www.faceit.com/ru",
+      "description": "ВАША ВЕДУЩАЯ ПЛАТФОРМА СОРЕВНОВАТЕЛЬНЫХ ИГР",
+      "tags": "Турнир",
+      "group": "TF2"
+    },
+    {
+      "link": "https://ozfstats.com/loganalyser/",
+      "description": "Основанная на статистике система ранжирования для австралийской соревновательной лиги Team Fortress 2, ozfortress",
+      "tags": "Статистика",
+      "group": "TF2"
+    },
+    {
+      "link": "https://tf2.online/",
+      "description": "Пикап.-онлаин. Соревновательная площадка 6v6",
+      "tags": "Пикап, 6v6",
+      "group": "TF2"
+    },
+        {
+      "link": "https://metanit.com/sharp/tutorial/",
+      "description": "Полное руководство по языку программирования С# 11 и платформе .NET",
+      "tags": "Учебник",
+      "group": "Web"
+    },
+    {
+      "link": "https://www.youtube.com/playlist?list=PLQOaTSbfxUtD6kMmAYc8Fooqya3pjLs1N",
+      "description": "C# УРОКИ | C# ОТ НОВИЧКА К ПРОФЕССИОНАЛУ",
+      "tags": "Учебник",
+      "group": "Web"
+    },
+    {
+      "link": "https://replit.com/languages/csharp",
+      "description": "Компилируйте, кодируйте, создавайте и изучайте вместе с C#",
+      "tags": "Компилятор",
+      "group": "Инструменты"
+    }
+  ]
+}
