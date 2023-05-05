@@ -16,8 +16,8 @@ const MainMenu = ({ groups }) => {
     <div className={sass["mainMenuWrap"]}>
       <Link to="/bookmarks-proto" ><Logo /></Link>
       <Br style={{ "margin": "10px 0" }} />
-      <BaseDropMenu />
-      <Br style={{ "margin": "10px 0" }} />
+      {/* <BaseDropMenu />
+      <Br style={{ "margin": "10px 0" }} /> */}
       <GroupLinks groups={groups} />
       <Br style={{ "margin": "10px 0" }} />
       <ThemeSelect setTheme={setTheme} />
