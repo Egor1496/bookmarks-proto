@@ -14,7 +14,7 @@ const MainMenu = ({ groups }) => {
 
   return (
     <div className={sass["mainMenuWrap"]}>
-      <Link to="/" ><Logo /></Link>
+      <Link to="/bookmarks-proto" ><Logo /></Link>
       <Br style={{ "margin": "10px 0" }} />
       <BaseDropMenu />
       <Br style={{ "margin": "10px 0" }} />

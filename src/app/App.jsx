@@ -14,11 +14,11 @@ const App = () => {
 	return (
 		<div>
 			<Routes>
-				<Route path="/" element={<Layout />}>
+				<Route path="bookmarks-proto/" element={<Layout />}>
 					<Route index element={<Main />} />
-					<Route path="/demo" element={<Demo />} />
-					<Route path="/ui" element={<UIKit />} />
-					<Route path="*" element={<Error />} />
+					<Route path="bookmarks-proto/demo" element={<Demo />} />
+					<Route path="bookmarks-proto/ui" element={<UIKit />} />
+					<Route path="bookmarks-proto/*" element={<Error />} />
 				</Route>
 			</Routes>
 		</div>
