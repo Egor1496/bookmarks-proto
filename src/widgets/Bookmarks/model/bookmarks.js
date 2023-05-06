@@ -80,10 +80,21 @@ const getGroups = () => {
 	});
 };
 
-const getBookmarks = (filterName = ["", ""], sortType = "title") => {
+const getBookmarks = (filterName = ["", ""], sortType = "title", searchType = "title", searchText = "") => {
 	filledBookmarks = filter(filterName, bookmarks);
 	filledBookmarks = sort(sortType, filledBookmarks);
+	filledBookmarks = searchBookmarks(searchType, searchText, filledBookmarks);
 	return filledBookmarks;
+};
+
+const searchBookmarks = (type = "title", text = "", bookmarks) => {
+	const textSearch = text.trim().toLowerCase();
+	console.log(bookmarks[0].description);
+	return bookmarks.filter((elem) => {
+		const elemStr = elem[type]?.trim().toLowerCase();
+		if (~elemStr.indexOf(textSearch) || textSearch === "") return elem;
+		else return false;
+	});
 };
 
 const filter = (filter, bookmarks) => {

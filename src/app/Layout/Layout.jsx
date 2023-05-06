@@ -25,6 +25,14 @@ const Layout = () => {
 	const [listGroup, setListGroup] = useState(cleanGroups);
 	const [listTags, setListTags] = useState(cleanTags);
 
+	const [searchState, setSearchState] = useState("");
+
+	const onChangeInput = (e) => {
+		setBookmarks((prev) => {
+			return getBookmarks(filterName, "title", "title", searchState);
+		});
+	}
+
 	const setState = (setList, newList, newFilterName) => {
 		setFilterName(newFilterName);
 		setBookmarks(getBookmarks(newFilterName));
@@ -79,7 +87,9 @@ const Layout = () => {
 			</nav>
 			<div className={sass["col-2"]}>
 				<header className={sass.header} >
-					<MainHeader />
+					<BookmarksContext.Provider value={[searchState, setSearchState, onChangeInput]}>
+						<MainHeader />
+					</BookmarksContext.Provider>
 				</header>
 				<main className={sass.main}>
 					<article className={sass.article} >
