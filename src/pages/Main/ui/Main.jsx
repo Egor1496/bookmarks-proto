@@ -8,7 +8,12 @@ import { BookmarksContext } from "../../../processes/model/context";
 
 const Main = () => {
 
-  const [bookmarks, setBookmarks, groupName] = useContext(BookmarksContext);
+  const [
+    bookmarks,
+    setBookmarks,
+    groupName,
+    updateGroupsAndTags
+  ] = useContext(BookmarksContext);
 
   return (
     <div className={sass.main}>
@@ -26,16 +31,19 @@ const Main = () => {
             bookmarks={bookmarks}
             setBookmarks={setBookmarks}
             uploadBookmarks={uploadBookmarks}
+            updateGroupsAndTags={updateGroupsAndTags}
           />
           <LoadBookmark
             uploadBookmarks={uploadBookmarks}
             setBookmarks={setBookmarks}
+            updateGroupsAndTags={updateGroupsAndTags}
           />
         </div>
       </div>
       <Bookmarks
         bookmarks={bookmarks}
         setBookmarks={setBookmarks}
+        updateGroupsAndTags={updateGroupsAndTags}
       />
     </div>
   );

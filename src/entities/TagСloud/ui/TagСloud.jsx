@@ -17,7 +17,7 @@ const TagСloud = ({ tags = [] }) => {
       {
         activeList.indexOf(true) !== -1 ? (
           <div className={sass.clerTags}>
-            <BaseButton text="Отмена" callBack={() => { onClick("clean") }}>
+            <BaseButton text="Отмена" callBack={() => { onClick("clean") }} btnStyle="transparent">
               <BiReset />
             </BaseButton>
           </div>

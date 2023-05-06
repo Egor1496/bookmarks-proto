@@ -20,16 +20,24 @@ const DEFAULT_TEXTAREA = `
 }
 `;
 
-const LoadBookmark = ({ uploadBookmarks, setBookmarks }) => {
+const LoadBookmark = (props) => {
+
+  const {
+    uploadBookmarks,
+    setBookmarks,
+    updateGroupsAndTags
+  } = props;
+
   const [modalActive, modalSetActive] = useState(false);
 
   const [textarea, setTextarea] = useState(DEFAULT_TEXTAREA);
 
-  const loadBookmark = (bookmarks) => {
+  const onАccept = (bookmarks) => {
     getObject(bookmarks).bookmarks.forEach(el => {
       el.title = getTitle(el.title, el.link);
       uploadBookmarks({ ...el }, setBookmarks);
     });
+    updateGroupsAndTags();
   }
 
   return (
@@ -49,7 +57,7 @@ const LoadBookmark = ({ uploadBookmarks, setBookmarks }) => {
         </div>
         <div className={sass.buttonWrap}>
           <BaseButton text="Принять"
-            callBack={() => { modalSetActive(false); loadBookmark(textarea); }}
+            callBack={() => { modalSetActive(false); onАccept(textarea); }}
           />
           <BaseButton text="Отмена" btnStyle="transparent"
             callBack={() => { modalSetActive(false) }}

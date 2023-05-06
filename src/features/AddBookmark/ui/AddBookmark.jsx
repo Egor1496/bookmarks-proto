@@ -6,7 +6,13 @@ import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 import { BookmarkModal } from "../../../entities";
 import { BaseButton } from "../../../shared/ui";
 
-const AddBookmark = ({ uploadBookmarks, setBookmarks }) => {
+const AddBookmark = (props) => {
+
+  const {
+    uploadBookmarks,
+    setBookmarks,
+    updateGroupsAndTags
+  } = props;
 
   const [modalActive, modalSetActive] = useState(false);
 
@@ -22,7 +28,8 @@ const AddBookmark = ({ uploadBookmarks, setBookmarks }) => {
     <div className={sass.main}>
       <BookmarkModal
         onАccept={(newBookmark) => {
-          uploadBookmarks({ ...newBookmark }, setBookmarks)
+          uploadBookmarks({ ...newBookmark }, setBookmarks);
+          updateGroupsAndTags();
         }}
         modalActive={modalActive}
         modalSetActive={modalSetActive}

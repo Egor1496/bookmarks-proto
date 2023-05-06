@@ -3,24 +3,26 @@ import { Outlet } from "react-router-dom";
 
 import sass from "./Layout.module.sass";
 
-import { FilterButtons, BookmarksContext } from "../../processes/model/context"
+import { FilterButtons, BookmarksContext } from "../../processes/model/context";
 
 import { MainMenu, MainHeader, MainAside, MainFooter, getGroups, getTags, getBookmarks } from "../../widgets";
 
-
 const Layout = () => {
+
+	const allTags = getTags();
+	const allGroups = getGroups();
+
+	const cleanGroups = new Array(allGroups.size).fill(false);
+	const cleanTags = new Array(allTags.size).fill(false);
 
 	const [filterName, setFilterName] = useState(["", ""]);
 
 	const [bookmarks, setBookmarks] = useState(getBookmarks(filterName, "title"));
 
-	const [groupLinks, setGroupLinks] = useState(getGroups());
-	const [tagCloud, setTagCloud] = useState(getTags());
+	const [groupLinks, setGroupLinks] = useState(allGroups);
+	const [tagCloud, setTagCloud] = useState(allTags);
 
-	const cleanGroups = new Array(getGroups().size).fill(false);
 	const [listGroup, setListGroup] = useState(cleanGroups);
-
-	const cleanTags = new Array(getTags().size).fill(false);
 	const [listTags, setListTags] = useState(cleanTags);
 
 	const setState = (setList, newList, newFilterName) => {
@@ -29,6 +31,11 @@ const Layout = () => {
 		setList(newList);
 		setTagCloud(getTags());
 	};
+
+	const updateGroupsAndTags = () => {
+		setTagCloud(getTags());
+		setGroupLinks(getGroups());
+	}
 
 	const onClickGroup = (i, text) => {
 		const newList = cleanGroups;
@@ -56,6 +63,13 @@ const Layout = () => {
 		}
 	}
 
+	const contextBookmarks = [
+		bookmarks,
+		setBookmarks,
+		filterName[0],
+		updateGroupsAndTags
+	];
+
 	return (
 		<div className={sass.mainWrap}>
 			<nav className={`${sass["col-1"]} ${sass.nav}`}>
@@ -69,7 +83,8 @@ const Layout = () => {
 				</header>
 				<main className={sass.main}>
 					<article className={sass.article} >
-						<BookmarksContext.Provider value={[bookmarks, setBookmarks, filterName[0]]}>
+						<BookmarksContext.Provider
+							value={contextBookmarks}>
 							<Outlet />
 						</BookmarksContext.Provider>
 					</article>
@@ -89,7 +104,4 @@ const Layout = () => {
 
 export { Layout };
 
-
-// обновление облака тэгов и груп при добавлении/изменении/удалении закладки
-// обновлении облака закладок при клике на группу
 // перенести из лаяута в процесс закладки и облоко тэгов групп

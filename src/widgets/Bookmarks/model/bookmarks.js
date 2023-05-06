@@ -2,7 +2,18 @@ import { nanoid } from "nanoid";
 
 import { getJSON, setStore, getStore, getObject } from "../../../shared/model";
 
+const bookmarkTmp = {
+	id: nanoid(),
+	link: "https://www.youtube.com/",
+	title: "youtube",
+	description: "Видеохостинг, предоставляющий пользователям услуги хранения, доставки и показа видео.",
+	tags: "Видео, Соц. сеть",
+	group: "Избранные",
+};
+
 let bookmarks = getObject(getStore("bookmarks"));
+
+if (bookmarks.length === 0) bookmarks = [bookmarkTmp];
 
 let filledBookmarks;
 
@@ -13,7 +24,6 @@ const addTagsAndGroups = (newTags, newGroups) => {
 	newTags.split(",").forEach((tag) => {
 		tags.add(tag.trim());
 	});
-
 	newGroups.split(",").forEach((group) => {
 		groups.add(group.trim());
 	});
@@ -35,6 +45,7 @@ const deleteBookmark = (id, setBookmarks) => {
 	bookmarks.forEach((el, i) => {
 		if (el.id === id) {
 			bookmarks.splice(i, 1);
+			filledBookmarks.splice(i, 1);
 			setStore("bookmarks", getJSON([...bookmarks]));
 			setBookmarks(bookmarks);
 		}
