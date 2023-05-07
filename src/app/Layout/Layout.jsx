@@ -29,7 +29,7 @@ const Layout = () => {
 
 	const onChangeInput = (e) => {
 		setBookmarks((prev) => {
-			return getBookmarks(filterName, "title", "title", searchState);
+			return getBookmarks(filterName, "title", searchState);
 		});
 	}
 
@@ -115,3 +115,11 @@ const Layout = () => {
 export { Layout };
 
 // перенести из лаяута в процесс закладки и облоко тэгов групп
+// сохранение настроек темы и выбора вида и поиска и сортировки
+// облачное хранилище закладок
+// чекбоксы выбор поиска и сортировки
+// перекинуть темы в настройки
+// темы цветами, а не цифрами
+// вид отображения карточек
+// варнинги и оповещения
+// кнопка бэкап закладок

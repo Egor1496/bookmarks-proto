@@ -80,25 +80,36 @@ const getGroups = () => {
 	});
 };
 
-const getBookmarks = (filterName = ["", ""], sortType = "title", searchType = "title", searchText = "") => {
+const getBookmarks = (filterName, sortType, searchText) => {
 	filledBookmarks = filter(filterName, bookmarks);
 	filledBookmarks = sort(sortType, filledBookmarks);
-	filledBookmarks = searchBookmarks(searchType, searchText, filledBookmarks);
+	filledBookmarks = searchBookmarks(searchText, filledBookmarks);
 	return filledBookmarks;
 };
 
-const searchBookmarks = (type = "title", text = "", bookmarks) => {
-	const textSearch = text.trim().toLowerCase();
-	console.log(bookmarks[0].description);
+const searchBookmarks = (textSearch = "", bookmarks) => {
+	textSearch = textSearch.trim().toLowerCase();
+
+	if (!textSearch) return bookmarks;
+
 	return bookmarks.filter((elem) => {
-		const elemStr = elem[type]?.trim().toLowerCase();
-		if (~elemStr.indexOf(textSearch) || textSearch === "") return elem;
+		let title = elem?.title || "",
+			description = elem?.description || "",
+			tags = elem?.tags || "";
+
+		title = title.trim().toLowerCase();
+		description = description.trim().toLowerCase();
+		tags = tags.trim().toLowerCase();
+
+		if (~title.indexOf(textSearch) || ~description.indexOf(textSearch) || ~tags.indexOf(textSearch)) return elem;
 		else return false;
 	});
 };
 
-const filter = (filter, bookmarks) => {
+const filter = (filter = ["", ""], bookmarks) => {
 	let [groupNames, tagsNames] = filter;
+
+	if (!groupNames.length === 0 && !tagsNames.length === 0) return bookmarks;
 
 	groupNames = groupNames.trim().split(",");
 	tagsNames = tagsNames.trim().split(",");
@@ -112,13 +123,15 @@ const filter = (filter, bookmarks) => {
 		let isSuitableGroup = false,
 			isSuitableTags = false;
 
-		for (let i = 0; i < groupNames.length; i++) {
-			const name = groupNames[i].trim().toLowerCase();
-			if (~cleanGroup.indexOf(name) || name === "") {
-				isSuitableGroup = true;
-				break;
+		if (!groupNames.length === 0) isSuitableGroup = true;
+		else
+			for (let i = 0; i < groupNames.length; i++) {
+				const name = groupNames[i].trim().toLowerCase();
+				if (~cleanGroup.indexOf(name) || name === "") {
+					isSuitableGroup = true;
+					break;
+				}
 			}
-		}
 
 		if (tagsNames.length === 1) isSuitableTags = true;
 		else
@@ -154,7 +167,7 @@ const sortDescriptionBookmarks = (bookmarks) => {
 	});
 };
 
-const sort = (sortType, bookmarks) => {
+const sort = (sortType = "title", bookmarks) => {
 	const type = {
 		title: sortTitleBookmarks,
 		description: sortDescriptionBookmarks,
