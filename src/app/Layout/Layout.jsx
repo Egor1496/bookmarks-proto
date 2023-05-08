@@ -65,7 +65,7 @@ const Layout = () => {
 					newFilterName = [filterName[0], filterName[1].replace(text + ",", "")];
 				setState(setListTags, newList, newFilterName);
 				break;
-			case "clean":
+			default: // clean
 				setState(setListTags, cleanTags, [filterName[0], ""]);
 				break;
 		}
@@ -104,7 +104,7 @@ const Layout = () => {
 						</FilterButtons.Provider>
 					</aside>
 				</main>
-				<footer className={sass.footer} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+				<footer className={sass.footer}>
 					<MainFooter />
 				</footer>
 			</div>
@@ -122,4 +122,5 @@ export { Layout };
 // темы цветами, а не цифрами
 // вид отображения карточек
 // варнинги и оповещения
-// кнопка бэкап закладок
+// транспарент вид карточки
+// БГ при удалении группы очищяет все

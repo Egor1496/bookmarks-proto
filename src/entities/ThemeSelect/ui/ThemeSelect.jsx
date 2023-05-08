@@ -9,7 +9,7 @@ const ThemeSelect = ({ setTheme }) => {
     <div className={css.main}>
       {
         [...Array(29)].map((el, i) =>
-          <BaseButton key={i} text={i + 1} callBack={() => { setTheme(i) }} />
+          <BaseButton key={i} text={i + 1} callBack={() => { setTheme(i); localStorage.setItem("themeNumber", i) }} />
         )
       }
     </div>

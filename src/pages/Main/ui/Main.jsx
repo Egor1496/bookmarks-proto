@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import sass from "./Main.module.sass"
 
 import { Sort } from "../../../entities";
-import { SelectStyleBookmark, Filters, AddBookmark, LoadBookmark } from "../../../features";
+import { SelectStyleBookmark, GetFile, AddBookmark, LoadBookmark } from "../../../features";
 import { Bookmarks, uploadBookmarks } from "../../../widgets";
 import { BookmarksContext } from "../../../processes/model/context";
 
@@ -17,14 +17,16 @@ const Main = () => {
 
   return (
     <div className={sass.main}>
-      <div className={sass["inner"]}>
+      <div className={sass.inner}>
         <div className={sass.countBookmarks}>{groupName || "Всего"} - {bookmarks.length}</div>
-        <SelectStyleBookmark />
-      </div>
-      <div className={sass["inner"]}>
-        <div className={sass["sort-wrap"]}>
+        <div className={sass.buttonWrap}>
           <Sort />
-          <Filters />
+          <SelectStyleBookmark />
+        </div>
+      </div>
+      <div className={sass.inner}>
+        <div className={sass["sort-wrap"]}>
+          <GetFile />
         </div>
         <div className={sass["sort-wrap"]}>
           <AddBookmark

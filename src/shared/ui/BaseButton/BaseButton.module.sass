@@ -25,11 +25,11 @@
     border-bottom: 3px solid var(--color2)
     background-color: var(--color5)
     color: var(--сolorControl1)
-  svg
+  svg, svg g
     fill: var(--color2)
-  &:hover svg
+  &:hover svg, &:hover svg g
     fill: var(--color5)
-  &:active svg
+  &:active svg, &:active svg g
     fill: var(--color2)
 
 .transparent
@@ -54,7 +54,7 @@
 .big
   font-size: 20px
   // padding: 10px 20px
-  svg
+  svg, svg g
     width: 30px
     height: 30px
 
@@ -75,7 +75,7 @@
     background-color: var(--bgDisableControl2)
     color: var(--сolorControl1)
     transform: none
-  svg, &:hover svg
+  svg, svg g, &:hover svg, &:hover svg g
     fill: var(--color2)
 
 .buttonActive
@@ -85,7 +85,7 @@
   color: var(--сolorControl2)
   box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .3) 0 6px 20px
   transform: scale(1.05)
-  svg
+  svg, svg g
     fill: var(--color5)
 
 .top
