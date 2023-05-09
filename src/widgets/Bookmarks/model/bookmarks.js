@@ -2,18 +2,44 @@ import { nanoid } from "nanoid";
 
 import { getJSON, setStore, getStore, getObject } from "../../../shared/model";
 
-const bookmarkTmp = {
-	id: nanoid(),
-	link: "https://www.youtube.com/",
-	title: "youtube",
-	description: "Видеохостинг, предоставляющий пользователям услуги хранения, доставки и показа видео.",
-	tags: "Видео, Соц. сеть",
-	group: "Избранные",
-};
+const bookmarksTmp = [
+	{
+		id: nanoid(),
+		link: "https://www.youtube.com/",
+		title: "youtube",
+		description: "Видеохостинг, предоставляющий пользователям услуги хранения, доставки и показа видео.",
+		tags: "Видео, Соц. сеть",
+		group: "Избранные",
+	},
+	{
+		id: nanoid(),
+		link: "https://mail.ru/",
+		title: "mail",
+		description: "Почта Mail.ru — крупнейшая бесплатная почта.",
+		tags: "Почта",
+		group: "Избранные",
+	},
+	{
+		id: nanoid(),
+		link: "https://dzen.ru",
+		title: "dzen",
+		description: "Это Дзен — платформа для создания и просмотра контента.",
+		tags: "Видео, Соц. сеть",
+		group: "Избранные",
+	},
+	{
+		id: nanoid(),
+		link: "https://translate.yandex.ru/",
+		title: "translate.yandex",
+		description: "Перевод с английского",
+		tags: "Переводчик",
+		group: "Избранные, Инструменты",
+	},
+];
 
 let bookmarks = getObject(getStore("bookmarks"));
 
-if (bookmarks.length === 0) bookmarks = [bookmarkTmp];
+if (bookmarks.length === 0) bookmarks = bookmarksTmp;
 
 let filledBookmarks;
 
