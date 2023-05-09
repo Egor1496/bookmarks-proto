@@ -8,14 +8,17 @@ const BaseInput = (props) => {
 		setState,
 		readonly,
 		placeholder = "",
-		onChangeInput = () => { }
+		onChangeInput = (e) => { }
 	} = props;
 
 	return (
 		<div className={css.main}>
 			<input className={`${css.input} ${readonly && css.disable}`}
 				type="text" value={state}
-				onChange={(e) => { onChangeInput(e); setState(prev => e.target.value); }}
+				onChange={(e) => {
+					onChangeInput(e);
+					setState(e.target.value);
+				}}
 				readOnly={readonly}
 				placeholder={placeholder}
 			/>
