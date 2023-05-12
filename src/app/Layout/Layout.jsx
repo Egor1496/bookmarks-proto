@@ -75,7 +75,7 @@ const Layout = () => {
 		bookmarks,
 		setBookmarks,
 		filterName[0],
-		updateGroupsAndTags
+		updateGroupsAndTags,
 	];
 
 	return (

@@ -10,16 +10,17 @@ import { AiOutlineDelete } from 'react-icons/ai';
 
 const Bookmark = (props) => {
 
-  const baseURL = "https://besticon-demo.herokuapp.com/icon?url=",
-    postfixUrl = "&size=80";
-
   const {
     bookmark,
     onEditBookmark,
-    onDeleteBookmark
+    onDeleteBookmark,
+    styleNumber
   } = props;
 
   const fB = fillBookmark(bookmark);
+
+  const baseURL = "https://besticon-demo.herokuapp.com/icon?url=",
+    postfixUrl = "&size=80";
 
   const elemImg = fB.imgLink && (
     <div className={`${sass["preview"]}`}>
@@ -46,18 +47,7 @@ const Bookmark = (props) => {
     </ul>
   );
 
-  // const elemGroup = fB.group && (
-  //   <ul className={`${sass["group"]}`}>
-  //     {
-  //       fB.group.map((elem, i) =>
-  //         <li key={i} className={`${sass["group-item"]}`}>
-  //           <BaseButton text={elem.trim()} btnStyle="transparent" hoverStyle="noHoverStyle"><AiFillFolderOpen /></BaseButton>
-  //         </li>)
-  //     }
-  //   </ul>
-  // );
-
-  // const elemTime = fB.time && (<div className={`${sass["time"]}`}><span>{fB.time}</span></div>);
+  // console.log(styleNumber);
 
   return (
     <div className={sass.bookamrkWrap}>
@@ -67,7 +57,7 @@ const Bookmark = (props) => {
       <div className={sass.changeBookmark} onClick={(e) => { onEditBookmark(); }}>
         <RxPencil2 />
       </div>
-      <a className={`${sass["bookmark"]}`} href={fB.link} target="_blank" rel="noreferrer">
+      <a className={`${sass["bookmark"]} ${sass["style-" + styleNumber + ""]}`} href={fB.link} target="_blank" rel="noreferrer">
         <div className={`${sass["main-inner"]}`}>
           {elemImg}
           {elemTitle}
@@ -78,8 +68,6 @@ const Bookmark = (props) => {
             {elemDescription}
             <div className={`${sass["inner"]}`}>
               {elemTags}
-              {/* {elemGroup} */}
-              {/* {elemTime} */}
             </div>
           </div>
         }

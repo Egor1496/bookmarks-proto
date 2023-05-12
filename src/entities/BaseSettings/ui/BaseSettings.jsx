@@ -2,31 +2,36 @@ import React, { useState } from "react";
 
 import sass from "./BaseSettings.module.sass";
 import { IoMdSettings } from "react-icons/io";
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
-import { BaseButton } from "../../../shared/ui";
-import { getStore } from "../../../shared/model";
-import { ThemeSelect } from "../../../entities";
 import { ThemeParams } from "../../../features";
+import { ThemeSelect } from "../../../entities";
+import { getStore } from "../../../shared/model";
+import { BaseButton } from "../../../shared/ui";
 
 const BaseSettings = () => {
-  const storageTheme = localStorage.getItem("themeNumber") || 1;
+  const storageTheme = getStore("themeNumber", 1);
 
   const [numberTheme, setTheme] = useState(storageTheme);
-  const [themeActive, setThemeActive] = useState(false);
+
+  const [themeModal, setModalActive] = useState(false);
 
   const onClick = () => {
-    setThemeActive(!themeActive);
+    setModalActive(!themeModal);
   }
 
   return (
     <div className={sass.settings}>
       <BaseButton sizeStyle="big" btnStyle="transparent" callBack={onClick}><IoMdSettings /></BaseButton>
       {
-        themeActive && (
+        themeModal && (
           <>
             <div className={sass.modalBg}
-              onClick={() => setThemeActive(false)}></div>
+              onClick={() => setModalActive(false)}></div>
             <div className={sass.modal}>
+              <div className={sass.close} onClick={() => { setModalActive(false) }} >
+                <AiOutlineCloseCircle />
+              </div>
               <ThemeSelect setTheme={setTheme} />
             </div>
           </>

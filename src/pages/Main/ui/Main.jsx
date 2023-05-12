@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import sass from "./Main.module.sass"
 
 import { Sort } from "../../../entities";
@@ -12,8 +12,10 @@ const Main = () => {
     bookmarks,
     setBookmarks,
     groupName,
-    updateGroupsAndTags
+    updateGroupsAndTags,
   ] = useContext(BookmarksContext);
+
+  const [styleNumber, setStyleNumber] = useState(1);
 
   return (
     <div className={sass.main}>
@@ -21,7 +23,7 @@ const Main = () => {
         <div className={sass.countBookmarks}>{groupName || "Всего"} - {bookmarks.length}</div>
         <div className={sass.buttonWrap}>
           <Sort />
-          <SelectStyleBookmark />
+          <SelectStyleBookmark setStyleNumber={setStyleNumber} />
         </div>
       </div>
       <div className={sass.inner}>
@@ -43,6 +45,7 @@ const Main = () => {
         </div>
       </div>
       <Bookmarks
+        styleNumber={styleNumber}
         bookmarks={bookmarks}
         setBookmarks={setBookmarks}
         updateGroupsAndTags={updateGroupsAndTags}

@@ -1,9 +1,9 @@
-const setStore = (name, obj) => {
-	localStorage.setItem(name, obj);
+const setStore = (key = "null", value = "") => {
+	localStorage.setItem(key, value);
 };
 
-const getStore = (name) => {
-	return localStorage.getItem(name) || "[]";
+const getStore = (key = "null", defaultValue = "") => {
+	return localStorage.getItem(key) || defaultValue;
 };
 
 export { setStore, getStore };

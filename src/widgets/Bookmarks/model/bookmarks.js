@@ -37,7 +37,7 @@ const bookmarksTmp = [
 	},
 ];
 
-let bookmarks = getObject(getStore("bookmarks"));
+let bookmarks = getObject(getStore("bookmarks", "[]"));
 
 if (bookmarks.length === 0) bookmarks = bookmarksTmp;
 
@@ -48,10 +48,10 @@ const tags = new Set(),
 
 const addTagsAndGroups = (newTags, newGroups) => {
 	newTags.split(",").forEach((tag) => {
-		tags.add(tag.trim());
+		if (tag.trim()) tags.add(tag.trim());
 	});
 	newGroups.split(",").forEach((group) => {
-		groups.add(group.trim());
+		if (group.trim()) groups.add(group.trim());
 	});
 };
 
