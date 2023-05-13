@@ -25,9 +25,7 @@ const Layout = () => {
 	const [listGroup, setListGroup] = useState(cleanGroups);
 	const [listTags, setListTags] = useState(cleanTags);
 
-	const [searchState, setSearchState] = useState("");
-
-	const onChangeInput = (e) => {
+	const onChangeInput = (searchState) => {
 		setBookmarks((prev) => {
 			return getBookmarks(filterName, "title", searchState);
 		});
@@ -87,7 +85,7 @@ const Layout = () => {
 			</nav>
 			<div className={sass["col-2"]}>
 				<header className={sass.header} >
-					<BookmarksContext.Provider value={[searchState, setSearchState, onChangeInput]}>
+					<BookmarksContext.Provider value={onChangeInput}>
 						<MainHeader />
 					</BookmarksContext.Provider>
 				</header>

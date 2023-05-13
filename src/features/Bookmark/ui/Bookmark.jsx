@@ -4,7 +4,6 @@ import sass from "./Bookmark.module.sass"
 import { BaseButton } from "../../../shared/ui"
 import { fillBookmark } from "../../../features"
 
-// import { AiFillFolderOpen } from 'react-icons/ai';
 import { RxPencil2 } from 'react-icons/rx';
 import { AiOutlineDelete } from 'react-icons/ai';
 
@@ -46,8 +45,6 @@ const Bookmark = (props) => {
       }
     </ul>
   );
-
-  // console.log(styleNumber);
 
   return (
     <div className={sass.bookamrkWrap}>
