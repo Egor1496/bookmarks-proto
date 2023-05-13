@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
 import sass from "./Main.module.sass"
 
-import { Sort } from "../../../entities";
-import { SelectStyleBookmark, GetFile, AddBookmark, LoadBookmark } from "../../../features";
-import { Bookmarks, uploadBookmarks } from "../../../widgets";
 import { BookmarksContext } from "../../../processes/model/context";
+import { Bookmarks, uploadBookmarks } from "../../../widgets";
+import { SelectStyleBookmark, GetFile, AddBookmark, LoadBookmark } from "../../../features";
+import { Sort } from "../../../entities";
+import { getStore, setStore } from "../../../shared/model";
 
 const Main = () => {
 
@@ -15,7 +16,14 @@ const Main = () => {
     updateGroupsAndTags,
   ] = useContext(BookmarksContext);
 
-  const [styleNumber, setStyleNumber] = useState(1);
+  const defStyleNumber = getStore("styleNumber", 10)
+
+  const [styleNumber, setStyleNumber] = useState(defStyleNumber);
+
+  const onClickStyleBookmarks = (number) => {
+    setStore("styleNumber", number);
+    setStyleNumber(number);
+  }
 
   return (
     <div className={sass.main}>
@@ -23,7 +31,7 @@ const Main = () => {
         <div className={sass.countBookmarks}>{groupName || "Всего"} - {bookmarks.length}</div>
         <div className={sass.buttonWrap}>
           <Sort />
-          <SelectStyleBookmark setStyleNumber={setStyleNumber} />
+          <SelectStyleBookmark setStyleNumber={onClickStyleBookmarks} />
         </div>
       </div>
       <div className={sass.inner}>
