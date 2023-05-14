@@ -96,7 +96,10 @@ const uploadBookmarks = (bookmark, setState) => {
 
 const getTags = () => {
 	fillTagsAndGroups();
-	return [...tags].sort((a, b) => a.localeCompare(b));
+	return [...tags].sort((a, b) => {
+		if (a.length < 7 && b.length < 7) return a.length - b.length;
+		else return a.localeCompare(b);
+	});
 };
 
 const getGroups = () => {

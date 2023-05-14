@@ -27,29 +27,31 @@ const Main = () => {
 
   return (
     <div className={sass.main}>
-      <div className={sass.inner}>
-        <div className={sass.countBookmarks}>{groupName || "Всего"} - {bookmarks.length}</div>
-        <div className={sass.buttonWrap}>
-          <Sort />
-          <SelectStyleBookmark setStyleNumber={onClickStyleBookmarks} />
+      <div className={sass.mainWrap}>
+        <div className={sass.inner}>
+          <div className={sass.countBookmarks}>{groupName || "Всего"} - {bookmarks.length}</div>
+          <div className={sass.buttonWrap}>
+            <Sort />
+            <SelectStyleBookmark setStyleNumber={onClickStyleBookmarks} />
+          </div>
         </div>
-      </div>
-      <div className={sass.inner}>
-        <div className={sass["sort-wrap"]}>
-          <GetFile />
-        </div>
-        <div className={sass["sort-wrap"]}>
-          <AddBookmark
-            bookmarks={bookmarks}
-            setBookmarks={setBookmarks}
-            uploadBookmarks={uploadBookmarks}
-            updateGroupsAndTags={updateGroupsAndTags}
-          />
-          <LoadBookmark
-            uploadBookmarks={uploadBookmarks}
-            setBookmarks={setBookmarks}
-            updateGroupsAndTags={updateGroupsAndTags}
-          />
+        <div className={sass.inner}>
+          <div className={sass["sort-wrap"]}>
+            <GetFile />
+          </div>
+          <div className={sass["sort-wrap"]}>
+            <AddBookmark
+              bookmarks={bookmarks}
+              setBookmarks={setBookmarks}
+              uploadBookmarks={uploadBookmarks}
+              updateGroupsAndTags={updateGroupsAndTags}
+            />
+            <LoadBookmark
+              uploadBookmarks={uploadBookmarks}
+              setBookmarks={setBookmarks}
+              updateGroupsAndTags={updateGroupsAndTags}
+            />
+          </div>
         </div>
       </div>
       <Bookmarks

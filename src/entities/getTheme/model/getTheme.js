@@ -1,4 +1,5 @@
 const THEME_COLORS = [
+	["#2C3531", "#116466", "#666666", "#b4b4b4", "#D1E8E2"],
 	["#2C3531", "#116466", "#D9B08C", "#FFCB9A", "#D1E8E2"],
 	["#687864", "#31708E", "#5085A5", "#8FC1E3", "#F7F9FB"],
 	["#59253A", "#78244C", "#895061", "#0677A1", "#2D4159"],
@@ -33,6 +34,21 @@ const THEME_COLORS = [
 ];
 
 const BASE_PARAMS = [
+	[
+		"14px",
+		"18px",
+		"24px",
+		"var(--colorDef2)",
+		"#F13C20",
+		"var(--colorDef2)",
+		"var(--colorDef1)",
+		"var(--colorDef2)",
+		"var(--colorDef1)",
+		"var(--colorDef2)",
+		"var(--colorDef1)",
+		"var(--colorDef2)",
+		"var(--colorDef1)",
+	],
 	[
 		"14px",
 		"18px",

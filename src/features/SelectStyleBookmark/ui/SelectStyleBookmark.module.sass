@@ -7,7 +7,7 @@
   z-index: 1000
   display: flex
   justify-content: center
-  min-width: 471px
+  width: 782px
   padding: 10px
   border-radius: 10px
   border: 1px solid var(--color5)
@@ -24,7 +24,8 @@
 
 .listBookmarks
   display: flex
-  justify-content: center
+  flex-wrap: wrap
+  justify-content: flex-end
   gap: 10px
   margin: 0
   padding: 0
@@ -70,8 +71,8 @@
 
 .close
   position: absolute
-  left: -5px
-  bottom: -50px
+  left: -50px
+  top: -3px
   z-index: 1001
   transition: 0.1s
   &:hover

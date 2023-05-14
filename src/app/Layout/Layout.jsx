@@ -7,6 +7,8 @@ import { FilterButtons, BookmarksContext } from "../../processes/model/context";
 
 import { MainMenu, MainHeader, MainAside, MainFooter, getGroups, getTags, getBookmarks } from "../../widgets";
 
+let isSearchProcess = false;
+
 const Layout = () => {
 
 	const allTags = getTags();
@@ -26,10 +28,13 @@ const Layout = () => {
 	const [listTags, setListTags] = useState(cleanTags);
 
 	const onChangeInput = (searchState) => {
-		setBookmarks((prev) => {
-			return getBookmarks(filterName, "title", searchState);
-		});
-	}
+		if (!isSearchProcess)
+			setTimeout(() => {
+				setBookmarks(prev => getBookmarks(filterName, "title", searchState));
+				isSearchProcess = false;
+			}, 500);
+		isSearchProcess = true;
+	};
 
 	const setState = (setList, newList, newFilterName) => {
 		setFilterName(newFilterName);
@@ -78,7 +83,7 @@ const Layout = () => {
 
 	return (
 		<div className={sass.mainWrap}>
-			<nav className={`${sass["col-1"]} ${sass.nav}`}>
+			<nav className={`${sass.nav}`}>
 				<FilterButtons.Provider value={[listGroup, onClickGroup]}>
 					<MainMenu groups={groupLinks} />
 				</FilterButtons.Provider>
@@ -113,12 +118,11 @@ const Layout = () => {
 export { Layout };
 
 // перенести из лаяута в процесс закладки и облоко тэгов групп
-// сохранение настроек темы и выбора вида и поиска и сортировки
+// сохранение настроек темы и выбора вида и сортировки
 // облачное хранилище закладок
-// чекбоксы выбор поиска и сортировки
+// чекбоксы выбор сортировки
 // перекинуть темы в настройки
 // темы цветами, а не цифрами
-// вид отображения карточек
 // варнинги и оповещения
 // транспарент вид карточки
 // БГ при удалении группы очищяет все
