@@ -16,7 +16,7 @@ const BaseInput = (props) => {
 			<input className={`${css.input} ${readonly && css.disable}`}
 				type="text" value={state}
 				onChange={(e) => {
-					onChangeInput();
+					onChangeInput(e.target.value);
 					setState(e.target.value);
 				}}
 				readOnly={readonly}

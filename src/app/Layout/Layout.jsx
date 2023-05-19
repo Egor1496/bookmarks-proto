@@ -7,7 +7,7 @@ import { FilterButtons, BookmarksContext } from "../../processes/model/context";
 
 import { MainMenu, MainHeader, MainAside, MainFooter, getGroups, getTags, getBookmarks } from "../../widgets";
 
-let isSearchProcess = false;
+import { debounce } from "../../shared/model";
 
 const Layout = () => {
 
@@ -28,12 +28,7 @@ const Layout = () => {
 	const [listTags, setListTags] = useState(cleanTags);
 
 	const onChangeInput = (searchState) => {
-		if (!isSearchProcess)
-			setTimeout(() => {
-				setBookmarks(prev => getBookmarks(filterName, "title", searchState));
-				isSearchProcess = false;
-			}, 500);
-		isSearchProcess = true;
+		setBookmarks(getBookmarks(filterName, "title", searchState));
 	};
 
 	const setState = (setList, newList, newFilterName) => {
@@ -90,7 +85,7 @@ const Layout = () => {
 			</nav>
 			<div className={sass["col-2"]}>
 				<header className={sass.header} >
-					<BookmarksContext.Provider value={onChangeInput}>
+					<BookmarksContext.Provider value={debounce(onChangeInput, 500)}>
 						<MainHeader />
 					</BookmarksContext.Provider>
 				</header>
