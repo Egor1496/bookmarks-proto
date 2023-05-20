@@ -9,34 +9,53 @@ import { HiTranslate } from 'react-icons/hi';
 import { BsTelegram, BsTwitch } from 'react-icons/bs';
 import { SlSocialVkontakte } from 'react-icons/sl';
 
+const links = [
+  {
+    href: "https://ya.ru/",
+    icon: <FaYandex />
+  },
+  {
+    href: "https://www.google.ru/",
+    icon: <AiFillGoogleCircle />
+  },
+  {
+    href: "https://www.youtube.com/",
+    icon: <AiOutlineYoutube />
+  },
+  {
+    href: "https://www.twitch.tv/",
+    icon: <BsTwitch />
+  },
+  {
+    href: "https://vk.com/",
+    icon: <SlSocialVkontakte />
+  },
+  {
+    href: "https://telegram.org/",
+    icon: <BsTelegram />
+  },
+  {
+    href: "https://facebook.com",
+    icon: <AiFillFacebook />
+  },
+  {
+    href: "https://translate.yandex.ru",
+    icon: <HiTranslate />
+  }
+]
 
 const FastLinks = () => {
   return (
     <div className={sass.main}>
-      <a href="https://ya.ru/" target="_blank" rel="noopener noreferrer">
-        <BaseButton ><FaYandex /></BaseButton>
-      </a>
-      <a href="https://www.google.ru/" target="_blank" rel="noopener noreferrer">
-        <BaseButton ><AiFillGoogleCircle /></BaseButton>
-      </a>
-      <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
-        <BaseButton ><AiOutlineYoutube /></BaseButton>
-      </a>
-      <a href="https://www.twitch.tv/" target="_blank" rel="noopener noreferrer">
-        <BaseButton ><BsTwitch /></BaseButton>
-      </a>
-      <a href="https://vk.com/" target="_blank" rel="noopener noreferrer">
-        <BaseButton ><SlSocialVkontakte /></BaseButton>
-      </a>
-      <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer">
-        <BaseButton ><BsTelegram /></BaseButton>
-      </a>
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-        <BaseButton ><AiFillFacebook /></BaseButton>
-      </a>
-      <a href="https://translate.yandex.ru" target="_blank" rel="noopener noreferrer">
-        <BaseButton ><HiTranslate /></BaseButton>
-      </a>
+      {
+        links.map((el) => {
+          return (
+            <a href={el.href} target="_blank" rel="noopener noreferrer">
+              <BaseButton>{el.icon}</BaseButton>
+            </a>
+          );
+        })
+      }
     </div >
   );
 }

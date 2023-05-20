@@ -12,4 +12,3 @@ export * from "./DialogModal/ui/DialogModal.jsx";
 export * from "./TagСloud/ui/TagСloud.jsx";
 
 // model
-export * from "./getTheme/model/getTheme.js";

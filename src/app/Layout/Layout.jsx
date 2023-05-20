@@ -9,6 +9,9 @@ import { MainMenu, MainHeader, MainAside, MainFooter, getGroups, getTags, getBoo
 
 import { debounce } from "../../shared/model";
 
+const DEFAULT_TYPE_SEARCH = "title";
+const DEFAULT_TYPE_SORT = "title";
+
 const Layout = () => {
 
 	const allTags = getTags();
@@ -19,7 +22,7 @@ const Layout = () => {
 
 	const [filterName, setFilterName] = useState(["", ""]);
 
-	const [bookmarks, setBookmarks] = useState(getBookmarks(filterName, "title"));
+	const [bookmarks, setBookmarks] = useState(getBookmarks(filterName, DEFAULT_TYPE_SORT));
 
 	const [groupLinks, setGroupLinks] = useState(allGroups);
 	const [tagCloud, setTagCloud] = useState(allTags);
@@ -28,7 +31,7 @@ const Layout = () => {
 	const [listTags, setListTags] = useState(cleanTags);
 
 	const onChangeInput = (searchState) => {
-		setBookmarks(getBookmarks(filterName, "title", searchState));
+		setBookmarks(getBookmarks(filterName, DEFAULT_TYPE_SEARCH, searchState));
 	};
 
 	const setState = (setList, newList, newFilterName) => {
@@ -113,10 +116,9 @@ const Layout = () => {
 export { Layout };
 
 // перенести из лаяута в процесс закладки и облоко тэгов групп
-// сохранение настроек темы и выбора вида и сортировки
+// сохранение настроек сортировки
 // облачное хранилище закладок
 // чекбоксы выбор сортировки
-// перекинуть темы в настройки
 // темы цветами, а не цифрами
 // варнинги и оповещения
 // транспарент вид карточки

@@ -13,8 +13,11 @@ const BaseButton = (props) => {
 		sizeStyle,
 		border,
 		children,
-		buttonActive
+		buttonActive,
+		css
 	} = props;
+
+	console.log(css)
 
 	return (
 		<div className={sass.main}>
@@ -29,6 +32,7 @@ const BaseButton = (props) => {
 					${sass[buttonActive]}
 					${disabled && sass.buttonDisabled}
 				`}
+				style={css}
 				onClick={callBack}
 				disabled={disabled}>
 				{children}

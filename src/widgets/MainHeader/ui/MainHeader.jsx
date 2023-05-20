@@ -10,14 +10,12 @@ const MainHeader = () => {
   const onChangeInput = useContext(BookmarksContext);
 
   return (
-    <div className={sass["mainHeaderWrap"]}>
-      <div className={sass["header-inner"]}>
-        <Search
-          onChangeInput={onChangeInput}
-        />
+    <div className={sass["mainWrap"]}>
+      <div className={sass["inner-top"]}>
         <BaseSettings />
       </div>
-      <div className={sass["header-inner"]}>
+      <div className={sass["inner-bottom"]}>
+        <Search onChangeInput={onChangeInput} />
         <FastLinks />
       </div>
     </div>

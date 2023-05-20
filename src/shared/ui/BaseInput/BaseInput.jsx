@@ -9,6 +9,7 @@ const BaseInput = (props) => {
 		readonly,
 		placeholder = "",
 		onChangeInput = () => { }
+
 	} = props;
 
 	return (

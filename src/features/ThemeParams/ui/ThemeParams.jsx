@@ -1,6 +1,6 @@
 import React from "react";
 
-import { THEME_COLORS, BASE_PARAMS } from "../../../entities";
+import { THEME_COLORS, BASE_PARAMS } from "../../../shared/model";
 
 const ThemeParams = ({ thisNumberTheme }) => {
 
