@@ -14,9 +14,10 @@ const Main = () => {
     setBookmarks,
     groupName,
     updateGroupsAndTags,
+    onClickTags
   ] = useContext(BookmarksContext);
 
-  const defStyleNumber = getStore("styleNumber", 10)
+  const defStyleNumber = getStore("styleNumber", 1)
 
   const [styleNumber, setStyleNumber] = useState(defStyleNumber);
 
@@ -59,6 +60,7 @@ const Main = () => {
         bookmarks={bookmarks}
         setBookmarks={setBookmarks}
         updateGroupsAndTags={updateGroupsAndTags}
+        onClickTags={onClickTags}
       />
     </div>
   );

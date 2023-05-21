@@ -2,9 +2,11 @@
 
 .bookamrkWrap
   position: relative
-  &:hover .changeBookmark, &:hover .deleteBookmark
-    visibility: block
-    opacity: 1
+  &:hover
+    cursor: pointer
+    .changeBookmark, .deleteBookmark
+      visibility: block
+      opacity: 1
   .changeBookmark, .deleteBookmark
     position: absolute
     top: 7px

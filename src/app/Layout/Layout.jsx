@@ -57,14 +57,9 @@ const Layout = () => {
 	const onClickTags = (action, i, text) => {
 		switch (action) {
 			case "toogle":
-				const newList = [...listTags];
-				newList[i] = !newList[i];
-				let newFilterName;
-				if (newList[i])
-					newFilterName = [filterName[0], text + "," + filterName[1]];
-				else
-					newFilterName = [filterName[0], filterName[1].replace(text + ",", "")];
-				setState(setListTags, newList, newFilterName);
+				const newList = cleanTags;
+				newList[i] = true;
+				setState(setListTags, newList, [filterName[0], text + ","]);
 				break;
 			default: // clean
 				setState(setListTags, cleanTags, [filterName[0], ""]);
@@ -72,11 +67,18 @@ const Layout = () => {
 		}
 	}
 
+	const onClickBookmarkTags = (text) => {
+		setState(setListTags, cleanTags, ["", text + ","]);
+		setListGroup(cleanGroups);
+		// отобразить кнопку отмена
+	}
+
 	const contextBookmarks = [
 		bookmarks,
 		setBookmarks,
 		filterName[0],
 		updateGroupsAndTags,
+		onClickBookmarkTags
 	];
 
 	return (

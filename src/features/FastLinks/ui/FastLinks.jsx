@@ -48,10 +48,16 @@ const FastLinks = () => {
   return (
     <div className={sass.main}>
       {
-        links.map((el) => {
+        links.map((el, i) => {
           return (
-            <a href={el.href} target="_blank" rel="noopener noreferrer">
-              <BaseButton>{el.icon}</BaseButton>
+            <a
+              href={el.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              key={i}>
+              <BaseButton
+                sizeStyle="big"
+              >{el.icon}</BaseButton>
             </a>
           );
         })

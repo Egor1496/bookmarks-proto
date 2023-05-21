@@ -11,12 +11,10 @@ const MainHeader = () => {
 
   return (
     <div className={sass["mainWrap"]}>
-      <div className={sass["inner-top"]}>
-        <BaseSettings />
-      </div>
       <div className={sass["inner-bottom"]}>
         <Search onChangeInput={onChangeInput} />
         <FastLinks />
+        <BaseSettings />
       </div>
     </div>
   );

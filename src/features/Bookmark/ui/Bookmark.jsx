@@ -13,7 +13,8 @@ const Bookmark = (props) => {
     bookmark,
     onEditBookmark,
     onDeleteBookmark,
-    styleNumber
+    styleNumber,
+    onClickTags
   } = props;
 
   const fB = fillBookmark(bookmark);
@@ -40,7 +41,11 @@ const Bookmark = (props) => {
       {
         fB.tags.map((elem, i) =>
           <li key={i} className={`${sass["tags-item"]}`}>
-            <BaseButton text={elem.trim()} sizeStyle="small"></BaseButton>
+            <BaseButton
+              callBack={(e) => { onClickTags(elem.trim()); e.stopPropagation() }}
+              text={elem.trim()}
+              sizeStyle="small"
+            />
           </li>)
       }
     </ul>
@@ -54,7 +59,10 @@ const Bookmark = (props) => {
       <div className={sass.changeBookmark} onClick={(e) => { onEditBookmark(); }}>
         <RxPencil2 />
       </div>
-      <a className={`${sass["bookmark"]} ${sass["style-" + styleNumber + ""]}`} href={fB.link} target="_blank" rel="noreferrer">
+      <div
+        className={`${sass["bookmark"]} ${sass["style-" + styleNumber + ""]}`}
+        onClick={(e) => window.open(fB.link, '_blank').focus()}
+      >
         <div className={`${sass["main-inner"]}`}>
           {elemImg}
           {elemTitle}
@@ -68,7 +76,7 @@ const Bookmark = (props) => {
             </div>
           </div>
         }
-      </ a>
+      </ div>
     </div>
 
   );
