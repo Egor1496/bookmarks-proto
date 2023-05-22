@@ -15,7 +15,12 @@ const SelectStyleBookmark = ({ setStyleNumber }) => {
 
   return (
     <div className={sass.main}>
-      <BaseButton text="Вид" btnStyle="transparent" callBack={onClick}><HiOutlineViewGrid /></BaseButton>
+      <BaseButton
+        text="Вид"
+        styleName="transparentStyle"
+        callBack={onClick}>
+        <HiOutlineViewGrid />
+      </BaseButton>
       {
         themeModal && (
           <>

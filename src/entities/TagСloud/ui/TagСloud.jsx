@@ -17,7 +17,7 @@ const TagСloud = ({ tags = [] }) => {
       {
         activeList.indexOf(true) !== -1 ? (
           <div className={sass.clerTags}>
-            <BaseButton text="Отмена" callBack={() => { onClick("clean") }} btnStyle="transparent">
+            <BaseButton text="Отмена" callBack={() => { onClick("clean") }} styleName="transparentStyle">
               <BiReset />
             </BaseButton>
           </div>
@@ -35,10 +35,9 @@ const TagСloud = ({ tags = [] }) => {
             return (
               <BaseButton
                 key={el}
-                sizeStyle="small"
                 text={el}
+                styleNameList={["smallStyle", activeList[i] && "buttonActive"]}
                 callBack={() => { onClick("toogle", i, el) }}
-                buttonActive={activeList[i] && "buttonActive"}
               >
                 <IoMdPricetag style={{ transform: "translateY(1px)" }} />
               </BaseButton>

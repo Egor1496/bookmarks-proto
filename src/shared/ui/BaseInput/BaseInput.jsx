@@ -9,12 +9,11 @@ const BaseInput = (props) => {
 		readonly,
 		placeholder = "",
 		onChangeInput = () => { }
-
 	} = props;
 
 	return (
 		<div className={css.main}>
-			<input className={`${css.input} ${readonly && css.disable}`}
+			<input className={`${css.input} ${(readonly && css.disable) || ""}`}
 				type="text" value={state}
 				onChange={(e) => {
 					onChangeInput(e.target.value);

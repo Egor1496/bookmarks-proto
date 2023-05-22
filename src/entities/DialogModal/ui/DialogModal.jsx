@@ -21,10 +21,13 @@ const DialogModal = (props) => {
         <h3 className={sass.title}>{modalTitle}</h3>
         <p className={sass.description}>{modalDescription}</p>
         <div className={sass.buttonWrap}>
-          <BaseButton text={textAccept}
+          <BaseButton
+            text={textAccept}
             callBack={() => { modalSetActive(false); onАccept(); }}
           />
-          <BaseButton text={textСancele} btnStyle="transparent"
+          <BaseButton
+            text={textСancele}
+            styleName="transparentStyle"
             callBack={() => { modalSetActive(false) }}
           />
         </div>

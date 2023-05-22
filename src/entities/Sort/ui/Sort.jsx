@@ -8,7 +8,7 @@ import { BaseButton } from "../../../shared/ui";
 const Sort = () => {
   return (
     <div className={sass.main}>
-      <BaseButton text="Сортировка" btnStyle="transparent"><TbArrowsTransferDown /></BaseButton>
+      <BaseButton text="Сортировка" styleName="transparentStyle"><TbArrowsTransferDown /></BaseButton>
     </div >
   );
 }

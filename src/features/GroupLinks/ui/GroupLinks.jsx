@@ -18,9 +18,8 @@ const GroupLinks = ({ groups = [] }) => {
           return (
             <BaseButton
               key={el} text={el}
-              btnStyle="transparent"
               callBack={() => { onClick(i, el) }}
-              buttonActive={activeList[i] && "buttonActive"}
+              styleNameList={["transparentStyle", activeList[i] && "buttonActive"]}
             ><AiFillFolderOpen /></BaseButton>
           )
         })

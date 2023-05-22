@@ -44,7 +44,7 @@ const Bookmark = (props) => {
             <BaseButton
               callBack={(e) => { onClickTags(elem.trim()); e.stopPropagation() }}
               text={elem.trim()}
-              sizeStyle="small"
+              styleName="smallStyle"
             />
           </li>)
       }

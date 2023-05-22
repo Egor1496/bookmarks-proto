@@ -56,15 +56,20 @@ const LoadBookmark = (props) => {
           />
         </div>
         <div className={sass.buttonWrap}>
-          <BaseButton text="Принять"
+          <BaseButton
+            text="Принять"
             callBack={() => { modalSetActive(false); onАccept(textarea); }}
           />
-          <BaseButton text="Отмена" btnStyle="transparent"
+          <BaseButton
+            text="Отмена"
+            btnStyle="transparent"
             callBack={() => { modalSetActive(false) }}
           />
         </div>
       </BaseModal >
-      <BaseButton text="Загрузить" callBack={() => { modalSetActive(true); }} >
+      <BaseButton
+        text="Загрузить"
+        callBack={() => { modalSetActive(true); }} >
         <AiFillFileText />
       </BaseButton>
     </div >

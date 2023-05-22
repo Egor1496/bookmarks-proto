@@ -55,9 +55,7 @@ const FastLinks = () => {
               target="_blank"
               rel="noopener noreferrer"
               key={i}>
-              <BaseButton
-                sizeStyle="big"
-              >{el.icon}</BaseButton>
+              <BaseButton styleName="bigStyle" >{el.icon}</BaseButton>
             </a>
           );
         })

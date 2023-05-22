@@ -78,32 +78,32 @@ function UIKit() {
 			<Br />
 			<Grid>
 				<GridСell>
-					<BaseButton btnStyle="transparent" text="Кнопка" ><DiHtml5 /></BaseButton>
-					<BaseButton text="Жми" floatIcon="top"><DiHtml5 /></BaseButton>
-					<BaseButton text="Кнопка" floatIcon="right"><SiCss3 /></BaseButton>
-					<BaseButton text="Кнопка" floatIcon="left"><DiJsBadge /></BaseButton>
-					<BaseButton text="Кнопка" floatIcon="bottom"><FaReact /></BaseButton>
+					<BaseButton styleName="transparentStyle" text="Кнопка" ><DiHtml5 /></BaseButton>
+					<BaseButton text="Жми" styleName="iconTop"><DiHtml5 /></BaseButton>
+					<BaseButton text="Кнопка" styleName="iconRight"><SiCss3 /></BaseButton>
+					<BaseButton text="Кнопка" styleName="iconLeft"><DiJsBadge /></BaseButton>
+					<BaseButton text="Кнопка" styleName="iconBottom"><FaReact /></BaseButton>
 				</GridСell>
 				<GridСell>
-					<BaseButton sizeStyle="big" text="Кнопка" />
-					<BaseButton sizeStyle="big"><DiNpm /></BaseButton>
+					<BaseButton styleName="bigStyle" text="Кнопка" />
+					<BaseButton styleName="bigStyle"><DiNpm /></BaseButton>
 					<MyLabel labelText="Описание" position="right"><BaseButton><DiGithubBadge /></BaseButton></MyLabel>
 					<MyLabel labelText="Описание" position="left"><BaseButton><BiCodeAlt /></BaseButton></MyLabel>
 					<MyLabel labelText="Описание" position="bottom"><BaseButton ><FaYandex /></BaseButton></MyLabel>
 				</GridСell>
 				<GridСell>
-					<BaseButton sizeStyle="small" text="Кнопка" />
-					<BaseButton disabled text="Жми" floatIcon="top"><IoAccessibilitySharp /></BaseButton>
-					<BaseButton disabled text="Кнопка" floatIcon="right"><HiCheckCircle /></BaseButton>
-					<BaseButton disabled text="Кнопка" floatIcon="left"><HiMail /></BaseButton>
-					<BaseButton disabled text="Кнопка" floatIcon="bottom"><DiCodeigniter /></BaseButton>
+					<BaseButton styleName="smallStyle" text="Кнопка" />
+					<BaseButton disabled text="Жми" styleName="iconTop"><IoAccessibilitySharp /></BaseButton>
+					<BaseButton disabled text="Кнопка" styleName="iconRight"><HiCheckCircle /></BaseButton>
+					<BaseButton disabled text="Кнопка" styleName="iconLeft"><HiMail /></BaseButton>
+					<BaseButton disabled text="Кнопка" styleName="iconBottom"><DiCodeigniter /></BaseButton>
 				</GridСell>
 			</Grid>
 			<Br />
 			<Grid>
 				<GridСell>
 					<BaseButton
-						sizeStyle="small"
+						styleName="smallStyle"
 						text="Видео">
 						<IoMdPricetag style={{ transform: "translateY(1px)" }} />
 					</BaseButton>
@@ -112,30 +112,6 @@ function UIKit() {
 			<Br />
 			<ColorsDemo />
 			<Br />
-
-			{
-				/*
-					правое выдвижное меню с права с права
-					всплывающие подсказки к элементам
-					инпут с иконкой
-					варнинги на инпут
-					боковое складывающиеся меню
-					верхнее меню страниц с найстройками темы
-					элемент меню с текстом с иконкой с боковым бордером
-					пагинация два вида
-					мини уведомления на инпут, оповищение об обязательых полях
-					красные звездочки на лейбл инпут, оповищение об обязательых полях
-					Облако тэгов с количеством закладок к тэгу
-					уведомление (текст с кнопкой 3 цвета)
-					микро уведомление иконка снизу текст
-					загрузка файла виджет
-					модальные окна подтверждения
-					виджет визуальной закладки два стиля
-					заглушка на фото
-					темная и светлая вариант для каждой темы
-				*/
-			}
-
 		</>
 	);
 }

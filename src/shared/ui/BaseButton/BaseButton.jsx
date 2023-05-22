@@ -5,32 +5,24 @@ const BaseButton = (props) => {
 
 	const {
 		text,
+		css,
+		styleName,
+		styleNameList = [],
 		disabled,
 		callBack = (e) => { },
-		floatIcon,
-		btnStyle,
-		hoverStyle,
-		sizeStyle,
-		border,
 		children,
-		buttonActive,
-		css
 	} = props;
 
-	const styleName = `
-		${sass.button || ""}
-		${sass[floatIcon] || ""}
-		${sass[btnStyle] || ""}
-		${sass[hoverStyle] || ""}
-		${sass[border] || ""}
-		${sass[sizeStyle] || ""}
-		${sass[buttonActive] || ""}
-		${(disabled && sass.buttonDisabled) || ""}`.replace(/[\s\n]+/g, ' ');
+	let styleNames = `${sass[styleName] || ""}`;
+
+	for (let i = 0; i < styleNameList.length; i++) {
+		styleNames += " " + (sass[styleNameList[i]] || "");
+	}
 
 	return (
 		<div className={sass.main}>
 			<button
-				className={styleName}
+				className={styleNames}
 				style={css}
 				onClick={(e) => callBack(e)}
 				disabled={disabled}>

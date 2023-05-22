@@ -78,7 +78,7 @@ const BookmarkModal = (props) => {
               });
             }}
           />
-          <BaseButton text="Отмена" btnStyle="transparent"
+          <BaseButton text="Отмена" styleName="transparentStyle"
             callBack={() => { modalSetActive(false) }}
           />
         </div>

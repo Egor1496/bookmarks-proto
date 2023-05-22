@@ -37,7 +37,8 @@ const AddBookmark = (props) => {
         state={bookmarkState}
         setState={setBookmarkState}
       />
-      <BaseButton text="Создать"
+      <BaseButton
+        text="Создать"
         callBack={() => { modalSetActive(true) }}
       >
         <AiOutlineAppstoreAdd />

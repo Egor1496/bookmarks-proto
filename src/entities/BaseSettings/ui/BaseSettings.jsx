@@ -22,7 +22,7 @@ const BaseSettings = () => {
 
   return (
     <div className={sass.settings}>
-      <BaseButton sizeStyle="big" callBack={onClick}><IoMdSettings /></BaseButton>
+      <BaseButton styleNameList={["transparentStyle", "baseSettings"]} callBack={onClick}><IoMdSettings /></BaseButton>
       {
         themeModal && (
           <>
