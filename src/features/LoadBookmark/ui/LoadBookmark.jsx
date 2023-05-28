@@ -1,24 +1,12 @@
 import React, { useState } from "react";
 import sass from "./LoadBookmark.module.sass"
 
+
 import { AiFillFileText } from 'react-icons/ai';
+import { FaCloudUploadAlt } from 'react-icons/fa';
 
-import { BaseModal, BaseButton, BaseTextarea } from "../../../shared/ui";
+import { BaseModal, BaseButton } from "../../../shared/ui";
 import { getTitle, getObject } from "../../../shared/model";
-
-const DEFAULT_TEXTAREA = `
-{
-  "bookmarks": [
-    {
-      "link": "https://www.youtube.com/",
-      "title": "youtube",
-      "description": "Видеохостинг, предоставляющий пользователям услуги хранения, доставки и показа видео.",
-      "tags": "Видео, Соц. сеть",
-      "group": "Избранные"
-    }
-  ]
-}
-`;
 
 const LoadBookmark = (props) => {
 
@@ -30,14 +18,47 @@ const LoadBookmark = (props) => {
 
   const [modalActive, modalSetActive] = useState(false);
 
-  const [textarea, setTextarea] = useState(DEFAULT_TEXTAREA);
-
-  const onАccept = (bookmarks) => {
+  const loadObgectBookmarks = (bookmarks) => {
     getObject(bookmarks).bookmarks.forEach(el => {
       el.title = getTitle(el.title, el.link);
       uploadBookmarks({ ...el }, setBookmarks);
     });
     updateGroupsAndTags();
+  }
+
+  const dropHandler = (e) => {
+    e.preventDefault();
+
+    if (e.dataTransfer.items) {
+      [...e.dataTransfer.items].forEach((item) => {
+        if (item.kind === "file") {
+          const file = item.getAsFile();
+          const reader = new FileReader();
+          reader.readAsText(file);
+          reader.onload = () => {
+            loadObgectBookmarks(reader.result);
+          };
+          reader.onerror = () => {
+            console.log(reader.error);
+          };
+        }
+      });
+    }
+  }
+
+  const readFile = (input) => {
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    reader.readAsText(file);
+
+    reader.onload = () => {
+      loadObgectBookmarks(reader.result);
+    };
+
+    reader.onerror = () => {
+      console.log(reader.error);
+    };
   }
 
   return (
@@ -47,24 +68,21 @@ const LoadBookmark = (props) => {
         setActive={modalSetActive}
       >
         <div className={sass.addBookFrom}>
-          <h3>Загрузить закладки</h3>
-          <BaseTextarea
-            state={textarea}
-            setState={(newState) => setTextarea(newState)}
-            placeholder={`[\n{ link: "https://www.youtube.com/" },\n{ link: "https://ya.ru/" }\n]`}
-            width="medium"
-          />
-        </div>
-        <div className={sass.buttonWrap}>
-          <BaseButton
-            text="Принять"
-            callBack={() => { modalSetActive(false); onАccept(textarea); }}
-          />
-          <BaseButton
-            text="Отмена"
-            btnStyle="transparent"
-            callBack={() => { modalSetActive(false) }}
-          />
+          <h3>Загрузить фаил</h3>
+          <label>
+            <div
+              className={sass.dropZone}
+              onDrop={(e) => { dropHandler(e); modalSetActive(false); }}
+              onDragOver={(e) => e.preventDefault()}>
+              <input
+                className={sass.inputFile}
+                type="file"
+                onChange={(e) => { readFile(e.target); modalSetActive(false); }}
+              />
+              <div className={sass.iconUplad}><FaCloudUploadAlt /></div>
+              <span className={sass.textUpload}><span>Выберите фаил</span>   или перетащите его сюда</span>
+            </div>
+          </label>
         </div>
       </BaseModal >
       <BaseButton

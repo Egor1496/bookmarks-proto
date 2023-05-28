@@ -9,7 +9,7 @@ const BaseButton = (props) => {
 		styleName,
 		styleNameList = [],
 		disabled,
-		callBack = (e) => { },
+		callBack,
 		children,
 	} = props;
 
@@ -24,7 +24,7 @@ const BaseButton = (props) => {
 			<button
 				className={styleNames}
 				style={css}
-				onClick={(e) => callBack(e)}
+				onClick={callBack}
 				disabled={disabled}>
 				{children}
 				{text}

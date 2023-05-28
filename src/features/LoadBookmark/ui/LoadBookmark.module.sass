@@ -1,11 +1,36 @@
 @import url("../../../app/styles/base-params.css")
 
-.buttonWrap
-  display: flex
-  margin: 10px 0
-  gap: 20px
-
 .addBookFrom
   display: flex
   flex-direction: column
   gap: 20px
+
+.dropZone
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  width: 600px
+  height: 400px
+  gap: 20px
+  padding: 10px
+  margin: 10px
+  border: 4px dashed var(--color2)
+  border-radius: 20px
+  &:hover
+    cursor: pointer
+    .textUpload span
+      color: var(--color5)
+
+.inputFile
+  display: none
+
+.iconUplad svg
+  width: 70px
+  height: 70px
+  fill: var(--color2)
+
+.textUpload
+  font-size: 18px
+  span
+    text-decoration: underline
