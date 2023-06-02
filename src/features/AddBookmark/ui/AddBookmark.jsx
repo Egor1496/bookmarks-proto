@@ -5,6 +5,7 @@ import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 
 import { BookmarkModal } from "../../../entities";
 import { BaseButton, Notification } from "../../../shared/ui";
+import { sendMesageNotification } from "../../../shared/model";
 
 const AddBookmark = (props) => {
 
@@ -24,42 +25,16 @@ const AddBookmark = (props) => {
     group: ""
   });
 
-  const [notification, setNotification] = useState({
-    isOpen: false,
-    text: "Готово!",
-    description: "",
-    alarm: false
-  });
-
-  const sendMessage = (text, description, alarm) => {
-    setNotification({
-      isOpen: true,
-      text,
-      description,
-      alarm
-    });
-    setTimeout(() => {
-      setNotification({
-        isOpen: false,
-        text,
-        description,
-        alarm
-      });
-    }, 3000);
-  }
+  const [notification, setNotification] = useState();
 
   return (
     <div className={sass.main}>
-      <Notification
-        text={notification.text}
-        description={notification.description}
-        alarm={notification.alarm}
-        active={notification.isOpen} />
+      <Notification state={notification} setState={setNotification} />
       <BookmarkModal
         onАccept={(newBookmark) => {
           uploadBookmarks({ ...newBookmark }, setBookmarks);
           updateFilter();
-          sendMessage("Добавлена ссылка!");
+          sendMesageNotification({ text: "Добавлена ссылка!" }, setNotification);
         }}
         modalActive={modalActive}
         modalSetActive={modalSetActive}

@@ -4,3 +4,4 @@ export * from "./URL.js";
 export * from "./base.js";
 export * from "./fillBookmark.js";
 export * from "./getTheme.js";
+export * from "./sendMesageNotification.js";

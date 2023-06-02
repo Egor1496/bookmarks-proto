@@ -6,7 +6,7 @@ import { AiFillFileText } from 'react-icons/ai';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 
 import { BaseModal, BaseButton, Notification } from "../../../shared/ui";
-import { getTitle, getObject } from "../../../shared/model";
+import { getTitle, getObject, sendMesageNotification } from "../../../shared/model";
 
 const LoadBookmark = (props) => {
 
@@ -18,6 +18,8 @@ const LoadBookmark = (props) => {
 
   const [modalActive, modalSetActive] = useState(false);
 
+  const [notification, setNotification] = useState();
+
   const loadObgectBookmarks = (bookmarks) => {
     const obgBookmarks = getObject(bookmarks).bookmarks;
     obgBookmarks.forEach(el => {
@@ -25,7 +27,10 @@ const LoadBookmark = (props) => {
       uploadBookmarks({ ...el }, setBookmarks);
     });
     updateFilter();
-    sendMessage("Загруженно ссылок - " + obgBookmarks.length + "шт.");
+    sendMesageNotification(
+      { text: "Загруженно ссылок - " + obgBookmarks.length + "шт." },
+      setNotification
+    );
   }
 
   const dropHandler = (e) => {
@@ -63,37 +68,9 @@ const LoadBookmark = (props) => {
     };
   }
 
-  const [notification, setNotification] = useState({
-    isOpen: false,
-    text: "Готово!",
-    description: "",
-    alarm: false
-  });
-
-  const sendMessage = (text, description, alarm) => {
-    setNotification({
-      isOpen: true,
-      text,
-      description,
-      alarm
-    });
-    setTimeout(() => {
-      setNotification({
-        isOpen: false,
-        text,
-        description,
-        alarm
-      });
-    }, 3000);
-  }
-
   return (
     <div className={sass.main}>
-      <Notification
-        text={notification.text}
-        description={notification.description}
-        alarm={notification.alarm}
-        active={notification.isOpen} />
+      <Notification state={notification} setState={setNotification} />
       <BaseModal
         active={modalActive}
         setActive={modalSetActive}

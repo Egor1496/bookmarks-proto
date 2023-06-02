@@ -4,7 +4,7 @@ import sass from "./GetFile.module.sass"
 import { FcDownload } from 'react-icons/fc';
 
 import { BaseButton, Notification } from "../../../shared/ui";
-import { getStore } from "../../../shared/model";
+import { getStore, sendMesageNotification } from "../../../shared/model";
 
 const GetFile = () => {
 
@@ -24,40 +24,14 @@ const GetFile = () => {
     elem.download = "all bookmarks (json).txt";
     document.body.appendChild(elem);
     elem.click();
-    sendMessage("Файл скачен!");
+    sendMesageNotification({ text: "Файл скачен!" }, setNotification);
   }
 
-  const [notification, setNotification] = useState({
-    isOpen: false,
-    text: "Готово!",
-    description: "",
-    alarm: false
-  });
-
-  const sendMessage = (text, description, alarm) => {
-    setNotification({
-      isOpen: true,
-      text,
-      description,
-      alarm
-    });
-    setTimeout(() => {
-      setNotification({
-        isOpen: false,
-        text,
-        description,
-        alarm
-      });
-    }, 3000);
-  }
+  const [notification, setNotification] = useState();
 
   return (
     <div className={sass.main}>
-      <Notification
-        text={notification.text}
-        description={notification.description}
-        alarm={notification.alarm}
-        active={notification.isOpen} />
+      <Notification state={notification} setState={setNotification} />
       <BaseButton
         text="Скачать"
         callBack={onAcept}>

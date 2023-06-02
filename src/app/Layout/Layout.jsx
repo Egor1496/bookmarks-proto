@@ -48,7 +48,7 @@ const Layout = () => {
 	}
 
 	const onClickTags = (tagName) => {
-		const newFilter = [filter[0], `${tagName},`];
+		const newFilter = [filter[0], tagName];
 		setFilter(newFilter);
 		setBookmarks(getBookmarks(newFilter));
 		setActiveTags(tagName);
@@ -66,7 +66,7 @@ const Layout = () => {
 	}
 
 	const onClickBookmarkTags = (tagName) => {
-		const newFilter = ["", `${tagName},`];
+		const newFilter = ["", tagName];
 		setFilter(newFilter);
 		setBookmarks(getBookmarks(newFilter));
 		setActiveTags(tagName);
@@ -128,6 +128,7 @@ export { Layout };
 // БАГ при удалении группы очищяет все
 // отображать путь закладок
 // переделать масив активных вкладок на текст активной вкладки
+// при добавлении, удалении, изменении, загрзки карточек добавить уведомление
 
 /*
 	правое выдвижное меню с права

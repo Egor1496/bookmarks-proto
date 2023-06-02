@@ -141,10 +141,10 @@ const searchBookmarks = (textSearch = "", bookmarks) => {
 const filter = (filter = ["", ""], bookmarks) => {
 	let [groupNames, tagsNames] = filter;
 
-	if (!groupNames.length === 0 && !tagsNames.length === 0) return bookmarks;
+	if (!groupNames === 0 && !tagsNames === 0) return bookmarks;
 
-	groupNames = groupNames.trim().split(",");
-	tagsNames = tagsNames.trim().split(",");
+	groupNames = groupNames.trim().toLocaleLowerCase();
+	tagsNames = tagsNames.trim().toLocaleLowerCase();
 
 	const filtered = bookmarks.filter((elem) => {
 		let suitableElem = false;
@@ -155,25 +155,8 @@ const filter = (filter = ["", ""], bookmarks) => {
 		let isSuitableGroup = false,
 			isSuitableTags = false;
 
-		if (!groupNames.length === 0) isSuitableGroup = true;
-		else
-			for (let i = 0; i < groupNames.length; i++) {
-				const name = groupNames[i].trim().toLowerCase();
-				if (~cleanGroup.indexOf(name) || name === "") {
-					isSuitableGroup = true;
-					break;
-				}
-			}
-
-		if (tagsNames.length === 1) isSuitableTags = true;
-		else
-			for (let i = 0; i < tagsNames.length - 1; i++) {
-				const name = tagsNames[i].trim().toLowerCase();
-				if (~cleanTags.indexOf(name) || name === "") {
-					isSuitableTags = true;
-					break;
-				}
-			}
+		isSuitableGroup = ~cleanGroup.indexOf(groupNames) || groupNames === "";
+		isSuitableTags = ~cleanTags.indexOf(tagsNames) || tagsNames === "";
 
 		if (isSuitableGroup && isSuitableTags) suitableElem = elem;
 
