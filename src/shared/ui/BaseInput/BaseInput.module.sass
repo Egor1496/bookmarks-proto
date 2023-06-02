@@ -1,6 +1,7 @@
 @import url("../../../app/styles/base-params.css")
 
 .main
+  position: relative
 
 .input
   width: 100%
@@ -16,11 +17,11 @@
   color: var(--сolorControl1)
   font-size: var(--fontSizeDef2)
   transition: box-shadow 0.2s
-
   &:hover
-
   &:focus
     box-shadow: 0px 0px 4px 1px var(--color2)
+    + div svg
+      opacity: 1
 
 input::selection
   background-color: var(--color3)
@@ -31,7 +32,6 @@ input::selection
   color: var(--color1)
   transition: none
   box-shadow: none
-
   &:hover, &:active
     cursor: default
     opacity: 0.5
@@ -39,6 +39,15 @@ input::selection
     color: var(--color1)
     transform: none
     box-shadow: none
-
   &:focus
     box-shadow: none
+
+.icon svg
+  position: absolute
+  top: 50%
+  right: 5px
+  width: 30px
+  height: 30px
+  transform: translateY(-50%)
+  opacity: 0.3
+  color: var(--color2)

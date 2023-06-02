@@ -20,7 +20,6 @@ import { HiCheckCircle, HiMail } from "react-icons/hi";
 import { IoAccessibilitySharp } from "react-icons/io5";
 import { IoMdPricetag } from "react-icons/io";
 
-
 const baseSelectCss = {
 
 };
@@ -40,7 +39,7 @@ function UIKit() {
 					<Title text="Заголовок" type="h1" BorderStyle="left" />
 					<Title text="Заголовок" type="h2" BorderStyle="left" />
 					<BaseButton text="Кнопка" />
-					<MyLabel labelText="Описание"><BaseInput defaultValue="По умолчанию" /></MyLabel>
+					<MyLabel labelText="Описание"><BaseInput defaultValue="По умолчанию"><HiCheckCircle /></BaseInput></MyLabel>
 					<MyLabel labelText="Описание"><BaseTextarea placeholder="Пустой" /></MyLabel>
 				</GridСell>
 				<GridСell>

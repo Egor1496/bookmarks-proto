@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+
 import sass from "./Search.module.sass"
+import { AiOutlineSearch } from "react-icons/ai"
 
 import { BaseInput } from "../../../shared/ui";
 
@@ -19,7 +21,9 @@ const Search = ({ onChangeInput }) => {
         state={searchState}
         setState={setSearchState}
         onChangeInput={onChaneInputWrap}
-      />
+      >
+        <AiOutlineSearch />
+      </BaseInput>
     </div >
   );
 }

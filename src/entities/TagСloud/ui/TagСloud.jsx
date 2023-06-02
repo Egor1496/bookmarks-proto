@@ -10,14 +10,14 @@ import { BaseButton } from "../../../shared/ui";
 
 const TagСloud = ({ tags = [] }) => {
 
-  const [activeList, onClick] = useContext(FilterButtons);
+  const [onClick, clearTags, activeTagsText] = useContext(FilterButtons);
 
   return (
     <>
       {
-        activeList.indexOf(true) !== -1 ? (
+        activeTagsText ? (
           <div className={sass.clerTags}>
-            <BaseButton text="Отмена" callBack={() => { onClick("clean") }} styleName="transparentStyle">
+            <BaseButton text="Отмена" callBack={clearTags} styleName="transparentStyle">
               <BiReset />
             </BaseButton>
           </div>
@@ -36,8 +36,11 @@ const TagСloud = ({ tags = [] }) => {
               <BaseButton
                 key={el}
                 text={el}
-                styleNameList={["smallStyle", activeList[i] && "buttonActive"]}
-                callBack={() => { onClick("toogle", i, el) }}
+                styleNameList={[
+                  "smallStyle",
+                  activeTagsText.toLowerCase() === el.toLowerCase() && "buttonActive"
+                ]}
+                callBack={() => { onClick(el) }}
               >
                 <IoMdPricetag style={{ transform: "translateY(1px)" }} />
               </BaseButton>
@@ -46,7 +49,6 @@ const TagСloud = ({ tags = [] }) => {
         }
       </div >
     </>
-
   );
 }
 

@@ -16,3 +16,4 @@ export * from "./MyLabel/MyLabel.jsx";
 export * from "./Grid/Grid.jsx";
 export * from "./GridСell/GridСell.jsx";
 export * from "./BaseModal/BaseModal.jsx";
+export * from "./Notification/Notification.jsx";

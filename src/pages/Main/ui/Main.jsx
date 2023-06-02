@@ -13,7 +13,7 @@ const Main = () => {
     bookmarks,
     setBookmarks,
     groupName,
-    updateGroupsAndTags,
+    updateFilter,
     onClickTags
   ] = useContext(BookmarksContext);
 
@@ -45,12 +45,12 @@ const Main = () => {
               bookmarks={bookmarks}
               setBookmarks={setBookmarks}
               uploadBookmarks={uploadBookmarks}
-              updateGroupsAndTags={updateGroupsAndTags}
+              updateFilter={updateFilter}
             />
             <LoadBookmark
               uploadBookmarks={uploadBookmarks}
               setBookmarks={setBookmarks}
-              updateGroupsAndTags={updateGroupsAndTags}
+              updateFilter={updateFilter}
             />
           </div>
         </div>
@@ -59,7 +59,7 @@ const Main = () => {
         styleNumber={styleNumber}
         bookmarks={bookmarks}
         setBookmarks={setBookmarks}
-        updateGroupsAndTags={updateGroupsAndTags}
+        updateFilter={updateFilter}
         onClickTags={onClickTags}
       />
     </div>

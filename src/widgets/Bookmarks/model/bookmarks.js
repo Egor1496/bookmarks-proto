@@ -3,38 +3,38 @@ import { nanoid } from "nanoid";
 import { getJSON, setStore, getStore, getObject } from "../../../shared/model";
 
 const bookmarksTmp = [
-	{
-		id: nanoid(),
-		link: "https://www.youtube.com/",
-		title: "youtube",
-		description: "Видеохостинг, предоставляющий пользователям услуги хранения, доставки и показа видео.",
-		tags: "Видео, Соц. сеть",
-		group: "Избранные",
-	},
-	{
-		id: nanoid(),
-		link: "https://mail.ru/",
-		title: "mail",
-		description: "Почта Mail.ru — крупнейшая бесплатная почта.",
-		tags: "Почта",
-		group: "Избранные",
-	},
-	{
-		id: nanoid(),
-		link: "https://dzen.ru",
-		title: "dzen",
-		description: "Это Дзен — платформа для создания и просмотра контента.",
-		tags: "Видео, Соц. сеть",
-		group: "Избранные",
-	},
-	{
-		id: nanoid(),
-		link: "https://translate.yandex.ru/",
-		title: "translate.yandex",
-		description: "Перевод с английского",
-		tags: "Переводчик",
-		group: "Избранные, Инструменты",
-	},
+	// {
+	// 	id: nanoid(),
+	// 	link: "https://www.youtube.com/",
+	// 	title: "youtube",
+	// 	description: "Видеохостинг, предоставляющий пользователям услуги хранения, доставки и показа видео.",
+	// 	tags: "Видео, Соц. сеть",
+	// 	group: "Избранные",
+	// },
+	// {
+	// 	id: nanoid(),
+	// 	link: "https://mail.ru/",
+	// 	title: "mail",
+	// 	description: "Почта Mail.ru — крупнейшая бесплатная почта.",
+	// 	tags: "Почта",
+	// 	group: "Избранные",
+	// },
+	// {
+	// 	id: nanoid(),
+	// 	link: "https://dzen.ru",
+	// 	title: "dzen",
+	// 	description: "Это Дзен — платформа для создания и просмотра контента.",
+	// 	tags: "Видео, Соц. сеть",
+	// 	group: "Избранные",
+	// },
+	// {
+	// 	id: nanoid(),
+	// 	link: "https://translate.yandex.ru/",
+	// 	title: "translate.yandex",
+	// 	description: "Перевод с английского",
+	// 	tags: "Переводчик",
+	// 	group: "Избранные, Инструменты",
+	// },
 ];
 
 let bookmarks = getObject(getStore("bookmarks", "[]"));
@@ -46,20 +46,21 @@ let filledBookmarks;
 const tags = new Set(),
 	groups = new Set();
 
-const addTagsAndGroups = (newTags, newGroups) => {
-	newTags.split(",").forEach((tag) => {
-		if (tag.trim()) tags.add(tag.trim());
-	});
-	newGroups.split(",").forEach((group) => {
-		if (group.trim()) groups.add(group.trim());
+const fillTags = () => {
+	tags.clear();
+	filledBookmarks.forEach((bookmark) => {
+		bookmark.tags.split(",").forEach((tag) => {
+			if (tag.trim()) tags.add(tag.trim());
+		});
 	});
 };
 
-const fillTagsAndGroups = () => {
-	tags.clear();
+const fillGroups = () => {
 	groups.clear();
-	filledBookmarks.forEach((bookmark) => {
-		addTagsAndGroups(bookmark.tags, bookmark.group);
+	bookmarks.forEach((bookmark) => {
+		bookmark.group.split(",").forEach((group) => {
+			if (group.trim()) groups.add(group.trim());
+		});
 	});
 };
 
@@ -95,7 +96,8 @@ const uploadBookmarks = (bookmark, setState) => {
 };
 
 const getTags = () => {
-	fillTagsAndGroups();
+	fillTags();
+	fillGroups();
 	return [...tags].sort((a, b) => {
 		if (a.length < 7 && b.length < 7) return a.length - b.length;
 		else return a.localeCompare(b);
@@ -103,7 +105,8 @@ const getTags = () => {
 };
 
 const getGroups = () => {
-	fillTagsAndGroups();
+	fillTags();
+	fillGroups();
 	return [...groups].sort((a, b) => {
 		return a.localeCompare(b);
 	});
@@ -207,6 +210,7 @@ const sort = (sortType = "title", bookmarks) => {
 
 filledBookmarks = getBookmarks();
 
-fillTagsAndGroups();
+fillTags();
+fillGroups();
 
 export { getBookmarks, deleteBookmark, editBookmark, uploadBookmarks, getTags, getGroups };

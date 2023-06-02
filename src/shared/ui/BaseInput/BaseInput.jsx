@@ -1,5 +1,5 @@
 import React from "react";
-import css from "./BaseInput.module.sass";
+import sass from "./BaseInput.module.sass";
 
 const BaseInput = (props) => {
 
@@ -8,12 +8,13 @@ const BaseInput = (props) => {
 		setState,
 		readonly,
 		placeholder = "",
+		children,
 		onChangeInput = () => { }
 	} = props;
 
 	return (
-		<div className={css.main}>
-			<input className={`${css.input} ${(readonly && css.disable) || ""}`}
+		<div className={sass.main}>
+			<input className={`${sass.input} ${(readonly && sass.disable) || ""}`}
 				type="text" value={state}
 				onChange={(e) => {
 					onChangeInput(e.target.value);
@@ -22,6 +23,9 @@ const BaseInput = (props) => {
 				readOnly={readonly}
 				placeholder={placeholder}
 			/>
+			<div className={sass.icon}>
+				{children}
+			</div>
 		</div>
 	);
 }

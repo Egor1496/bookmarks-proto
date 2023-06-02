@@ -5,7 +5,7 @@ import { deleteBookmark, editBookmark } from "../../../widgets";
 import { Bookmark } from "../../../features";
 import { BookmarkModal, DialogModal } from "../../../entities";
 
-const Bookmarks = ({ bookmarks, setBookmarks, updateGroupsAndTags, styleNumber, onClickTags }) => {
+const Bookmarks = ({ bookmarks, setBookmarks, updateFilter, styleNumber, onClickTags }) => {
 
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [editModalActive, editModalSetActive] = useState(false);
@@ -32,7 +32,7 @@ const Bookmarks = ({ bookmarks, setBookmarks, updateGroupsAndTags, styleNumber, 
         modalSetActive={setDeleteModalActive}
         onАccept={() => {
           deleteBookmark(form.id, setBookmarks);
-          updateGroupsAndTags();
+          updateFilter();
         }}
       />
       <BookmarkModal
