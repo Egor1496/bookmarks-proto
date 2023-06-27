@@ -1,9 +1,9 @@
-const getJSON = (json) => {
-	return JSON.stringify(json);
+const getJSON = (obj) => {
+	return obj ? JSON.stringify(obj) : null;
 };
 
 const getObject = (json) => {
-	return JSON.parse(json);
+	return json ? JSON.parse(json) : null;
 };
 
 export { getJSON, getObject };

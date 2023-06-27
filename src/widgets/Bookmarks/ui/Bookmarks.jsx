@@ -7,7 +7,7 @@ import { BookmarkModal, DialogModal } from "../../../entities";
 import { Notification } from "../../../shared/ui";
 import { sendMesageNotification } from "../../../shared/model";
 
-const Bookmarks = ({ bookmarks, setBookmarks, updateFilter, styleNumber, onClickTags }) => {
+const Bookmarks = ({ bookmarks, onAddBookmarks, updateFilter, styleNumber, onClickTags }) => {
 
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [editModalActive, editModalSetActive] = useState(false);
@@ -35,7 +35,7 @@ const Bookmarks = ({ bookmarks, setBookmarks, updateFilter, styleNumber, onClick
         modalActive={deleteModalActive}
         modalSetActive={setDeleteModalActive}
         onАccept={() => {
-          deleteBookmark(form.id, setBookmarks);
+          deleteBookmark(form.id, onAddBookmarks);
           updateFilter();
           sendMesageNotification({ text: "Ссылка удалена!", alarm: true }, setNotification);
         }}
@@ -45,7 +45,7 @@ const Bookmarks = ({ bookmarks, setBookmarks, updateFilter, styleNumber, onClick
         modalActive={editModalActive}
         modalSetActive={editModalSetActive}
         onАccept={(newBookmark) => {
-          editBookmark(form.id, newBookmark, setBookmarks);
+          editBookmark(form.id, newBookmark, onAddBookmarks);
           sendMesageNotification({ text: "Ссылка редактирована!" }, setNotification);
         }}
         state={form}

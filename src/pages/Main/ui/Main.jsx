@@ -11,7 +11,7 @@ const Main = () => {
 
   const [
     bookmarks,
-    setBookmarks,
+    onAddBookmarks,
     groupName,
     updateFilter,
     onClickTags,
@@ -44,13 +44,13 @@ const Main = () => {
           <div className={sass["sort-wrap"]}>
             <AddBookmark
               bookmarks={bookmarks}
-              setBookmarks={setBookmarks}
+              onAddBookmarks={onAddBookmarks}
               uploadBookmarks={uploadBookmarks}
               updateFilter={updateFilter}
             />
             <LoadBookmark
               uploadBookmarks={uploadBookmarks}
-              setBookmarks={setBookmarks}
+              onAddBookmarks={onAddBookmarks}
               updateFilter={updateFilter}
             />
           </div>
@@ -59,7 +59,7 @@ const Main = () => {
       <Bookmarks
         styleNumber={styleNumber}
         bookmarks={bookmarks}
-        setBookmarks={setBookmarks}
+        onAddBookmarks={onAddBookmarks}
         updateFilter={updateFilter}
         onClickTags={onClickTags}
       />

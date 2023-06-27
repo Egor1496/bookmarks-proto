@@ -12,7 +12,7 @@ const LoadBookmark = (props) => {
 
   const {
     uploadBookmarks,
-    setBookmarks,
+    onAddBookmarks,
     updateFilter
   } = props;
 
@@ -24,7 +24,7 @@ const LoadBookmark = (props) => {
     const obgBookmarks = getObject(bookmarks).bookmarks;
     obgBookmarks.forEach(el => {
       el.title = getTitle(el.title, el.link);
-      uploadBookmarks({ ...el }, setBookmarks);
+      uploadBookmarks({ ...el }, onAddBookmarks);
     });
     updateFilter();
     sendMesageNotification(

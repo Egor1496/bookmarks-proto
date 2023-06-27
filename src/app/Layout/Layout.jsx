@@ -7,7 +7,7 @@ import { FilterButtons, BookmarksContext } from "../../processes/model/context";
 
 import { MainMenu, MainHeader, MainAside, MainFooter, getGroups, getTags, getBookmarks } from "../../widgets";
 
-import { debounce, getStore, setStore } from "../../shared/model";
+import { debounce, getStore, setStore, getObject, getJSON } from "../../shared/model";
 
 const DEFAULT_TYPE_SORT = { value: "title", sortType: true };
 
@@ -16,7 +16,7 @@ const Layout = () => {
 	const [activeGroup, setActiveGroup] = useState(getStore("activeGroup") || "");
 
 	const [filter, setFilter] = useState([activeGroup, activeTags]);
-	const [sort, setSort] = useState(DEFAULT_TYPE_SORT);
+	const [sort, setSort] = useState(getObject(getStore("sort")) || DEFAULT_TYPE_SORT);
 
 	const [bookmarks, setBookmarks] = useState(getBookmarks(filter, sort));
 
@@ -25,6 +25,10 @@ const Layout = () => {
 
 	const [groupLinks, setGroupLinks] = useState(allGroups);
 	const [tagCloud, setTagCloud] = useState(allTags);
+
+	const onAddBookmarks = (newBookmark) => {
+		setBookmarks(getBookmarks(filter, sort));
+	}
 
 	const onChangeInput = (searchState) => {
 		setBookmarks(getBookmarks(filter, sort, searchState));
@@ -80,11 +84,12 @@ const Layout = () => {
 		setSort(newSort);
 		console.log(sort);
 		setBookmarks(getBookmarks(filter, newSort))
+		setStore("sort", getJSON(newSort));
 	};
 
 	const contextBookmarks = [
 		bookmarks,
-		setBookmarks,
+		onAddBookmarks,
 		filter[0],
 		updateFilter,
 		onClickBookmarkTags,
@@ -127,15 +132,13 @@ const Layout = () => {
 
 export { Layout };
 
+// баг сравнение похожих групп 123 === 12
 // перенести из лаяута в процесс закладки и облоко тэгов групп
-// сохранение настроек сортировки
 // облачное хранилище закладок
-// чекбоксы выбор сортировки
 // транспарент вид карточки
 // БАГ при удалении группы очищяет все
 // отображать путь закладок
 // переделать масив активных вкладок на текст активной вкладки
-// при добавлении, удалении, изменении, загрзки карточек добавить уведомление
 
 /*
 	правое выдвижное меню с права

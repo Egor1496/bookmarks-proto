@@ -11,7 +11,7 @@ const AddBookmark = (props) => {
 
   const {
     uploadBookmarks,
-    setBookmarks,
+    onAddBookmarks,
     updateFilter
   } = props;
 
@@ -32,7 +32,7 @@ const AddBookmark = (props) => {
       <Notification state={notification} setState={setNotification} />
       <BookmarkModal
         onАccept={(newBookmark) => {
-          uploadBookmarks({ ...newBookmark }, setBookmarks);
+          uploadBookmarks({ ...newBookmark }, onAddBookmarks);
           updateFilter();
           sendMesageNotification({ text: "Добавлена ссылка!" }, setNotification);
         }}
