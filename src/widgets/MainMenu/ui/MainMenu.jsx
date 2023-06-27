@@ -8,7 +8,6 @@ import { GroupLinks } from "../../../features";
 import { Br, Logo } from "../../../shared/ui"; //BaseDropMenu
 
 const MainMenu = ({ groups }) => {
-
   return (
     <div className={sass["mainMenuWrap"]}>
       <Link to="/bookmarks-proto" ><Logo /></Link>

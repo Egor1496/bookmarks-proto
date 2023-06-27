@@ -14,7 +14,8 @@ const Main = () => {
     setBookmarks,
     groupName,
     updateFilter,
-    onClickTags
+    onClickTags,
+    onSortSelect,
   ] = useContext(BookmarksContext);
 
   const defStyleNumber = getStore("styleNumber", 1)
@@ -32,7 +33,7 @@ const Main = () => {
         <div className={sass.inner}>
           <div className={sass.countBookmarks}>{groupName || "Всего"} - {bookmarks.length}</div>
           <div className={sass.buttonWrap}>
-            <Sort />
+            <Sort onAcept={onSortSelect} />
             <SelectStyleBookmark setStyleNumber={onClickStyleBookmarks} />
           </div>
         </div>

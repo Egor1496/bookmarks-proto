@@ -1,5 +1,4 @@
 const sendMesageNotification = (state, setState) => {
-	console.log(state);
 	setState({
 		active: true,
 		text: state?.text,

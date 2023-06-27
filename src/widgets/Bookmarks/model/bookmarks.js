@@ -112,9 +112,9 @@ const getGroups = () => {
 	});
 };
 
-const getBookmarks = (filterName, sortType, searchText) => {
+const getBookmarks = (filterName, sortSelected = { value: "title", sortType: true }, searchText = "") => {
 	filledBookmarks = filter(filterName, bookmarks);
-	filledBookmarks = sort(sortType, filledBookmarks);
+	filledBookmarks = sort(sortSelected, filledBookmarks);
 	filledBookmarks = searchBookmarks(searchText, filledBookmarks);
 	return filledBookmarks;
 };
@@ -166,29 +166,47 @@ const filter = (filter = ["", ""], bookmarks) => {
 	return filtered;
 };
 
-const sortTitleBookmarks = (bookmarks) => {
+const sortTitleBookmarks = (bookmarks, type) => {
 	return bookmarks.sort((a, b) => {
 		if (!a.title) return false;
 		if (!b.title) return false;
-		return a.title.localeCompare(b.title);
+		return type ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
 	});
 };
 
-const sortDescriptionBookmarks = (bookmarks) => {
+const sortDescriptionBookmarks = (bookmarks, type) => {
 	return bookmarks.sort((a, b) => {
 		if (!a.description) return false;
 		if (!b.description) return false;
-		return a.description.localeCompare(b.description);
+		return type ? a.description.localeCompare(b.description) : b.description.localeCompare(a.description);
 	});
 };
 
-const sort = (sortType = "title", bookmarks) => {
+const sortTagsBookmarks = (bookmarks, type) => {
+	return bookmarks.sort((a, b) => {
+		if (!a.title) return false;
+		if (!b.title) return false;
+		return type ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+	});
+};
+
+const sortGroupBookmarks = (bookmarks, type) => {
+	return bookmarks.sort((a, b) => {
+		if (!a.title) return false;
+		if (!b.title) return false;
+		return type ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+	});
+};
+
+const sort = (sortObg, bookmarks) => {
 	const type = {
 		title: sortTitleBookmarks,
 		description: sortDescriptionBookmarks,
+		tags: sortTagsBookmarks,
+		group: sortGroupBookmarks,
 	};
-
-	return type[sortType.trim().toLowerCase()](bookmarks);
+	// console.log(sortObg);
+	return type[sortObg.value.trim().toLowerCase()](bookmarks, sortObg.sortType);
 };
 
 filledBookmarks = getBookmarks();

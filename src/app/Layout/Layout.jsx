@@ -9,16 +9,16 @@ import { MainMenu, MainHeader, MainAside, MainFooter, getGroups, getTags, getBoo
 
 import { debounce, getStore, setStore } from "../../shared/model";
 
-const DEFAULT_TYPE_SEARCH = "title";
-const DEFAULT_TYPE_SORT = "title";
+const DEFAULT_TYPE_SORT = { value: "title", sortType: true };
 
 const Layout = () => {
 	const [activeTags, setActiveTags] = useState(getStore("activeTags") || "");
 	const [activeGroup, setActiveGroup] = useState(getStore("activeGroup") || "");
 
 	const [filter, setFilter] = useState([activeGroup, activeTags]);
+	const [sort, setSort] = useState(DEFAULT_TYPE_SORT);
 
-	const [bookmarks, setBookmarks] = useState(getBookmarks(filter, DEFAULT_TYPE_SORT));
+	const [bookmarks, setBookmarks] = useState(getBookmarks(filter, sort));
 
 	const allTags = getTags();
 	const allGroups = getGroups();
@@ -27,7 +27,7 @@ const Layout = () => {
 	const [tagCloud, setTagCloud] = useState(allTags);
 
 	const onChangeInput = (searchState) => {
-		setBookmarks(getBookmarks(filter, DEFAULT_TYPE_SEARCH, searchState));
+		setBookmarks(getBookmarks(filter, sort, searchState));
 	};
 
 	const updateFilter = () => {
@@ -39,7 +39,7 @@ const Layout = () => {
 		const newText = groupName === activeGroup ? "" : groupName;
 		const newFilter = [newText, ""];
 		setFilter(newFilter);
-		setBookmarks(getBookmarks(newFilter));
+		setBookmarks(getBookmarks(newFilter, sort));
 		setActiveGroup(newText);
 		setTagCloud(getTags());
 		setStore("activeTags", "");
@@ -50,7 +50,7 @@ const Layout = () => {
 	const onClickTags = (tagName) => {
 		const newFilter = [filter[0], tagName];
 		setFilter(newFilter);
-		setBookmarks(getBookmarks(newFilter));
+		setBookmarks(getBookmarks(newFilter, sort));
 		setActiveTags(tagName);
 		setStore("activeTags", tagName);
 		setTagCloud(getTags());
@@ -59,7 +59,7 @@ const Layout = () => {
 	const clearTags = () => {
 		const newFilter = [filter[0], ""];
 		setFilter(newFilter);
-		setBookmarks(getBookmarks(newFilter));
+		setBookmarks(getBookmarks(newFilter, sort));
 		setActiveTags("");
 		setStore("activeTags", "");
 		setTagCloud(getTags());
@@ -68,7 +68,7 @@ const Layout = () => {
 	const onClickBookmarkTags = (tagName) => {
 		const newFilter = ["", tagName];
 		setFilter(newFilter);
-		setBookmarks(getBookmarks(newFilter));
+		setBookmarks(getBookmarks(newFilter, sort));
 		setActiveTags(tagName);
 		setStore("activeTags", tagName);
 		setActiveGroup("");
@@ -76,12 +76,19 @@ const Layout = () => {
 		setTagCloud(getTags());
 	}
 
+	const onSortSelect = (newSort) => {
+		setSort(newSort);
+		console.log(sort);
+		setBookmarks(getBookmarks(filter, newSort))
+	};
+
 	const contextBookmarks = [
 		bookmarks,
 		setBookmarks,
 		filter[0],
 		updateFilter,
-		onClickBookmarkTags
+		onClickBookmarkTags,
+		onSortSelect,
 	];
 
 	return (
