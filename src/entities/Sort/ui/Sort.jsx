@@ -5,6 +5,7 @@ import { TbArrowsTransferDown } from 'react-icons/tb';
 import { FaSortAlphaDown, FaSortAlphaUpAlt } from 'react-icons/fa';
 
 import { BaseButton } from "../../../shared/ui";
+import { getStore, setStore, getObject, getJSON } from "../../../shared/model";
 
 const sortListDefault = [
   { text: "Заголовок", value: "title", sortType: true },
@@ -13,18 +14,23 @@ const sortListDefault = [
   { text: "Папки", value: "group", sortType: true },
 ]
 
+const ACTIVE_NUM_DEFAULT = 0;
+
 const Sort = ({ onAcept = () => { } }) => {
 
   const [modalActive, setModalActive] = useState(false);
 
-  const [sortList, setSortList] = useState(sortListDefault);
+  const [sortList, setSortList] = useState(getObject(getStore("sortList")) || sortListDefault);
 
-  const [activeNum, setActiveNum] = useState(0);
+  const [activeNum, setActiveNum] = useState(Number(getStore("activeNum")) || ACTIVE_NUM_DEFAULT);
 
   const getNewList = (prevSortList) => {
+    console.log(prevSortList);
     const newList = [...prevSortList];
     return newList;
   }
+
+  const newList = getNewList(sortList);
 
   return (
     <div className={sass.main}>
@@ -41,19 +47,21 @@ const Sort = ({ onAcept = () => { } }) => {
             <ul className={sass.selectSort}>
               {
                 sortList.map((item, i) => {
-                  const newList = getNewList(sortList);
                   return (
                     <li
                       key={item.text}
                       className={`${sass.sortItem} ${activeNum === i && sass.sortItemActive}`}
                       onClick={(e) => {
-                        if (activeNum !== i)
+                        if (activeNum !== i) {
                           setActiveNum(i);
+                          setStore("activeNum", i);
+                          setStore("sortList", getJSON(newList));
+                        }
                         else {
                           newList[i] = { ...newList[i], sortType: !(newList[i].sortType) }
                           setSortList(() => newList)
+                          setStore("sortList", getJSON(newList));
                         }
-
 
                         onAcept(newList[i]);
                       }}
@@ -66,6 +74,8 @@ const Sort = ({ onAcept = () => { } }) => {
                           newList[i] = { ...newList[i], sortType: !(newList[i].sortType) }
                           setSortList(() => newList)
                           setActiveNum(i);
+                          setStore("activeNum", i);
+                          setStore("sortList", getJSON(newList));
                           onAcept(newList[i]);
                         }}
                       >

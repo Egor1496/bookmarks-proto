@@ -155,8 +155,8 @@ const filter = (filter = ["", ""], bookmarks) => {
 		let isSuitableGroup = false,
 			isSuitableTags = false;
 
-		isSuitableGroup = ~cleanGroup.indexOf(groupNames) || groupNames === "";
-		isSuitableTags = ~cleanTags.indexOf(tagsNames) || tagsNames === "";
+		isSuitableGroup = cleanGroup === groupNames || groupNames === "";
+		isSuitableTags = cleanTags === tagsNames || tagsNames === "";
 
 		if (isSuitableGroup && isSuitableTags) suitableElem = elem;
 
@@ -183,6 +183,7 @@ const sortDescriptionBookmarks = (bookmarks, type) => {
 };
 
 const sortTagsBookmarks = (bookmarks, type) => {
+	console.log(getTags());
 	return bookmarks.sort((a, b) => {
 		if (!a.title) return false;
 		if (!b.title) return false;
@@ -191,6 +192,7 @@ const sortTagsBookmarks = (bookmarks, type) => {
 };
 
 const sortGroupBookmarks = (bookmarks, type) => {
+	console.log(getGroups());
 	return bookmarks.sort((a, b) => {
 		if (!a.title) return false;
 		if (!b.title) return false;
@@ -205,7 +207,7 @@ const sort = (sortObg, bookmarks) => {
 		tags: sortTagsBookmarks,
 		group: sortGroupBookmarks,
 	};
-	// console.log(sortObg);
+
 	return type[sortObg.value.trim().toLowerCase()](bookmarks, sortObg.sortType);
 };
 

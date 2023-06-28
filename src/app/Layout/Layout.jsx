@@ -82,7 +82,6 @@ const Layout = () => {
 
 	const onSortSelect = (newSort) => {
 		setSort(newSort);
-		console.log(sort);
 		setBookmarks(getBookmarks(filter, newSort))
 		setStore("sort", getJSON(newSort));
 	};
@@ -132,7 +131,7 @@ const Layout = () => {
 
 export { Layout };
 
-// баг сравнение похожих групп 123 === 12
+// использовать context без передачи пропсов
 // перенести из лаяута в процесс закладки и облоко тэгов групп
 // облачное хранилище закладок
 // транспарент вид карточки
