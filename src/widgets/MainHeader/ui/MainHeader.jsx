@@ -5,7 +5,7 @@ import { Search, BaseSettings } from "../../../entities";
 import { FastLinks } from "../../../features";
 import { BookmarksContext } from "../../../processes/model/context";
 
-const MainHeader = () => {
+const MainHeader = ({ enableSelectGroup, enableGroups, enableSelectTags, enableTags }) => {
 
   const onChangeInput = useContext(BookmarksContext);
 
@@ -14,7 +14,12 @@ const MainHeader = () => {
       <div className={sass["inner-bottom"]}>
         <Search onChangeInput={onChangeInput} />
         <FastLinks />
-        <BaseSettings />
+        <BaseSettings
+          enableSelectGroup={enableSelectGroup}
+          enableGroups={enableGroups}
+          enableSelectTags={enableSelectTags}
+          enableTags={enableTags}
+        />
       </div>
     </div>
   );

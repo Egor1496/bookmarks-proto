@@ -25,6 +25,9 @@ const Layout = () => {
 	const [groupLinks, setGroupLinks] = useState(allGroups);
 	const [tagCloud, setTagCloud] = useState(allTags);
 
+	const [enableTags, setEnableTags] = useState(Boolean(Number(getStore("enableTags") || 1)));
+	const [enableGroups, setEnableGroups] = useState(Boolean(Number(getStore("enableGroups") || 1)));
+
 	const onAddBookmarks = (newBookmark) => {
 		setBookmarks(getBookmarks(filter, sort));
 	}
@@ -85,6 +88,16 @@ const Layout = () => {
 		setStore("sort", getJSON(newSort));
 	};
 
+	const enableSelectGroup = (isChecked) => {
+		setEnableGroups(isChecked);
+		setStore("enableGroups", Number(isChecked));
+	}
+
+	const enableSelectTags = (isChecked) => {
+		setEnableTags(isChecked);
+		setStore("enableTags", Number(isChecked));
+	}
+
 	const contextBookmarks = [
 		bookmarks,
 		onAddBookmarks,
@@ -96,7 +109,7 @@ const Layout = () => {
 
 	return (
 		<div className={sass.mainWrap}>
-			<nav className={`${sass.nav}`}>
+			<nav className={`${sass.nav} ${!enableGroups && sass.hide}`}>
 				<FilterButtons.Provider value={[onClickGroup, activeGroup]}>
 					<MainMenu groups={groupLinks} />
 				</FilterButtons.Provider>
@@ -104,7 +117,12 @@ const Layout = () => {
 			<div className={sass["col-2"]}>
 				<header className={sass.header} >
 					<BookmarksContext.Provider value={debounce(onChangeInput, 500)}>
-						<MainHeader />
+						<MainHeader
+							enableSelectGroup={enableSelectGroup}
+							enableGroups={enableGroups}
+							enableSelectTags={enableSelectTags}
+							enableTags={enableTags}
+						/>
 					</BookmarksContext.Provider>
 				</header>
 				<main className={sass.main}>
@@ -114,7 +132,7 @@ const Layout = () => {
 							<Outlet />
 						</BookmarksContext.Provider>
 					</article>
-					<aside className={sass.aside} >
+					<aside className={`${sass.aside} ${!enableTags && sass.hide}`} >
 						<FilterButtons.Provider value={[onClickTags, clearTags, activeTags]}>
 							<MainAside tags={tagCloud} />
 						</FilterButtons.Provider>
