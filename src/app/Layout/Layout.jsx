@@ -6,7 +6,6 @@ import sass from "./Layout.module.sass";
 import { FilterButtons, BookmarksContext } from "../../processes/model/context";
 
 import { MainMenu, MainHeader, MainAside, MainFooter, getGroups, getTags, getBookmarks } from "../../widgets";
-
 import { debounce, getStore, setStore, getObject, getJSON } from "../../shared/model";
 
 const DEFAULT_TYPE_SORT = { value: "title", sortType: true };
@@ -39,15 +38,15 @@ const Layout = () => {
 		setGroupLinks(getGroups());
 	}
 
-	const onClickGroup = (groupName) => {
-		const newText = groupName === activeGroup ? "" : groupName;
+	const onClickGroup = (groupName, isPressed) => {
+		const newText = isPressed ? "" : groupName;
 		const newFilter = [newText, ""];
 		setFilter(newFilter);
 		setBookmarks(getBookmarks(newFilter, sort));
 		setActiveGroup(newText);
 		setTagCloud(getTags());
 		setStore("activeTags", "");
-		setStore("activeGroup", groupName);
+		setStore("activeGroup", newText);
 		setActiveTags("");
 	}
 
@@ -131,7 +130,7 @@ const Layout = () => {
 
 export { Layout };
 
-// использовать context без передачи пропсов
+//баг с тэгами при нажатии на соц. сеть не показываетвсе соц сети
 // перенести из лаяута в процесс закладки и облоко тэгов групп
 // облачное хранилище закладок
 // транспарент вид карточки

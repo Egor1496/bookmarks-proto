@@ -183,20 +183,18 @@ const sortDescriptionBookmarks = (bookmarks, type) => {
 };
 
 const sortTagsBookmarks = (bookmarks, type) => {
-	console.log(getTags());
 	return bookmarks.sort((a, b) => {
-		if (!a.title) return false;
-		if (!b.title) return false;
-		return type ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+		if (!a.tags) return false;
+		if (!b.tags) return false;
+		return type ? a.tags.localeCompare(b.tags) : b.tags.localeCompare(a.tags);
 	});
 };
 
 const sortGroupBookmarks = (bookmarks, type) => {
-	console.log(getGroups());
 	return bookmarks.sort((a, b) => {
-		if (!a.title) return false;
-		if (!b.title) return false;
-		return type ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+		if (!a.group) return false;
+		if (!b.group) return false;
+		return type ? a.group.localeCompare(b.group) : b.group.localeCompare(a.group);
 	});
 };
 

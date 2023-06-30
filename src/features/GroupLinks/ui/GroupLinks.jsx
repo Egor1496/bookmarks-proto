@@ -9,19 +9,23 @@ import { BaseButton } from "../../../shared/ui";
 
 const GroupLinks = ({ groups = [] }) => {
 
-  const [onClick, activeGroupText] = useContext(FilterButtons);
+  const [
+    onClick,
+    activeGroupText
+  ] = useContext(FilterButtons);
 
   return (
     <div className={sass.main}>
       {
         [...groups].map((el) => {
+          const isPressed = activeGroupText.toLowerCase() === el.toLowerCase();
           return (
             <BaseButton
               key={el} text={el}
-              callBack={() => { onClick(el) }}
+              callBack={() => { onClick(el, isPressed) }}
               styleNameList={[
                 "transparentStyle",
-                activeGroupText.toLowerCase() === el.toLowerCase() && "buttonActive"
+                isPressed && "buttonActive"
               ]}
             ><AiFillFolderOpen /></BaseButton>
           )

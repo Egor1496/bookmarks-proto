@@ -25,7 +25,6 @@ const Sort = ({ onAcept = () => { } }) => {
   const [activeNum, setActiveNum] = useState(Number(getStore("activeNum")) || ACTIVE_NUM_DEFAULT);
 
   const getNewList = (prevSortList) => {
-    console.log(prevSortList);
     const newList = [...prevSortList];
     return newList;
   }
