@@ -7,7 +7,7 @@
   z-index: 1000
   display: flex
   justify-content: center
-  width: 562px
+  width: 673px
   padding: 10px
   border-radius: 10px
   border: 1px solid var(--color5)
@@ -30,6 +30,7 @@
   margin: 0
   padding: 0
   .bookmarks
+    position: relative
     display: flex
     flex-direction: column
     gap: 10px
@@ -68,7 +69,15 @@
       width: 80%
       height: 15px
       margin: 0 auto
+      &--abs
+        position: absolute
+        bottom: -10px
+        left: 5px
     .description
+      &--abs
+        position: absolute
+        bottom: -10px
+        left: 0px
     .tagsWrap
       display: flex
       width: 100%

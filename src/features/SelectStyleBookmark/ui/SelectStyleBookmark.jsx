@@ -145,6 +145,22 @@ const SelectStyleBookmark = ({ setStyleNumber }) => {
                   <div className={sass.imgPreview}></div>
                 </li>
 
+                <li
+                  className={`${sass["bookmarks"]} ${sass["bookmarks--transparent-radio"]}`}
+                  onClick={() => setStyleNumber(17)}
+                >
+                  <div className={sass.imgPreview}></div>
+                  <div className={`${sass["title"]} ${sass["title--abs"]}`}></div>
+                </li>
+
+                <li
+                  className={`${sass["bookmarks"]} ${sass["bookmarks--transparent-radio"]}`}
+                  onClick={() => setStyleNumber(18)}
+                >
+                  <div className={sass.imgPreview}></div>
+                  <div className={`${sass["description"]} ${sass["description--abs"]}`}></div>
+                </li>
+
               </ul>
             </div>
           </>

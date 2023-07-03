@@ -155,8 +155,8 @@ const filter = (filter = ["", ""], bookmarks) => {
 		let isSuitableGroup = false,
 			isSuitableTags = false;
 
-		isSuitableGroup = cleanGroup === groupNames || groupNames === "";
-		isSuitableTags = cleanTags === tagsNames || tagsNames === "";
+		isSuitableGroup = ~cleanGroup.indexOf(groupNames) || groupNames === "";
+		isSuitableTags = ~cleanTags.indexOf(tagsNames) || tagsNames === "";
 
 		if (isSuitableGroup && isSuitableTags) suitableElem = elem;
 
