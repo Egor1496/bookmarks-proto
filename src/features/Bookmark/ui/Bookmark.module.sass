@@ -20,12 +20,12 @@
       cursor: pointer
       transform: scale(1.2)
       path
-        fill: var(--color3)
+        fill: var(--svgBookamrkHover)
     svg
       width: 25px
       height: 25px
       path
-        fill: var(--color4)
+        fill: var(--svgBookamrk)
   .deleteBookmark
     top: 7px
     left: 7px
@@ -38,18 +38,18 @@
   width: 250px
   padding-bottom: 5px
   border-radius: 8px
-  border: 2px solid var(--color4)
-  background-color: var(--color3)
+  border: 2px solid var(--color2)
+  background-color: var(--bgDescriptionBookamrk)
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px
   text-decoration: none
   overflow: hidden
   &:hover
     filter: contrast(1.5)
 
-.main-inner
-  position: relative
-  &:nth-child(3)
-    border-top: 1px solid var(--color4)
+// .main-inner
+//   position: relative
+//   &:nth-child(3)
+//     border-top: 1px solid var(--svgControl)
 
 .inner
   padding: 0 10px
@@ -61,7 +61,7 @@
   align-items: center
   width: 100%
   min-height: 94px
-  background-color: var(--color5)
+  background-color: var(--bgPreviewBookamrk)
   img
     width: 70px
     height: 70px
@@ -71,12 +71,13 @@
 .title
   text-align: center
   padding: 10px 10px
-  background-color: var(--color5)
+  color: var(--colorTitleBookamrk)
+  background-color: var(--bgTitleBookamrk)
 
 .description
   margin: 5px 0
   margin-bottom: 0
-  color: var(--color5)
+  color: var(--colorDescriptionBookamrk)
 
 .tags
   display: flex

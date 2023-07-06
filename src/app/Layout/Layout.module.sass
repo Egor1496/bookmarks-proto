@@ -20,34 +20,36 @@
     margin: 10px 10px
     border-radius: 10px
     border: 2px solid var(--color5)
-    background-color: var(--color1)
-    background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='black' fill-opacity='0.1'%3E%3Cpath d='M0 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") // 0h42v44H0V0zm1
+    background-color: var(--bgMain)
+    // background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='black' fill-opacity='0.1'%3E%3Cpath d='M0 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") // 0h42v44H0V0zm1
 
 .aside
   flex: 0.5
   margin: 10px 0
   // border: 1px solid var(--color5)
-  background: var(--color1)
+  background: var(--bgAside)
   border-bottom-left-radius: 10px
   border-top-left-radius: 10px
-  background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='black' fill-opacity='0.1'%3E%3Cpath d='M0 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") // 0h42v44H0V0zm1
+  // background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='black' fill-opacity='0.1'%3E%3Cpath d='M0 1h40v20H1V1zM0 23h20v20H0V23zm22 0h20v20H22V23z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") // 0h42v44H0V0zm1
   &.hide
     display: none
 
 .nav
+  position: relative
   display: flex
   flex-direction: column
   max-width: 240px
+  min-width: 180px
   gap: 50px
   // border-right: 1px solid var(--color5)
-  background-color: var(--color3)
+  background-color: var(--bgMenu)
   &.hide
     display: none
 
 .header
   margin: 0 10px
   // border: 1px solid var(--color5)
-  background-color: var(--color3)
+  background-color: var(--bgHeader)
   border-top: none
   border-bottom-left-radius: 10px
   border-bottom-right-radius: 10px

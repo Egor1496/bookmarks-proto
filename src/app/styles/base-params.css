@@ -8,21 +8,7 @@
   --fontSizeDef2: 18px;
   --fontSizeDef3: 24px;
   --сolorA1: var(--colorDef2);
-  --сolorA2: #116466;
-  --сolorH1: var(--colorDef2);
-  --сolorH2: var(--colorDef1);
-  --сolorP1: var(--colorDef2);
-  --сolorP2: var(--colorDef1);
-  --сolorControl1: var(--colorDef2);
-  --сolorControl2: var(--colorDef1);
-  --bgDisableControl1: var(--colorDef2);
-  --bgDisableControl2: var(--colorDef1);
-  --color4: #687864;
-  --color2: #31708E;
-  --color3: #5085A5;
-  --color1: #8FC1E3;
-  --color5: #F7F9FB;
-
-  --section-pattern: linear-gradient(135deg, transparent 21px, rgba(100, 100, 100, .2) 22px, rgba(100, 100, 100, .2) 24px, transparent 24px, transparent 67px, rgba(100, 100, 100, .2) 67px, rgba(100, 100, 100, .2) 69px, transparent 69px), linear-gradient(225deg, transparent 21px, rgba(100, 100, 100, .2) 22px, rgba(100, 100, 100, .2) 24px, transparent 24px, transparent 67px, rgba(100, 100, 100, .2) 67px, rgba(100, 100, 100, .2) 69px, transparent 69px)0 64px;
-  --section-pattern-size: 64px 128px;
+  --сolorA2: var(--colorDef1);
+  --сolorH: var(--colorDef2);
+  --сolorP: var(--colorDef2);
 }
