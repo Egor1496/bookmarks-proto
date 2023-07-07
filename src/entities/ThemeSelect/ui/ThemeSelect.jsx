@@ -16,8 +16,10 @@ const ThemeSelect = ({ setTheme }) => {
             return <BaseButton
               key={i}
               callBack={() => { setTheme(i); setStore("themeNumber", i) }}
-              css={{ "backgroundColor": BASE_PARAMS[i]["color3"], "minWidth": "50px", "minHeight": "50px" }}
-            />
+              css={{ "backgroundColor": BASE_PARAMS[i]["color1"], "minWidth": "50px", "minHeight": "50px" }}
+            >
+              <div className={css["border"]} style={{ "backgroundColor": BASE_PARAMS[i]["color2"] }}></div>
+            </BaseButton>
           }
           )
         }
