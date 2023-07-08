@@ -9,7 +9,7 @@ import { ThemeSelect } from "../../../entities";
 import { getStore } from "../../../shared/model";
 import { BaseButton, BaseToggleRadio } from "../../../shared/ui";
 
-const BaseSettings = ({ enableSelectGroup, enableGroups, enableSelectTags, enableTags }) => {
+const BaseSettings = ({ enableSelectGroup, enableGroups, enableSelectTags, enableTags, enableSelectBg, enableBg }) => {
   const storageTheme = getStore("themeNumber", 1);
 
   const [numberTheme, setTheme] = useState(storageTheme);
@@ -34,12 +34,16 @@ const BaseSettings = ({ enableSelectGroup, enableGroups, enableSelectTags, enabl
               </div>
               <div className={css["enable-wrap"]}>
                 <div className={css["groups-enable"]}>
-                  <h2>Показать группы</h2>
+                  <h2>Группы</h2>
                   <BaseToggleRadio onClickChange={enableSelectGroup} defaultChecked={enableGroups} />
                 </div>
                 <div className={css["tags-enable"]}>
-                  <h2>Показать тэги</h2>
+                  <h2>Тэги</h2>
                   <BaseToggleRadio onClickChange={enableSelectTags} defaultChecked={enableTags} />
+                </div>
+                <div className={css["bg-enable"]}>
+                  <h2>Фон</h2>
+                  <BaseToggleRadio onClickChange={enableSelectBg} defaultChecked={enableBg} />
                 </div>
               </div>
               <ThemeSelect setTheme={setTheme} />

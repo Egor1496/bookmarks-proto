@@ -27,8 +27,9 @@ const Layout = () => {
 
 	const [enableTags, setEnableTags] = useState(Boolean(Number(getStore("enableTags") || 1)));
 	const [enableGroups, setEnableGroups] = useState(Boolean(Number(getStore("enableGroups") || 1)));
+	const [enableBg, setEnableBg] = useState(Boolean(Number(getStore("enableBg") || 1)));
 
-	const onAddBookmarks = (newBookmark) => {
+	const onAddBookmarks = () => {
 		setBookmarks(getBookmarks(filter, sort));
 	}
 
@@ -98,6 +99,11 @@ const Layout = () => {
 		setStore("enableTags", Number(isChecked));
 	}
 
+	const enableSelectBg = (isChecked) => {
+		setEnableBg(isChecked);
+		setStore("enableBg", Number(isChecked));
+	}
+
 	const contextBookmarks = [
 		bookmarks,
 		onAddBookmarks,
@@ -122,11 +128,13 @@ const Layout = () => {
 							enableGroups={enableGroups}
 							enableSelectTags={enableSelectTags}
 							enableTags={enableTags}
+							enableSelectBg={enableSelectBg}
+							enableBg={enableBg}
 						/>
 					</BookmarksContext.Provider>
 				</header>
-				<main className={sass.main}>
-					<article className={sass.article} >
+				<main className={`${sass.main}`}>
+					<article className={`${sass.article} ${!enableBg && sass.transparent}`} >
 						<BookmarksContext.Provider
 							value={contextBookmarks}>
 							<Outlet />
