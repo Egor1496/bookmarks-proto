@@ -13,13 +13,17 @@ const BaseModal = (props) => {
 		setActive
 	} = props;
 
+	const handlerClickClose = () => {
+		setActive(false)
+	}
+
 	return (
 		<>
 			{
 				active && (<div>
-					<div className={sass.bg} style={cssBg} onClick={() => { setActive(false) }} />
+					<div className={sass.bg} style={cssBg} onClick={handlerClickClose} />
 					<div className={sass.modal} style={cssModal} >
-						<div className={sass.close} onClick={() => { setActive(false) }} >
+						<div className={sass.close} onClick={handlerClickClose} >
 							<AiOutlineCloseCircle />
 						</div>
 						<div className={sass.mainInner} style={cssInner} >

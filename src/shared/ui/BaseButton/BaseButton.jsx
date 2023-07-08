@@ -13,18 +13,20 @@ const BaseButton = (props) => {
 		children,
 	} = props;
 
-	let styleNames = `${sass[styleName] || ""}`;
+	let classNamesButton = `${sass[styleName] || ""}`;
 
 	for (let i = 0; i < styleNameList.length; i++) {
-		styleNames += " " + (sass[styleNameList[i]] || "");
+		classNamesButton += " " + (sass[styleNameList[i]] || "");
 	}
+
+	const handlerClickButton = (e) => callBack(e);
 
 	return (
 		<div className={sass.main}>
 			<button
-				className={styleNames}
+				className={classNamesButton}
 				style={css}
-				onClick={(e) => callBack(e)}
+				onClick={handlerClickButton}
 				disabled={disabled}>
 				{children}
 				{text}

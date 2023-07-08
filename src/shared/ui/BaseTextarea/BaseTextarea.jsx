@@ -11,11 +11,13 @@ const BaseTextarea = (props) => {
 		width
 	} = props;
 
+	const handlerChangeTextarea = (e) => setState(e.target.value);
+
 	return (
 		<div className={sass.main}>
 			<textarea className={`${sass.textarea} ${sass[width]} ${readonly && sass.disable}`}
 				value={state}
-				onChange={(e) => setState(e.target.value)}
+				onChange={handlerChangeTextarea}
 				readOnly={readonly}
 				placeholder={placeholder}
 			/>

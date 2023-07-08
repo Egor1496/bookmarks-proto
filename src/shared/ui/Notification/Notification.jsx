@@ -13,13 +13,15 @@ const Notification = (props) => {
 			alarm: false,
 			active: false
 		},
-		// setState
 	} = props;
 
+	const classNamesClose = `${sass.main} ${state.active ? sass.active : sass.close}`;
+	const classNamesNotification = `${sass.notification} ${state.alarm && sass.alarm}`;
+
 	return (
-		<div className={`${sass.main} ${state.active ? sass.active : sass.close}`} >
+		<div className={classNamesClose} >
 			<div className={sass.wrap}>
-				<div className={`${sass.notification} ${state.alarm && sass.alarm}`} style={state.style}>
+				<div className={classNamesNotification} style={state.style}>
 					{children || <BiError />} <span>{state.text}</span> {state.description}
 				</div>
 			</div>

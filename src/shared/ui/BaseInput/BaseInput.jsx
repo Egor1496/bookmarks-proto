@@ -12,14 +12,18 @@ const BaseInput = (props) => {
 		onChangeInput = () => { }
 	} = props;
 
+	const handlerChangeInput = (e) => {
+		onChangeInput(e.target.value);
+		setState(e.target.value);
+	}
+
+	const classNamesInput = `${sass.input} ${(readonly && sass.disable) || ""}`;
+
 	return (
 		<div className={sass.main}>
-			<input className={`${sass.input} ${(readonly && sass.disable) || ""}`}
+			<input className={classNamesInput}
 				type="text" value={state}
-				onChange={(e) => {
-					onChangeInput(e.target.value);
-					setState(e.target.value);
-				}}
+				onChange={handlerChangeInput}
 				readOnly={readonly}
 				placeholder={placeholder}
 			/>

@@ -5,7 +5,7 @@ const BaseSelect = ({ styles, options }) => {
 
 	const [select, setSelect] = useState({ open: false, value: 0, text: "Опция 1" });
 
-	const click = (e) => {
+	const handlerClickToggle = (e) => {
 		if (e.target.getAttribute("data-number"))
 			setSelect({
 				open: !select.open,
@@ -19,17 +19,23 @@ const BaseSelect = ({ styles, options }) => {
 			});
 	}
 
+	const classNamesToggle = `${css.select} ${select.open ? css.open : css.close}`;
+
 	return (
 		<div className={css.main}>
-			<div className={`${css.select} ${select.open ? css.open : css.close}`}
-				onClick={click}
+			<div className={classNamesToggle}
+				onClick={handlerClickToggle}
 				style={styles}
 			>
-				<div className={css["option-title"]}><span>{options?.title || "Опции"}</span></div>
+				<div className={css["option-title"]}>
+					<span>{options?.title || "Опции"}</span>
+				</div>
 				<div className={css["option-wrap"]}>
-					{options?.arrOption?.map((elem, i) => {
-						return <div key={i} className={css.option} data-number={i}>{elem}</div>
-					}) || <div className={css.option} data-number="0">Опция</div>}
+					{
+						options?.arrOption?.map((elem, i) => {
+							return <div key={i} className={css.option} data-number={i}>{elem}</div>
+						}) || <div className={css.option} data-number="0">Опция</div>
+					}
 				</div>
 			</div>
 		</div >
