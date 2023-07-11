@@ -9,7 +9,7 @@ const Search = ({ onChangeInput }) => {
 
   const [searchState, setSearchState] = useState("");
 
-  const onChaneInputWrap = (state) => {
+  const handlerChaneInput = (state) => {
     setSearchState(state);
     onChangeInput(state);
   }
@@ -20,7 +20,7 @@ const Search = ({ onChangeInput }) => {
         placeholder="Поиск"
         state={searchState}
         setState={setSearchState}
-        onChangeInput={onChaneInputWrap}
+        onChangeInput={handlerChaneInput}
       >
         <AiOutlineSearch />
       </BaseInput>

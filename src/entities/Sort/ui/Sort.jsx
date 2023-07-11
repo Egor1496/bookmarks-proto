@@ -31,6 +31,29 @@ const Sort = ({ onAcept = () => { } }) => {
 
   const newList = getNewList(sortList);
 
+  const handlerClickLi = (i) => {
+    if (activeNum !== i) {
+      setActiveNum(i);
+      setStore("activeNum", i);
+      setStore("sortList", getJSON(newList));
+    }
+    else {
+      newList[i] = { ...newList[i], sortType: !(newList[i].sortType) }
+      setSortList(() => newList)
+      setStore("sortList", getJSON(newList));
+    }
+    onAcept(newList[i]);
+  }
+
+  const handlerCallback = (i) => {
+    newList[i] = { ...newList[i], sortType: !(newList[i].sortType) }
+    setSortList(() => newList)
+    setActiveNum(i);
+    setStore("activeNum", i);
+    setStore("sortList", getJSON(newList));
+    onAcept(newList[i]);
+  }
+
   return (
     <div className={sass.main}>
       <BaseButton
@@ -50,32 +73,14 @@ const Sort = ({ onAcept = () => { } }) => {
                     <li
                       key={item.text}
                       className={`${sass.sortItem} ${activeNum === i && sass.sortItemActive}`}
-                      onClick={(e) => {
-                        if (activeNum !== i) {
-                          setActiveNum(i);
-                          setStore("activeNum", i);
-                          setStore("sortList", getJSON(newList));
-                        }
-                        else {
-                          newList[i] = { ...newList[i], sortType: !(newList[i].sortType) }
-                          setSortList(() => newList)
-                          setStore("sortList", getJSON(newList));
-                        }
-
-                        onAcept(newList[i]);
-                      }}
+                      onClick={(e) => handlerClickLi(i)}
                     >
                       {item.text}
                       <BaseButton
                         styleNameList={["transparentStyle", "noHoverStyle"]}
                         callBack={(e) => {
                           e.stopPropagation();
-                          newList[i] = { ...newList[i], sortType: !(newList[i].sortType) }
-                          setSortList(() => newList)
-                          setActiveNum(i);
-                          setStore("activeNum", i);
-                          setStore("sortList", getJSON(newList));
-                          onAcept(newList[i]);
+                          handlerCallback(i);
                         }}
                       >
                         {item.sortType ? <FaSortAlphaDown /> : <FaSortAlphaUpAlt />}

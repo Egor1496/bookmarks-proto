@@ -9,27 +9,40 @@ import { ThemeSelect } from "../../../entities";
 import { getStore } from "../../../shared/model";
 import { BaseButton, BaseToggleRadio } from "../../../shared/ui";
 
-const BaseSettings = ({ enableSelectGroup, enableGroups, enableSelectTags, enableTags, enableSelectBg, enableBg }) => {
+const BaseSettings = (props) => {
+  const {
+    enableSelectGroup,
+    enableGroups,
+    enableSelectTags,
+    enableTags,
+    enableSelectBg,
+    enableBg
+  } = props;
+
   const storageTheme = getStore("themeNumber", 1);
 
   const [numberTheme, setTheme] = useState(storageTheme);
 
   const [themeModal, setModalActive] = useState(false);
 
-  const onClick = () => {
+  const handlerClickSettings = () => {
     setModalActive(!themeModal);
+  }
+
+  const handlerClickClose = () => {
+    setModalActive(false)
   }
 
   return (
     <div className={css.settings}>
-      <BaseButton styleNameList={["transparentStyle", "baseSettings"]} callBack={onClick}><IoMdSettings /></BaseButton>
+      <BaseButton styleNameList={["transparentStyle", "baseSettings"]} callBack={handlerClickSettings}><IoMdSettings /></BaseButton>
       {
         themeModal && (
           <>
             <div className={css.modalBg}
-              onClick={() => setModalActive(false)}></div>
+              onClick={handlerClickClose}></div>
             <div className={css.modal}>
-              <div className={css.close} onClick={() => { setModalActive(false) }} >
+              <div className={css.close} onClick={handlerClickClose} >
                 <AiOutlineCloseCircle />
               </div>
               <div className={css["enable-wrap"]}>

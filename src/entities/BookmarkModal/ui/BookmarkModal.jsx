@@ -21,6 +21,19 @@ const BookmarkModal = (props) => {
     group: "избранные"
   };
 
+  const handlerClickAccept = () => {
+    modalSetActive(false);
+    onАccept({
+      link: state.link,
+      title: state.title,
+      description: state.description,
+      tags: state.tags,
+      group: state.group,
+    });
+  }
+
+  const handlerClickClose = () => { modalSetActive(false) }
+
   return (
     <BaseModal active={modalActive} setActive={modalSetActive}>
       <div className={sass.addBookFrom}>
@@ -67,19 +80,10 @@ const BookmarkModal = (props) => {
         </div>
         <div className={sass.buttonWrap}>
           <BaseButton text="Принять"
-            callBack={() => {
-              modalSetActive(false);
-              onАccept({
-                link: state.link,
-                title: state.title,
-                description: state.description,
-                tags: state.tags,
-                group: state.group,
-              });
-            }}
+            callBack={handlerClickAccept}
           />
           <BaseButton text="Отмена" styleName="transparentStyle"
-            callBack={() => { modalSetActive(false) }}
+            callBack={handlerClickClose}
           />
         </div>
       </div>

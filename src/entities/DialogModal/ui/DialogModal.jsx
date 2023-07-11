@@ -15,6 +15,10 @@ const DialogModal = (props) => {
     textСancele
   } = props;
 
+  const handlerCallbackAccept = () => { modalSetActive(false); onАccept(); }
+
+  const handlerCallbackClose = () => { modalSetActive(false) }
+
   return (
     <BaseModal active={modalActive} setActive={modalSetActive}>
       <div className={sass.BookFrom}>
@@ -23,12 +27,12 @@ const DialogModal = (props) => {
         <div className={sass.buttonWrap}>
           <BaseButton
             text={textAccept}
-            callBack={() => { modalSetActive(false); onАccept(); }}
+            callBack={handlerCallbackAccept}
           />
           <BaseButton
             text={textСancele}
             styleName="transparentStyle"
-            callBack={() => { modalSetActive(false) }}
+            callBack={handlerCallbackClose}
           />
         </div>
       </div>
