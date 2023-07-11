@@ -25,6 +25,17 @@ const Bookmarks = ({ bookmarks, onAddBookmarks, updateFilter, styleNumber, onCli
     editModalSetActive(true);
   }
 
+  const handlerAcceptEdit = (newBookmark) => {
+    editBookmark(form.id, newBookmark, onAddBookmarks);
+    sendMesageNotification({ text: "Ссылка редактирована!" }, setNotification);
+  }
+
+  const handlerAcceptDelete = () => {
+    deleteBookmark(form.id, onAddBookmarks);
+    updateFilter();
+    sendMesageNotification({ text: "Ссылка удалена!", alarm: true }, setNotification);
+  }
+
   return (
     <>
       <Notification state={notification} setState={setNotification} />
@@ -35,19 +46,14 @@ const Bookmarks = ({ bookmarks, onAddBookmarks, updateFilter, styleNumber, onCli
         modalActive={deleteModalActive}
         modalSetActive={setDeleteModalActive}
         onАccept={() => {
-          deleteBookmark(form.id, onAddBookmarks);
-          updateFilter();
-          sendMesageNotification({ text: "Ссылка удалена!", alarm: true }, setNotification);
+          handlerAcceptDelete()
         }}
       />
       <BookmarkModal
         modalTitle={`Редактировать "${form.title}"`}
         modalActive={editModalActive}
         modalSetActive={editModalSetActive}
-        onАccept={(newBookmark) => {
-          editBookmark(form.id, newBookmark, onAddBookmarks);
-          sendMesageNotification({ text: "Ссылка редактирована!" }, setNotification);
-        }}
+        onАccept={(newBookmark) => handlerAcceptEdit(newBookmark)}
         state={form}
         setState={setForm}
       />
