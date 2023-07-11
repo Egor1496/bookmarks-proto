@@ -113,9 +113,14 @@ const Layout = () => {
 		onSortSelect,
 	];
 
+
+	const classNamesNav = `${sass.nav} ${!enableGroups && sass.hide}`;
+	const classNameArticle = `${sass.article} ${!enableBg && sass.transparent}`;
+	const classNamesAside = `${sass.aside} ${!enableTags && sass.hide}`;
+
 	return (
 		<div className={sass.mainWrap}>
-			<nav className={`${sass.nav} ${!enableGroups && sass.hide}`}>
+			<nav className={classNamesNav}>
 				<FilterButtons.Provider value={[onClickGroup, activeGroup]}>
 					<MainMenu groups={groupLinks} />
 				</FilterButtons.Provider>
@@ -134,13 +139,13 @@ const Layout = () => {
 					</BookmarksContext.Provider>
 				</header>
 				<main className={`${sass.main}`}>
-					<article className={`${sass.article} ${!enableBg && sass.transparent}`} >
+					<article className={classNameArticle} >
 						<BookmarksContext.Provider
 							value={contextBookmarks}>
 							<Outlet />
 						</BookmarksContext.Provider>
 					</article>
-					<aside className={`${sass.aside} ${!enableTags && sass.hide}`} >
+					<aside className={classNamesAside} >
 						<FilterButtons.Provider value={[onClickTags, clearTags, activeTags]}>
 							<MainAside tags={tagCloud} />
 						</FilterButtons.Provider>
