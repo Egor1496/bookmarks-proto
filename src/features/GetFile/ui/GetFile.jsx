@@ -4,14 +4,14 @@ import sass from "./GetFile.module.sass"
 import { FcDownload } from 'react-icons/fc';
 
 import { BaseButton, Notification } from "../../../shared/ui";
-import { getStore, sendMesageNotification } from "../../../shared/model";
+import { LocalStorage, sendMesageNotification } from "../../../shared/model";
 
 const GetFile = () => {
 
   const onAcept = () => {
     const prefix = '{"bookmarks":';
     const postfix = '}';
-    downloadTxtFile(`${prefix}${getStore("bookmarks")}${postfix}`);
+    downloadTxtFile(`${prefix}${LocalStorage.getStore("bookmarks")}${postfix}`);
   }
 
   const downloadTxtFile = (text) => {

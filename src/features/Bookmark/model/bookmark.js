@@ -1,15 +1,15 @@
-import { getURL, getId, getLink, getImgLink, getDescription, getTags, getGroup } from "../../../shared/model";
+import { FillBookmark, getURL } from "../../../shared/model";
 
 const fillBookmark = (bookmark) => {
-	const url = getURL(getLink(bookmark.link));
+	const url = getURL(FillBookmark.getLink(bookmark.link));
 	const filledBookmark = {
-		id: getId(bookmark.id),
-		link: getLink(bookmark.link),
-		imgLink: getImgLink(url),
+		id: FillBookmark.getId(bookmark.id),
+		link: FillBookmark.getLink(bookmark.link),
+		imgLink: FillBookmark.getImgLink(url),
 		title: bookmark.title,
-		description: getDescription(bookmark.description),
-		tags: getTags(bookmark.tags),
-		group: getGroup(bookmark.group),
+		description: FillBookmark.getDescription(bookmark.description),
+		tags: FillBookmark.getTags(bookmark.tags),
+		group: FillBookmark.getGroup(bookmark.group),
 	};
 	return filledBookmark;
 };

@@ -6,7 +6,7 @@ import { BookmarksContext } from "../../../processes/model/context";
 import { Bookmarks, uploadBookmarks } from "../../../widgets";
 import { SelectStyleBookmark, GetFile, AddBookmark, LoadBookmark } from "../../../features";
 import { Sort } from "../../../entities";
-import { getStore, setStore } from "../../../shared/model";
+import { LocalStorage } from "../../../shared/model";
 
 const Main = () => {
 
@@ -19,12 +19,12 @@ const Main = () => {
     onSortSelect,
   ] = useContext(BookmarksContext);
 
-  const defStyleNumber = getStore("styleNumber", 1)
+  const defStyleNumber = LocalStorage.getStore("styleNumber", 1)
 
   const [styleNumber, setStyleNumber] = useState(defStyleNumber);
 
   const onClickStyleBookmarks = (number) => {
-    setStore("styleNumber", number);
+    LocalStorage.setStore("styleNumber", number);
     setStyleNumber(number);
   }
 

@@ -6,16 +6,16 @@ import sass from "./Layout.module.sass";
 import { FilterButtons, BookmarksContext } from "../../processes/model/context";
 
 import { MainMenu, MainHeader, MainAside, MainFooter, getGroups, getTags, getBookmarks } from "../../widgets";
-import { debounce, getStore, setStore, getObject, getJSON } from "../../shared/model";
+import { debounce, LocalStorage, JsonHelper } from "../../shared/model";
 
 const DEFAULT_TYPE_SORT = { value: "title", sortType: true };
 
 const Layout = () => {
-	const [activeTags, setActiveTags] = useState(getStore("activeTags") || "");
-	const [activeGroup, setActiveGroup] = useState(getStore("activeGroup") || "");
+	const [activeTags, setActiveTags] = useState(LocalStorage.getStore("activeTags") || "");
+	const [activeGroup, setActiveGroup] = useState(LocalStorage.getStore("activeGroup") || "");
 
 	const [filter, setFilter] = useState([activeGroup, activeTags]);
-	const [sort, setSort] = useState(getObject(getStore("sort")) || DEFAULT_TYPE_SORT);
+	const [sort, setSort] = useState(JsonHelper.getObject(LocalStorage.getStore("sort")) || DEFAULT_TYPE_SORT);
 
 	const [bookmarks, setBookmarks] = useState(getBookmarks(filter, sort));
 
@@ -25,9 +25,9 @@ const Layout = () => {
 	const [groupLinks, setGroupLinks] = useState(allGroups);
 	const [tagCloud, setTagCloud] = useState(allTags);
 
-	const [enableTags, setEnableTags] = useState(Boolean(Number(getStore("enableTags") || 1)));
-	const [enableGroups, setEnableGroups] = useState(Boolean(Number(getStore("enableGroups") || 1)));
-	const [enableBg, setEnableBg] = useState(Boolean(Number(getStore("enableBg") || 1)));
+	const [enableTags, setEnableTags] = useState(Boolean(Number(LocalStorage.getStore("enableTags") || 1)));
+	const [enableGroups, setEnableGroups] = useState(Boolean(Number(LocalStorage.getStore("enableGroups") || 1)));
+	const [enableBg, setEnableBg] = useState(Boolean(Number(LocalStorage.getStore("enableBg") || 1)));
 
 	const onAddBookmarks = () => {
 		setBookmarks(getBookmarks(filter, sort));
@@ -49,8 +49,8 @@ const Layout = () => {
 		setBookmarks(getBookmarks(newFilter, sort));
 		setActiveGroup(newText);
 		setTagCloud(getTags());
-		setStore("activeTags", "");
-		setStore("activeGroup", newText);
+		LocalStorage.setStore("activeTags", "");
+		LocalStorage.setStore("activeGroup", newText);
 		setActiveTags("");
 	}
 
@@ -59,7 +59,7 @@ const Layout = () => {
 		setFilter(newFilter);
 		setBookmarks(getBookmarks(newFilter, sort));
 		setActiveTags(tagName);
-		setStore("activeTags", tagName);
+		LocalStorage.setStore("activeTags", tagName);
 		setTagCloud(getTags());
 	}
 
@@ -68,7 +68,7 @@ const Layout = () => {
 		setFilter(newFilter);
 		setBookmarks(getBookmarks(newFilter, sort));
 		setActiveTags("");
-		setStore("activeTags", "");
+		LocalStorage.setStore("activeTags", "");
 		setTagCloud(getTags());
 	}
 
@@ -77,31 +77,31 @@ const Layout = () => {
 		setFilter(newFilter);
 		setBookmarks(getBookmarks(newFilter, sort));
 		setActiveTags(tagName);
-		setStore("activeTags", tagName);
+		LocalStorage.setStore("activeTags", tagName);
 		setActiveGroup("");
-		setStore("activeGroup", "");
+		LocalStorage.setStore("activeGroup", "");
 		setTagCloud(getTags());
 	}
 
 	const onSortSelect = (newSort) => {
 		setSort(newSort);
 		setBookmarks(getBookmarks(filter, newSort))
-		setStore("sort", getJSON(newSort));
+		LocalStorage.setStore("sort", JsonHelper.getJSON(newSort));
 	};
 
 	const enableSelectGroup = (isChecked) => {
 		setEnableGroups(isChecked);
-		setStore("enableGroups", Number(isChecked));
+		LocalStorage.setStore("enableGroups", Number(isChecked));
 	}
 
 	const enableSelectTags = (isChecked) => {
 		setEnableTags(isChecked);
-		setStore("enableTags", Number(isChecked));
+		LocalStorage.setStore("enableTags", Number(isChecked));
 	}
 
 	const enableSelectBg = (isChecked) => {
 		setEnableBg(isChecked);
-		setStore("enableBg", Number(isChecked));
+		LocalStorage.setStore("enableBg", Number(isChecked));
 	}
 
 	const contextBookmarks = [
@@ -112,7 +112,6 @@ const Layout = () => {
 		onClickBookmarkTags,
 		onSortSelect,
 	];
-
 
 	const classNamesNav = `${sass.nav} ${!enableGroups && sass.hide}`;
 	const classNameArticle = `${sass.article} ${!enableBg && sass.transparent}`;

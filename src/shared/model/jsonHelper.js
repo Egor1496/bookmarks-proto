@@ -1,9 +1,10 @@
-const getJSON = (obj) => {
-	return obj ? JSON.stringify(obj) : null;
-};
+class JsonHelper {
+	static getJSON(obj) {
+		return obj ? JSON.stringify(obj) : null;
+	}
+	static getObject(json) {
+		return json ? JSON.parse(json) : null;
+	}
+}
 
-const getObject = (json) => {
-	return json ? JSON.parse(json) : null;
-};
-
-export { getJSON, getObject };
+export { JsonHelper };

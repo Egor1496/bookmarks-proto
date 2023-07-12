@@ -6,7 +6,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import { ThemeParams } from "../../../features";
 import { ThemeSelect } from "../../../entities";
-import { getStore } from "../../../shared/model";
+import { LocalStorage } from "../../../shared/model";
 import { BaseButton, BaseToggleRadio } from "../../../shared/ui";
 
 const BaseSettings = (props) => {
@@ -19,7 +19,7 @@ const BaseSettings = (props) => {
     enableBg
   } = props;
 
-  const storageTheme = getStore("themeNumber", 1);
+  const storageTheme = LocalStorage.getStore("themeNumber", 1);
 
   const [numberTheme, setTheme] = useState(storageTheme);
 

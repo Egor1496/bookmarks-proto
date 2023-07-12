@@ -6,7 +6,7 @@ import { AiFillFileText } from 'react-icons/ai';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 
 import { BaseModal, BaseButton, Notification } from "../../../shared/ui";
-import { getTitle, getObject, sendMesageNotification } from "../../../shared/model";
+import { FillBookmark, JsonHelper, sendMesageNotification } from "../../../shared/model";
 
 const LoadBookmark = (props) => {
 
@@ -21,9 +21,9 @@ const LoadBookmark = (props) => {
   const [notification, setNotification] = useState();
 
   const loadObgectBookmarks = (bookmarks) => {
-    const obgBookmarks = getObject(bookmarks).bookmarks;
+    const obgBookmarks = JsonHelper.getObject(bookmarks).bookmarks;
     obgBookmarks.forEach(el => {
-      el.title = getTitle(el.title, el.link);
+      el.title = FillBookmark.getTitle(el.title, el.link);
       uploadBookmarks({ ...el }, onAddBookmarks);
     });
     updateFilter();

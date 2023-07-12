@@ -5,7 +5,7 @@ import { TbArrowsTransferDown } from 'react-icons/tb';
 import { FaSortAlphaDown, FaSortAlphaUpAlt } from 'react-icons/fa';
 
 import { BaseButton } from "../../../shared/ui";
-import { getStore, setStore, getObject, getJSON } from "../../../shared/model";
+import { LocalStorage, JsonHelper } from "../../../shared/model";
 
 const sortListDefault = [
   { text: "Заголовок", value: "title", sortType: true },
@@ -20,9 +20,9 @@ const Sort = ({ onAcept = () => { } }) => {
 
   const [modalActive, setModalActive] = useState(false);
 
-  const [sortList, setSortList] = useState(getObject(getStore("sortList")) || sortListDefault);
+  const [sortList, setSortList] = useState(JsonHelper.getObject(LocalStorage.getStore("sortList")) || sortListDefault);
 
-  const [activeNum, setActiveNum] = useState(Number(getStore("activeNum")) || ACTIVE_NUM_DEFAULT);
+  const [activeNum, setActiveNum] = useState(Number(LocalStorage.getStore("activeNum")) || ACTIVE_NUM_DEFAULT);
 
   const getNewList = (prevSortList) => {
     const newList = [...prevSortList];
@@ -34,13 +34,13 @@ const Sort = ({ onAcept = () => { } }) => {
   const handlerClickLi = (i) => {
     if (activeNum !== i) {
       setActiveNum(i);
-      setStore("activeNum", i);
-      setStore("sortList", getJSON(newList));
+      LocalStorage.setStore("activeNum", i);
+      LocalStorage.setStore("sortList", JsonHelper.getJSON(newList));
     }
     else {
       newList[i] = { ...newList[i], sortType: !(newList[i].sortType) }
       setSortList(() => newList)
-      setStore("sortList", getJSON(newList));
+      LocalStorage.setStore("sortList", JsonHelper.getJSON(newList));
     }
     onAcept(newList[i]);
   }
@@ -49,8 +49,8 @@ const Sort = ({ onAcept = () => { } }) => {
     newList[i] = { ...newList[i], sortType: !(newList[i].sortType) }
     setSortList(() => newList)
     setActiveNum(i);
-    setStore("activeNum", i);
-    setStore("sortList", getJSON(newList));
+    LocalStorage.setStore("activeNum", i);
+    LocalStorage.setStore("sortList", JsonHelper.getJSON(newList));
     onAcept(newList[i]);
   }
 

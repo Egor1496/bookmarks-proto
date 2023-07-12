@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 
-import { getJSON, setStore, getStore, getObject } from "../../../shared/model";
+import { JsonHelper, LocalStorage } from "../../../shared/model";
 
 const bookmarksTmp = [
 	// {
@@ -36,8 +36,7 @@ const bookmarksTmp = [
 	// 	group: "Избранные, Инструменты",
 	// },
 ];
-
-let bookmarks = getObject(getStore("bookmarks", "[]"));
+let bookmarks = JsonHelper.getObject(LocalStorage.getStore("bookmarks", "[]"));
 
 if (bookmarks.length === 0) bookmarks = bookmarksTmp;
 
@@ -73,7 +72,7 @@ const deleteBookmark = (id, setBookmarks) => {
 		if (el.id === id) {
 			bookmarks.splice(i, 1);
 			filledBookmarks.splice(i, 1);
-			setStore("bookmarks", getJSON([...bookmarks]));
+			LocalStorage.setStore("bookmarks", JsonHelper.getJSON([...bookmarks]));
 			setBookmarks(bookmarks);
 		}
 	});
@@ -83,7 +82,7 @@ const editBookmark = (id, newBookmark, setBookmarks) => {
 	bookmarks.forEach((el, i) => {
 		if (el.id === id) {
 			bookmarks.splice(i, 1);
-			setStore("bookmarks", getJSON([...bookmarks]));
+			LocalStorage.setStore("bookmarks", JsonHelper.getJSON([...bookmarks]));
 			uploadBookmarks(newBookmark, setBookmarks);
 		}
 	});
@@ -91,7 +90,7 @@ const editBookmark = (id, newBookmark, setBookmarks) => {
 
 const uploadBookmarks = (bookmark, setState) => {
 	addBookmark(bookmark);
-	setStore("bookmarks", getJSON(bookmarks));
+	LocalStorage.setStore("bookmarks", JsonHelper.getJSON(bookmarks));
 	setState(getBookmarks());
 };
 
