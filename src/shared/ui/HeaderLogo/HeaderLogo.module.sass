@@ -1,0 +1,51 @@
+@import url("../../../app/styles/base-params.css")
+
+.logoWrap
+  display: flex
+  align-items: flex-end
+  margin-right: 40px
+  transform: translateY(10px)
+  .after
+    z-index: 10
+    width: 20px
+    height: 20px
+    border-bottom-right-radius: 10px
+    background-color: var(--bgHeader)
+  .logo
+    position: relative
+    padding: 5px 20px
+    border-radius: 10px
+    background-color: var(--bgBody)
+    .logoText h2
+      font-size: 40px
+      color: var(--colorDef1)
+    &::after
+      content: ""
+      position: absolute
+      bottom: 0
+      left: -10px
+      width: 20px
+      height: 20px
+      background-color: var(--bgBody)
+    &::before
+      content: ""
+      position: absolute
+      bottom: 0
+      right: -10px
+      width: 20px
+      height: 20px
+      background-color: var(--bgBody)
+  .before
+    z-index: 10
+    width: 20px
+    height: 20px
+    border-bottom-left-radius: 10px
+    background-color: var(--bgHeader)
+
+@media screen and (max-width: 1090px)
+  .logoWrap
+    margin-right: 0
+
+@media screen and (max-width: 1005px)
+  .logoWrap
+    display: none

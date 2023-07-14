@@ -113,7 +113,7 @@ const getGroups = () => {
 
 const getBookmarks = (filterName, sortSelected = { value: "title", sortType: true }, searchText = "") => {
 	filledBookmarks = filter(filterName, bookmarks);
-	filledBookmarks = sort(sortSelected, filledBookmarks);
+	filledBookmarks = Sorting.getSorted(sortSelected, filledBookmarks);
 	filledBookmarks = searchBookmarks(searchText, filledBookmarks);
 	return filledBookmarks;
 };
@@ -165,48 +165,50 @@ const filter = (filter = ["", ""], bookmarks) => {
 	return filtered;
 };
 
-const sortTitleBookmarks = (bookmarks, type) => {
-	return bookmarks.sort((a, b) => {
-		if (!a.title) return false;
-		if (!b.title) return false;
-		return type ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
-	});
-};
+class Sorting {
+	static sortTitle(bookmarks, type) {
+		return bookmarks.sort((a, b) => {
+			if (!a.title) return false;
+			if (!b.title) return false;
+			return type ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+		});
+	}
 
-const sortDescriptionBookmarks = (bookmarks, type) => {
-	return bookmarks.sort((a, b) => {
-		if (!a.description) return false;
-		if (!b.description) return false;
-		return type ? a.description.localeCompare(b.description) : b.description.localeCompare(a.description);
-	});
-};
+	static sortDescription(bookmarks, type) {
+		return bookmarks.sort((a, b) => {
+			if (!a.description) return false;
+			if (!b.description) return false;
+			return type ? a.description.localeCompare(b.description) : b.description.localeCompare(a.description);
+		});
+	}
 
-const sortTagsBookmarks = (bookmarks, type) => {
-	return bookmarks.sort((a, b) => {
-		if (!a.tags) return false;
-		if (!b.tags) return false;
-		return type ? a.tags.localeCompare(b.tags) : b.tags.localeCompare(a.tags);
-	});
-};
+	static sortTags(bookmarks, type) {
+		return bookmarks.sort((a, b) => {
+			if (!a.tags) return false;
+			if (!b.tags) return false;
+			return type ? a.tags.localeCompare(b.tags) : b.tags.localeCompare(a.tags);
+		});
+	}
 
-const sortGroupBookmarks = (bookmarks, type) => {
-	return bookmarks.sort((a, b) => {
-		if (!a.group) return false;
-		if (!b.group) return false;
-		return type ? a.group.localeCompare(b.group) : b.group.localeCompare(a.group);
-	});
-};
+	static sortGroup(bookmarks, type) {
+		return bookmarks.sort((a, b) => {
+			if (!a.group) return false;
+			if (!b.group) return false;
+			return type ? a.group.localeCompare(b.group) : b.group.localeCompare(a.group);
+		});
+	}
 
-const sort = (sortObg, bookmarks) => {
-	const type = {
-		title: sortTitleBookmarks,
-		description: sortDescriptionBookmarks,
-		tags: sortTagsBookmarks,
-		group: sortGroupBookmarks,
-	};
+	static getSorted(sortObg, bookmarks) {
+		const type = {
+			title: Sorting.sortTitle,
+			description: Sorting.sortDescription,
+			tags: Sorting.sortTags,
+			group: Sorting.sortGroup,
+		};
 
-	return type[sortObg.value.trim().toLowerCase()](bookmarks, sortObg.sortType);
-};
+		return type[sortObg.value.trim().toLowerCase()](bookmarks, sortObg.sortType);
+	}
+}
 
 filledBookmarks = getBookmarks();
 
