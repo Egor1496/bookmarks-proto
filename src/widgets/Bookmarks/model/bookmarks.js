@@ -86,4 +86,4 @@ class BookmarksArray {
 
 const bookmarksArray = new BookmarksArray(bookmarksTmp);
 
-export { bookmarksArray }; // getBookmarks, deleteBookmark, editBookmark, uploadBookmarks,
+export { bookmarksArray };
