@@ -37,45 +37,53 @@ const bookmarksTmp = [
 	// 	group: "Избранные, Инструменты",
 	// },
 ];
-let bookmarks = JsonHelper.getObject(LocalStorage.getStore("bookmarks", "[]"));
 
-if (bookmarks.length === 0) bookmarks = bookmarksTmp;
+class BookmarksArray {
+	constructor(bookmarksTmp) {
+		this.bookmarksTmp = bookmarksTmp;
+		this.bookmarks = JsonHelper.getObject(LocalStorage.getStore("bookmarks", "[]"));
 
-const addBookmark = (bookmark) => {
-	bookmarks = [...bookmarks, { ...bookmark, id: nanoid() }];
-};
+		if (this.bookmarks.length === 0) this.bookmarks = this.bookmarksTmp;
+	}
 
-const deleteBookmark = (id, setBookmarks) => {
-	bookmarks.forEach((el, i) => {
-		if (el.id === id) {
-			bookmarks.splice(i, 1);
-			LocalStorage.setStore("bookmarks", JsonHelper.getJSON([...bookmarks]));
-			setBookmarks(bookmarks);
-		}
-	});
-};
+	addBookmark(bookmark) {
+		this.bookmarks = [...this.bookmarks, { ...bookmark, id: nanoid() }];
+	}
 
-const editBookmark = (id, newBookmark, setBookmarks) => {
-	bookmarks.forEach((el, i) => {
-		if (el.id === id) {
-			bookmarks.splice(i, 1);
-			LocalStorage.setStore("bookmarks", JsonHelper.getJSON([...bookmarks]));
-			uploadBookmarks(newBookmark, setBookmarks);
-		}
-	});
-};
+	deleteBookmark(id, setBookmarks) {
+		this.bookmarks.forEach((el, i) => {
+			if (el.id === id) {
+				this.bookmarks.splice(i, 1);
+				LocalStorage.setStore("bookmarks", JsonHelper.getJSON([...this.bookmarks]));
+				setBookmarks(this.bookmarks);
+			}
+		});
+	}
 
-const uploadBookmarks = (bookmark, setState) => {
-	addBookmark(bookmark);
-	LocalStorage.setStore("bookmarks", JsonHelper.getJSON(bookmarks));
-	setState(getBookmarks());
-};
+	editBookmark(id, newBookmark, setBookmarks) {
+		this.bookmarks.forEach((el, i) => {
+			if (el.id === id) {
+				this.bookmarks.splice(i, 1);
+				LocalStorage.setStore("bookmarks", JsonHelper.getJSON([...this.bookmarks]));
+				this.uploadBookmarks(newBookmark, setBookmarks);
+			}
+		});
+	}
 
-const getBookmarks = (filterName, sortSelected, searchText) => {
-	let filledBookmarks = FilterBookmarks.getFiltered(filterName, bookmarks);
-	filledBookmarks = SortingBookmarks.getSorted(sortSelected, filledBookmarks);
-	filledBookmarks = SearchBookmarks.find(searchText, filledBookmarks);
-	return filledBookmarks;
-};
+	uploadBookmarks(bookmark, setState) {
+		this.addBookmark(bookmark);
+		LocalStorage.setStore("bookmarks", JsonHelper.getJSON(this.bookmarks));
+		setState(this.getBookmarks());
+	}
 
-export { getBookmarks, deleteBookmark, editBookmark, uploadBookmarks };
+	getBookmarks(filterName, sortSelected, searchText) {
+		let filledBookmarks = FilterBookmarks.getFiltered(filterName, this.bookmarks);
+		filledBookmarks = SortingBookmarks.getSorted(sortSelected, filledBookmarks);
+		filledBookmarks = SearchBookmarks.find(searchText, filledBookmarks);
+		return filledBookmarks;
+	}
+}
+
+const bookmarksArray = new BookmarksArray(bookmarksTmp);
+
+export { bookmarksArray }; // getBookmarks, deleteBookmark, editBookmark, uploadBookmarks,

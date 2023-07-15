@@ -5,7 +5,7 @@ import sass from "./Layout.module.sass";
 
 import { FilterButtons, BookmarksContext } from "../../processes/model/context";
 
-import { MainMenu, MainHeader, MainAside, MainFooter, getBookmarks } from "../../widgets";
+import { MainMenu, MainHeader, MainAside, MainFooter, bookmarksArray } from "../../widgets";
 import { Groups } from "../../features";
 import { Tags } from "../../entities";
 import { debounce, LocalStorage, JsonHelper } from "../../shared/model";
@@ -22,7 +22,7 @@ const Layout = () => {
 	const [filter, setFilter] = useState([activeGroup, activeTags]);
 	const [sort, setSort] = useState(JsonHelper.getObject(LocalStorage.getStore("sort")) || DEFAULT_TYPE_SORT);
 
-	const [bookmarks, setBookmarks] = useState(getBookmarks(filter, sort));
+	const [bookmarks, setBookmarks] = useState(bookmarksArray.getBookmarks(filter, sort));
 
 	const allTags = tags.getTags(bookmarks);
 	const allGroups = groups.getGroups();
@@ -35,11 +35,11 @@ const Layout = () => {
 	const [enableBg, setEnableBg] = useState(Boolean(Number(LocalStorage.getStore("enableBg") || 1)));
 
 	const onAddBookmarks = () => {
-		setBookmarks(getBookmarks(filter, sort));
+		setBookmarks(bookmarksArray.getBookmarks(filter, sort));
 	}
 
 	const onChangeInput = (searchState) => {
-		setBookmarks(getBookmarks(filter, sort, searchState));
+		setBookmarks(bookmarksArray.getBookmarks(filter, sort, searchState));
 	};
 
 	const updateFilter = () => {
@@ -50,7 +50,7 @@ const Layout = () => {
 	const onClickGroup = (groupName, isPressed) => {
 		const newText = isPressed ? "" : groupName;
 		const newFilter = [newText, ""];
-		const newBookmark = getBookmarks(newFilter, sort);
+		const newBookmark = bookmarksArray.getBookmarks(newFilter, sort);
 		setFilter(newFilter);
 		setBookmarks(newBookmark);
 		setActiveGroup(newText);
@@ -62,7 +62,7 @@ const Layout = () => {
 
 	const onClickTags = (tagName) => {
 		const newFilter = [filter[0], tagName];
-		const newBookmark = getBookmarks(newFilter, sort);
+		const newBookmark = bookmarksArray.getBookmarks(newFilter, sort);
 		setFilter(newFilter);
 		setBookmarks(newBookmark);
 		setActiveTags(tagName);
@@ -72,7 +72,7 @@ const Layout = () => {
 
 	const clearTags = () => {
 		const newFilter = [filter[0], ""];
-		const newBookmark = getBookmarks(newFilter, sort);
+		const newBookmark = bookmarksArray.getBookmarks(newFilter, sort);
 		setFilter(newFilter);
 		setBookmarks(newBookmark);
 		setActiveTags("");
@@ -82,7 +82,7 @@ const Layout = () => {
 
 	const onClickBookmarkTags = (tagName) => {
 		const newFilter = ["", tagName];
-		const newBookmark = getBookmarks(newFilter, sort);
+		const newBookmark = bookmarksArray.getBookmarks(newFilter, sort);
 		setFilter(newFilter);
 		setBookmarks(newBookmark);
 		setActiveTags(tagName);
@@ -94,7 +94,7 @@ const Layout = () => {
 
 	const onSortSelect = (newSort) => {
 		setSort(newSort);
-		setBookmarks(getBookmarks(filter, newSort))
+		setBookmarks(bookmarksArray.getBookmarks(filter, newSort))
 		LocalStorage.setStore("sort", JsonHelper.getJSON(newSort));
 	};
 

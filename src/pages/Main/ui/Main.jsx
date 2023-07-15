@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import sass from "./Main.module.sass"
 
 import { BookmarksContext } from "../../../processes/model/context";
-import { Bookmarks, uploadBookmarks } from "../../../widgets";
+import { Bookmarks, bookmarksArray } from "../../../widgets";
 import { SelectStyleBookmark, GetFile, AddBookmark, LoadBookmark } from "../../../features";
 import { Sort } from "../../../entities";
 import { LocalStorage } from "../../../shared/model";
@@ -46,11 +46,11 @@ const Main = () => {
             <AddBookmark
               bookmarks={bookmarks}
               onAddBookmarks={onAddBookmarks}
-              uploadBookmarks={uploadBookmarks}
+              uploadBookmarks={bookmarksArray.uploadBookmarks}
               updateFilter={updateFilter}
             />
             <LoadBookmark
-              uploadBookmarks={uploadBookmarks}
+              uploadBookmarks={bookmarksArray.uploadBookmarks}
               onAddBookmarks={onAddBookmarks}
               updateFilter={updateFilter}
             />

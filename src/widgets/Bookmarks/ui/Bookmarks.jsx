@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import sass from "./Bookmarks.module.sass";
 
-import { deleteBookmark, editBookmark } from "../../../widgets";
+import { bookmarksArray } from "../../../widgets";
 import { Bookmark } from "../../../features";
 import { BookmarkModal, DialogModal } from "../../../entities";
 import { Notification } from "../../../shared/ui";
@@ -26,12 +26,12 @@ const Bookmarks = ({ bookmarks, onAddBookmarks, updateFilter, styleNumber, onCli
   }
 
   const handlerAcceptEdit = (newBookmark) => {
-    editBookmark(form.id, newBookmark, onAddBookmarks);
+    bookmarksArray.editBookmark(form.id, newBookmark, onAddBookmarks);
     sendMesageNotification({ text: "Ссылка редактирована!" }, setNotification);
   }
 
   const handlerAcceptDelete = () => {
-    deleteBookmark(form.id, onAddBookmarks);
+    bookmarksArray.deleteBookmark(form.id, onAddBookmarks);
     updateFilter();
     sendMesageNotification({ text: "Ссылка удалена!", alarm: true }, setNotification);
   }
