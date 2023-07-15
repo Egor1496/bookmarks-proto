@@ -5,13 +5,15 @@ import sass from "./Layout.module.sass";
 
 import { FilterButtons, BookmarksContext } from "../../processes/model/context";
 
-import { MainMenu, MainHeader, MainAside, MainFooter, Groups, Tags, getBookmarks } from "../../widgets";
+import { MainMenu, MainHeader, MainAside, MainFooter, getBookmarks } from "../../widgets";
+import { Groups } from "../../features";
+import { Tags } from "../../entities";
 import { debounce, LocalStorage, JsonHelper } from "../../shared/model";
 
 const DEFAULT_TYPE_SORT = { value: "title", sortType: true };
 
 const groups = new Groups();
-const tags = new Tags()
+const tags = new Tags();
 
 const Layout = () => {
 	const [activeTags, setActiveTags] = useState(LocalStorage.getStore("activeTags") || "");

@@ -3,6 +3,7 @@ export * from "./Bookmark/ui/Bookmark.jsx";
 export * from "./FastLinks/ui/FastLinks.jsx";
 export * from "./SelectStyleBookmark/ui/SelectStyleBookmark.jsx";
 export * from "./GroupLinks/ui/GroupLinks.jsx";
+export * from "./GroupLinks/model/GroupLinks.js";
 export * from "./GetFile/ui/GetFile.jsx";
 export * from "./Bookmark/model/bookmark.js";
 export * from "./AddBookmark/ui/AddBookmark.jsx";
