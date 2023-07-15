@@ -40,28 +40,49 @@ let bookmarks = JsonHelper.getObject(LocalStorage.getStore("bookmarks", "[]"));
 
 if (bookmarks.length === 0) bookmarks = bookmarksTmp;
 
-let filledBookmarks;
-
-const tags = new Set(),
+class Groups {
 	groups = new Set();
 
-const fillTags = () => {
-	tags.clear();
-	filledBookmarks.forEach((bookmark) => {
-		bookmark.tags.split(",").forEach((tag) => {
-			if (tag.trim()) tags.add(tag.trim());
+	fillGroups() {
+		this.groups.clear();
+		bookmarks.forEach((bookmark) => {
+			bookmark.group.split(",").forEach((group) => {
+				if (group.trim()) this.groups.add(group.trim());
+			});
 		});
-	});
-};
+	}
 
-const fillGroups = () => {
-	groups.clear();
-	bookmarks.forEach((bookmark) => {
-		bookmark.group.split(",").forEach((group) => {
-			if (group.trim()) groups.add(group.trim());
+	getGroups() {
+		this.fillGroups();
+		return [...this.groups].sort((a, b) => {
+			return a.localeCompare(b);
 		});
-	});
-};
+	}
+}
+
+class Tags {
+	tags = new Set();
+
+	fillTags(filledBookmarks) {
+		this.tags.clear();
+		filledBookmarks.forEach((bookmark) => {
+			bookmark.tags.split(",").forEach((tag) => {
+				if (tag.trim()) this.tags.add(tag.trim());
+			});
+		});
+	}
+
+	getTags(filledBookmarks) {
+		this.fillTags(filledBookmarks);
+		return [...this.tags].sort((a, b) => {
+			if (a.length < 7 && b.length < 7) return a.length - b.length;
+			else return a.localeCompare(b);
+		});
+	}
+}
+
+const groups = new Groups();
+const tags = new Tags();
 
 const addBookmark = (bookmark) => {
 	bookmarks = [...bookmarks, { ...bookmark, id: nanoid() }];
@@ -71,7 +92,6 @@ const deleteBookmark = (id, setBookmarks) => {
 	bookmarks.forEach((el, i) => {
 		if (el.id === id) {
 			bookmarks.splice(i, 1);
-			filledBookmarks.splice(i, 1);
 			LocalStorage.setStore("bookmarks", JsonHelper.getJSON([...bookmarks]));
 			setBookmarks(bookmarks);
 		}
@@ -94,79 +114,68 @@ const uploadBookmarks = (bookmark, setState) => {
 	setState(getBookmarks());
 };
 
-const getTags = () => {
-	fillTags();
-	fillGroups();
-	return [...tags].sort((a, b) => {
-		if (a.length < 7 && b.length < 7) return a.length - b.length;
-		else return a.localeCompare(b);
-	});
-};
-
-const getGroups = () => {
-	fillTags();
-	fillGroups();
-	return [...groups].sort((a, b) => {
-		return a.localeCompare(b);
-	});
-};
-
-const getBookmarks = (filterName, sortSelected = { value: "title", sortType: true }, searchText = "") => {
-	filledBookmarks = filter(filterName, bookmarks);
+const getBookmarks = (filterName, sortSelected, searchText) => {
+	let filledBookmarks = Filter.getFiltered(filterName, bookmarks);
 	filledBookmarks = Sorting.getSorted(sortSelected, filledBookmarks);
-	filledBookmarks = searchBookmarks(searchText, filledBookmarks);
+	filledBookmarks = Search.find(searchText, filledBookmarks);
 	return filledBookmarks;
 };
 
-const searchBookmarks = (textSearch = "", bookmarks) => {
-	textSearch = textSearch.trim().toLowerCase();
+class Search {
+	static find(textSearch = "", bookmarks) {
+		textSearch = textSearch.trim().toLowerCase();
 
-	if (!textSearch) return bookmarks;
+		if (!textSearch) return bookmarks;
 
-	return bookmarks.filter((elem) => {
-		let title = elem?.title || "",
-			description = elem?.description || "",
-			tags = elem?.tags || "";
+		return bookmarks.filter((elem) => {
+			let title = elem?.title || "",
+				description = elem?.description || "",
+				tags = elem?.tags || "";
 
-		title = title.trim().toLowerCase();
-		description = description.trim().toLowerCase();
-		tags = tags.trim().toLowerCase();
+			title = title.trim().toLowerCase();
+			description = description.trim().toLowerCase();
+			tags = tags.trim().toLowerCase();
 
-		if (~title.indexOf(textSearch) || ~description.indexOf(textSearch) || ~tags.indexOf(textSearch)) return elem;
-		else return false;
-	});
-};
+			if (~title.indexOf(textSearch) || ~description.indexOf(textSearch) || ~tags.indexOf(textSearch)) return elem;
+			else return false;
+		});
+	}
+}
 
-const filter = (filter = ["", ""], bookmarks) => {
-	let [groupNames, tagsNames] = filter;
+class Filter {
+	static getFiltered(filter = ["", ""], bookmarks) {
+		let [groupNames, tagsNames] = filter;
 
-	if (!groupNames === 0 && !tagsNames === 0) return bookmarks;
+		if (!groupNames === 0 && !tagsNames === 0) return bookmarks;
 
-	groupNames = groupNames.trim().toLocaleLowerCase();
-	tagsNames = tagsNames.trim().toLocaleLowerCase();
+		groupNames = groupNames.trim().toLocaleLowerCase();
+		tagsNames = tagsNames.trim().toLocaleLowerCase();
 
-	const filtered = bookmarks.filter((elem) => {
-		let suitableElem = false;
+		const filtered = bookmarks.filter((elem) => {
+			let suitableElem = false;
 
-		const cleanGroup = elem.group.trim().toLowerCase();
-		const cleanTags = elem.tags.trim().toLowerCase();
+			const cleanGroup = elem.group.trim().toLowerCase();
+			const cleanTags = elem.tags.trim().toLowerCase();
 
-		let isSuitableGroup = false,
-			isSuitableTags = false;
+			let isSuitableGroup = false,
+				isSuitableTags = false;
 
-		isSuitableGroup = cleanGroup === groupNames || groupNames === "";
-		isSuitableTags = ~cleanTags.indexOf(tagsNames) || tagsNames === "";
+			isSuitableGroup = cleanGroup === groupNames || groupNames === "";
+			isSuitableTags = ~cleanTags.indexOf(tagsNames) || tagsNames === "";
 
-		if (isSuitableGroup && isSuitableTags) suitableElem = elem;
+			if (isSuitableGroup && isSuitableTags) suitableElem = elem;
 
-		return suitableElem;
-	});
+			return suitableElem;
+		});
 
-	return filtered;
-};
+		return filtered;
+	}
+}
 
 class Sorting {
-	static sortTitle(bookmarks, type) {
+	static defaultType = { value: "title", sortType: true };
+
+	static sortTitle(bookmarks, type = true) {
 		return bookmarks.sort((a, b) => {
 			if (!a.title) return false;
 			if (!b.title) return false;
@@ -174,7 +183,7 @@ class Sorting {
 		});
 	}
 
-	static sortDescription(bookmarks, type) {
+	static sortDescription(bookmarks, type = true) {
 		return bookmarks.sort((a, b) => {
 			if (!a.description) return false;
 			if (!b.description) return false;
@@ -182,7 +191,7 @@ class Sorting {
 		});
 	}
 
-	static sortTags(bookmarks, type) {
+	static sortTags(bookmarks, type = true) {
 		return bookmarks.sort((a, b) => {
 			if (!a.tags) return false;
 			if (!b.tags) return false;
@@ -190,7 +199,7 @@ class Sorting {
 		});
 	}
 
-	static sortGroup(bookmarks, type) {
+	static sortGroup(bookmarks, type = true) {
 		return bookmarks.sort((a, b) => {
 			if (!a.group) return false;
 			if (!b.group) return false;
@@ -198,7 +207,7 @@ class Sorting {
 		});
 	}
 
-	static getSorted(sortObg, bookmarks) {
+	static getSorted(sortObg = Sorting.defaultType, bookmarks) {
 		const type = {
 			title: Sorting.sortTitle,
 			description: Sorting.sortDescription,
@@ -210,9 +219,4 @@ class Sorting {
 	}
 }
 
-filledBookmarks = getBookmarks();
-
-fillTags();
-fillGroups();
-
-export { getBookmarks, deleteBookmark, editBookmark, uploadBookmarks, getTags, getGroups };
+export { getBookmarks, deleteBookmark, editBookmark, uploadBookmarks, Groups, Tags };

@@ -5,10 +5,13 @@ import sass from "./Layout.module.sass";
 
 import { FilterButtons, BookmarksContext } from "../../processes/model/context";
 
-import { MainMenu, MainHeader, MainAside, MainFooter, getGroups, getTags, getBookmarks } from "../../widgets";
+import { MainMenu, MainHeader, MainAside, MainFooter, Groups, Tags, getBookmarks } from "../../widgets";
 import { debounce, LocalStorage, JsonHelper } from "../../shared/model";
 
 const DEFAULT_TYPE_SORT = { value: "title", sortType: true };
+
+const groups = new Groups();
+const tags = new Tags()
 
 const Layout = () => {
 	const [activeTags, setActiveTags] = useState(LocalStorage.getStore("activeTags") || "");
@@ -19,8 +22,8 @@ const Layout = () => {
 
 	const [bookmarks, setBookmarks] = useState(getBookmarks(filter, sort));
 
-	const allTags = getTags();
-	const allGroups = getGroups();
+	const allTags = tags.getTags(bookmarks);
+	const allGroups = groups.getGroups();
 
 	const [groupLinks, setGroupLinks] = useState(allGroups);
 	const [tagCloud, setTagCloud] = useState(allTags);
@@ -38,17 +41,18 @@ const Layout = () => {
 	};
 
 	const updateFilter = () => {
-		setTagCloud(getTags());
-		setGroupLinks(getGroups());
+		setTagCloud(tags.getTags(bookmarks));
+		setGroupLinks(groups.getGroups());
 	}
 
 	const onClickGroup = (groupName, isPressed) => {
 		const newText = isPressed ? "" : groupName;
 		const newFilter = [newText, ""];
+		const newBookmark = getBookmarks(newFilter, sort);
 		setFilter(newFilter);
-		setBookmarks(getBookmarks(newFilter, sort));
+		setBookmarks(newBookmark);
 		setActiveGroup(newText);
-		setTagCloud(getTags());
+		setTagCloud(tags.getTags(newBookmark));
 		LocalStorage.setStore("activeTags", "");
 		LocalStorage.setStore("activeGroup", newText);
 		setActiveTags("");
@@ -56,31 +60,34 @@ const Layout = () => {
 
 	const onClickTags = (tagName) => {
 		const newFilter = [filter[0], tagName];
+		const newBookmark = getBookmarks(newFilter, sort);
 		setFilter(newFilter);
-		setBookmarks(getBookmarks(newFilter, sort));
+		setBookmarks(newBookmark);
 		setActiveTags(tagName);
+		setTagCloud(tags.getTags(newBookmark));
 		LocalStorage.setStore("activeTags", tagName);
-		setTagCloud(getTags());
 	}
 
 	const clearTags = () => {
 		const newFilter = [filter[0], ""];
+		const newBookmark = getBookmarks(newFilter, sort);
 		setFilter(newFilter);
-		setBookmarks(getBookmarks(newFilter, sort));
+		setBookmarks(newBookmark);
 		setActiveTags("");
+		setTagCloud(tags.getTags(newBookmark));
 		LocalStorage.setStore("activeTags", "");
-		setTagCloud(getTags());
 	}
 
 	const onClickBookmarkTags = (tagName) => {
 		const newFilter = ["", tagName];
+		const newBookmark = getBookmarks(newFilter, sort);
 		setFilter(newFilter);
-		setBookmarks(getBookmarks(newFilter, sort));
+		setBookmarks(newBookmark);
 		setActiveTags(tagName);
-		LocalStorage.setStore("activeTags", tagName);
 		setActiveGroup("");
+		setTagCloud(tags.getTags(newBookmark));
+		LocalStorage.setStore("activeTags", tagName);
 		LocalStorage.setStore("activeGroup", "");
-		setTagCloud(getTags());
 	}
 
 	const onSortSelect = (newSort) => {
