@@ -12,15 +12,24 @@ const LoadBookmark = (props) => {
 
   const {
     bookmarksArray,
-    updateFilter,
+    bookmarks,
     setBookmarks,
     filter,
-    sort
-  } = props;
+    sort,
+    setTagCloud,
+    setGroupLinks,
+    tags,
+    groups,
+  } = props.stateUpdateBookamrks;
 
   const [modalActive, modalSetActive] = useState(false);
 
   const [notification, setNotification] = useState();
+
+  const updateFilter = () => {
+    setTagCloud(tags.getTags(bookmarks));
+    setGroupLinks(groups.getGroups());
+  }
 
   const onAddBookmarks = () => {
     setBookmarks(bookmarksArray.getBookmarks(filter, sort));

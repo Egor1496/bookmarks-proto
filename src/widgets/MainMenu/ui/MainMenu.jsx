@@ -9,12 +9,16 @@ import { Br, LogoMyNotes, LogoBookMarks } from "../../../shared/ui"; //BaseDropM
 const MainMenu = ({ groups }) => {
   return (
     <div className={sass["mainMenuWrap"]}>
-      <Link to="/bookmarks-proto" ><LogoBookMarks /></Link>
+      <Link to="/bookmarks-proto" >
+        <LogoBookMarks />
+      </Link>
       <Br />
       {/*<BaseDropMenu /> <Br style={{ "margin": "10px 0" }}/>*/}
       <GroupLinks groups={groups} />
       <Br />
-      <Link to="/bookmarks-proto" ><LogoMyNotes /></Link>
+      <Link to="/bookmarks-proto" >
+        <LogoMyNotes />
+      </Link>
     </div>
   );
 }

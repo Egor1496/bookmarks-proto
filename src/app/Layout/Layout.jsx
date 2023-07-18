@@ -32,11 +32,6 @@ const Layout = () => {
 	const [groupLinks, setGroupLinks] = useState(allGroups);
 	const [tagCloud, setTagCloud] = useState(allTags);
 
-	const updateFilter = () => {
-		setTagCloud(tags.getTags(bookmarks));
-		setGroupLinks(groups.getGroups());
-	}
-
 	const onClickGroup = (groupName, isPressed) => {
 		const newText = isPressed ? "" : groupName;
 		const newFilter = [newText, ""];
@@ -93,34 +88,39 @@ const Layout = () => {
 	const [enableBg, setEnableBg] = useState(Boolean(Number(LocalStorage.getStore("enableBg") || 1)));
 
 	const stateBaseSettings = {
-		enableGroups: enableGroups,
-		setEnableGroups: setEnableGroups,
-		enableTags: enableTags,
-		setEnableTags: setEnableTags,
-		enableBg: enableBg,
-		setEnableBg: setEnableBg,
+		enableGroups,
+		setEnableGroups,
+		enableTags,
+		setEnableTags,
+		enableBg,
+		setEnableBg,
 	};
 
-	const contextMainHeader = [
+	const contextMainMenu = { onClickGroup, activeGroup };
+
+	const contextMainHeader = {
 		bookmarksArray,
 		setBookmarks,
 		filter,
 		sort
-	]
+	};
 
-	const contextMain = [
+	const contextMain = {
 		bookmarks,
-		filter[0],
-		updateFilter,
+		"groupName": filter[0],
 		onClickBookmarkTags,
 		onSortSelect,
 		bookmarksArray,
 		setBookmarks,
 		filter,
-		sort
-	];
+		sort,
+		setTagCloud,
+		setGroupLinks,
+		tags,
+		groups,
+	};
 
-	const contextAside = [onClickTags, clearTags, activeTags];
+	const contextAside = { onClickTags, clearTags, activeTags };
 
 	const classNamesNav = `${sass.nav} ${!enableGroups && sass.hide}`;
 	const classNameArticle = `${sass.article} ${!enableBg && sass.transparent}`;
@@ -129,7 +129,7 @@ const Layout = () => {
 	return (
 		<div className={sass.mainWrap}>
 			<nav className={classNamesNav}>
-				<FilterButtons.Provider value={[onClickGroup, activeGroup]}>
+				<FilterButtons.Provider value={contextMainMenu}>
 					<MainMenu groups={groupLinks} />
 				</FilterButtons.Provider>
 			</nav>
@@ -161,6 +161,8 @@ const Layout = () => {
 }
 
 export { Layout };
+
+// упростить { x: x } -> { x }
 
 // onerror img
 

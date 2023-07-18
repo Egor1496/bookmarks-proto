@@ -10,14 +10,20 @@ import { sendMesageNotification } from "../../../shared/model";
 const Bookmarks = (props) => {
 
   const {
-    bookmarks,
     bookmarksArray,
-    updateFilter,
-    styleNumber,
-    onClickTags,
+    bookmarks,
     setBookmarks,
     filter,
-    sort
+    sort,
+    setTagCloud,
+    setGroupLinks,
+    tags,
+    groups,
+  } = props.stateUpdateBookamrks;
+
+  const {
+    styleNumber,
+    onClickTags,
   } = props;
 
   const [deleteModalActive, setDeleteModalActive] = useState(false);
@@ -36,13 +42,18 @@ const Bookmarks = (props) => {
     editModalSetActive(true);
   }
 
+  const updateFilter = () => {
+    setTagCloud(tags.getTags(bookmarks));
+    setGroupLinks(groups.getGroups());
+  }
+
   const onAddBookmarks = () => {
     setBookmarks(bookmarksArray.getBookmarks(filter, sort));
   }
 
   const handlerAcceptEdit = (newBookmark) => {
     bookmarksArray.editBookmark(form.id, newBookmark, onAddBookmarks);
-    // updateFilter();
+    // updateFilter(); !!!!
     sendMesageNotification({ text: "Ссылка редактирована!" }, setNotification);
   }
 

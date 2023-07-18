@@ -10,19 +10,34 @@ import { LocalStorage } from "../../../shared/model";
 
 const Main = () => {
 
-  const [
+  const {
     bookmarks,
     groupName,
-    updateFilter,
     onClickTags,
     onSortSelect,
     bookmarksArray,
     setBookmarks,
     filter,
-    sort
-  ] = useContext(BookmarksContext);
+    sort,
+    setTagCloud,
+    setGroupLinks,
+    tags,
+    groups,
+  } = useContext(BookmarksContext);
 
-  const defStyleNumber = LocalStorage.getStore("styleNumber", 1)
+  const stateUpdateBookamrks = {
+    bookmarks,
+    bookmarksArray,
+    setBookmarks,
+    filter,
+    sort,
+    setTagCloud,
+    setGroupLinks,
+    tags,
+    groups,
+  }
+
+  const defStyleNumber = LocalStorage.getStore("styleNumber", 1);
 
   const [styleNumber, setStyleNumber] = useState(defStyleNumber);
 
@@ -46,32 +61,14 @@ const Main = () => {
             <GetFile />
           </div>
           <div className={sass["sort-wrap"]}>
-            <AddBookmark
-              bookmarks={bookmarks}
-              bookmarksArray={bookmarksArray}
-              updateFilter={updateFilter}
-              setBookmarks={setBookmarks}
-              filter={filter}
-              sort={sort}
-            />
-            <LoadBookmark
-              bookmarksArray={bookmarksArray}
-              updateFilter={updateFilter}
-              setBookmarks={setBookmarks}
-              filter={filter}
-              sort={sort}
-            />
+            <AddBookmark stateUpdateBookamrks={stateUpdateBookamrks} />
+            <LoadBookmark stateUpdateBookamrks={stateUpdateBookamrks} />
           </div>
         </div>
       </div>
       <Bookmarks
+        stateUpdateBookamrks={stateUpdateBookamrks}
         styleNumber={styleNumber}
-        bookmarksArray={bookmarksArray}
-        bookmarks={bookmarks}
-        updateFilter={updateFilter}
-        setBookmarks={setBookmarks}
-        filter={filter}
-        sort={sort}
         onClickTags={onClickTags}
       />
     </div>

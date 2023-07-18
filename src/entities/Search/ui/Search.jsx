@@ -12,12 +12,12 @@ const Search = () => {
 
   const [searchState, setSearchState] = useState("");
 
-  const [
+  const {
     bookmarksArray,
     setBookmarks,
     filter,
     sort
-  ] = useContext(BookmarksContext);
+  } = useContext(BookmarksContext);
 
   const onChangeInput = (searchState) => setBookmarks(bookmarksArray.getBookmarks(filter, sort, searchState));
 

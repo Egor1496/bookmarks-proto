@@ -17,7 +17,6 @@ const MainHeader = ({ state }) => {
           <FastLinks />
           <BaseSettings state={state} />
         </div>
-
       </div>
     </div>
   );
