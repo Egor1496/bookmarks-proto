@@ -10,9 +10,11 @@ import { sendMesageNotification } from "../../../shared/model";
 const AddBookmark = (props) => {
 
   const {
-    uploadBookmarks,
-    onAddBookmarks,
-    updateFilter
+    bookmarksArray,
+    updateFilter,
+    setBookmarks,
+    filter,
+    sort
   } = props;
 
   const [modalActive, modalSetActive] = useState(false);
@@ -27,12 +29,16 @@ const AddBookmark = (props) => {
 
   const [notification, setNotification] = useState();
 
+  const onAddBookmarks = () => {
+    setBookmarks(bookmarksArray.getBookmarks(filter, sort));
+  }
+
   return (
     <div className={sass.main}>
       <Notification state={notification} setState={setNotification} />
       <BookmarkModal
         onАccept={(newBookmark) => {
-          uploadBookmarks({ ...newBookmark }, onAddBookmarks);
+          bookmarksArray.uploadBookmarks({ ...newBookmark }, onAddBookmarks);
           updateFilter();
           sendMesageNotification({ text: "Добавлена ссылка!" }, setNotification);
         }}

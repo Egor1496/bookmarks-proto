@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 import { SortingBookmarks, SearchBookmarks, FilterBookmarks } from "../../../entities";
 import { JsonHelper, LocalStorage } from "../../../shared/model";
 
-const bookmarksTmp = [
+const DEFAULT_BOOKMARKS_TMP = [
 	// {
 	// 	id: nanoid(),
 	// 	link: "https://www.youtube.com/",
@@ -46,11 +46,8 @@ class BookmarksArray {
 		if (this.bookmarks.length === 0) this.bookmarks = this.bookmarksTmp;
 	}
 
-	addBookmark(bookmark) {
-		this.bookmarks = [...this.bookmarks, { ...bookmark, id: nanoid() }];
-	}
-
 	deleteBookmark(id, setBookmarks) {
+		console.log(this);
 		this.bookmarks.forEach((el, i) => {
 			if (el.id === id) {
 				this.bookmarks.splice(i, 1);
@@ -71,7 +68,7 @@ class BookmarksArray {
 	}
 
 	uploadBookmarks(bookmark, setState) {
-		this.addBookmark(bookmark);
+		this.bookmarks = [...this.bookmarks, { ...bookmark, id: nanoid() }];
 		LocalStorage.setStore("bookmarks", JsonHelper.getJSON(this.bookmarks));
 		setState(this.getBookmarks());
 	}
@@ -84,6 +81,4 @@ class BookmarksArray {
 	}
 }
 
-const bookmarksArray = new BookmarksArray(bookmarksTmp);
-
-export { bookmarksArray };
+export { BookmarksArray, DEFAULT_BOOKMARKS_TMP };

@@ -11,20 +11,26 @@ import { FillBookmark, JsonHelper, sendMesageNotification } from "../../../share
 const LoadBookmark = (props) => {
 
   const {
-    uploadBookmarks,
-    onAddBookmarks,
-    updateFilter
+    bookmarksArray,
+    updateFilter,
+    setBookmarks,
+    filter,
+    sort
   } = props;
 
   const [modalActive, modalSetActive] = useState(false);
 
   const [notification, setNotification] = useState();
 
+  const onAddBookmarks = () => {
+    setBookmarks(bookmarksArray.getBookmarks(filter, sort));
+  }
+
   const loadObgectBookmarks = (bookmarks) => {
     const obgBookmarks = JsonHelper.getObject(bookmarks).bookmarks;
     obgBookmarks.forEach(el => {
       el.title = FillBookmark.getTitle(el.title, el.link);
-      uploadBookmarks({ ...el }, onAddBookmarks);
+      bookmarksArray.uploadBookmarks({ ...el }, onAddBookmarks);
     });
     updateFilter();
     sendMesageNotification(

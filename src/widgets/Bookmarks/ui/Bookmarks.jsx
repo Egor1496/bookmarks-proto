@@ -1,13 +1,24 @@
 import React, { useState } from "react";
+
 import sass from "./Bookmarks.module.sass";
 
-import { bookmarksArray } from "../../../widgets";
 import { Bookmark } from "../../../features";
 import { BookmarkModal, DialogModal } from "../../../entities";
 import { Notification } from "../../../shared/ui";
 import { sendMesageNotification } from "../../../shared/model";
 
-const Bookmarks = ({ bookmarks, onAddBookmarks, updateFilter, styleNumber, onClickTags }) => {
+const Bookmarks = (props) => {
+
+  const {
+    bookmarks,
+    bookmarksArray,
+    updateFilter,
+    styleNumber,
+    onClickTags,
+    setBookmarks,
+    filter,
+    sort
+  } = props;
 
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [editModalActive, editModalSetActive] = useState(false);
@@ -25,8 +36,13 @@ const Bookmarks = ({ bookmarks, onAddBookmarks, updateFilter, styleNumber, onCli
     editModalSetActive(true);
   }
 
+  const onAddBookmarks = () => {
+    setBookmarks(bookmarksArray.getBookmarks(filter, sort));
+  }
+
   const handlerAcceptEdit = (newBookmark) => {
     bookmarksArray.editBookmark(form.id, newBookmark, onAddBookmarks);
+    // updateFilter();
     sendMesageNotification({ text: "Ссылка редактирована!" }, setNotification);
   }
 

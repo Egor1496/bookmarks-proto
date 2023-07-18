@@ -5,15 +5,17 @@ import sass from "./Layout.module.sass";
 
 import { FilterButtons, BookmarksContext } from "../../processes/model/context";
 
-import { MainMenu, MainHeader, MainAside, MainFooter, bookmarksArray } from "../../widgets";
+import { MainMenu, MainHeader, MainAside, MainFooter, BookmarksArray, DEFAULT_BOOKMARKS_TMP } from "../../widgets";
 import { Groups } from "../../features";
 import { Tags } from "../../entities";
-import { debounce, LocalStorage, JsonHelper } from "../../shared/model";
+import { LocalStorage, JsonHelper } from "../../shared/model";
 
 const DEFAULT_TYPE_SORT = { value: "title", sortType: true };
 
 const groups = new Groups();
 const tags = new Tags();
+
+const bookmarksArray = new BookmarksArray(DEFAULT_BOOKMARKS_TMP);
 
 const Layout = () => {
 	const [activeTags, setActiveTags] = useState(LocalStorage.getStore("activeTags") || "");
@@ -29,18 +31,6 @@ const Layout = () => {
 
 	const [groupLinks, setGroupLinks] = useState(allGroups);
 	const [tagCloud, setTagCloud] = useState(allTags);
-
-	const [enableTags, setEnableTags] = useState(Boolean(Number(LocalStorage.getStore("enableTags") || 1)));
-	const [enableGroups, setEnableGroups] = useState(Boolean(Number(LocalStorage.getStore("enableGroups") || 1)));
-	const [enableBg, setEnableBg] = useState(Boolean(Number(LocalStorage.getStore("enableBg") || 1)));
-
-	const onAddBookmarks = () => {
-		setBookmarks(bookmarksArray.getBookmarks(filter, sort));
-	}
-
-	const onChangeInput = (searchState) => {
-		setBookmarks(bookmarksArray.getBookmarks(filter, sort, searchState));
-	};
 
 	const updateFilter = () => {
 		setTagCloud(tags.getTags(bookmarks));
@@ -98,29 +88,39 @@ const Layout = () => {
 		LocalStorage.setStore("sort", JsonHelper.getJSON(newSort));
 	};
 
-	const enableSelectGroup = (isChecked) => {
-		setEnableGroups(isChecked);
-		LocalStorage.setStore("enableGroups", Number(isChecked));
-	}
+	const [enableGroups, setEnableGroups] = useState(Boolean(Number(LocalStorage.getStore("enableGroups") || 1)));
+	const [enableTags, setEnableTags] = useState(Boolean(Number(LocalStorage.getStore("enableTags") || 1)));
+	const [enableBg, setEnableBg] = useState(Boolean(Number(LocalStorage.getStore("enableBg") || 1)));
 
-	const enableSelectTags = (isChecked) => {
-		setEnableTags(isChecked);
-		LocalStorage.setStore("enableTags", Number(isChecked));
-	}
+	const stateBaseSettings = {
+		enableGroups: enableGroups,
+		setEnableGroups: setEnableGroups,
+		enableTags: enableTags,
+		setEnableTags: setEnableTags,
+		enableBg: enableBg,
+		setEnableBg: setEnableBg,
+	};
 
-	const enableSelectBg = (isChecked) => {
-		setEnableBg(isChecked);
-		LocalStorage.setStore("enableBg", Number(isChecked));
-	}
+	const contextMainHeader = [
+		bookmarksArray,
+		setBookmarks,
+		filter,
+		sort
+	]
 
-	const contextBookmarks = [
+	const contextMain = [
 		bookmarks,
-		onAddBookmarks,
 		filter[0],
 		updateFilter,
 		onClickBookmarkTags,
 		onSortSelect,
+		bookmarksArray,
+		setBookmarks,
+		filter,
+		sort
 	];
+
+	const contextAside = [onClickTags, clearTags, activeTags];
 
 	const classNamesNav = `${sass.nav} ${!enableGroups && sass.hide}`;
 	const classNameArticle = `${sass.article} ${!enableBg && sass.transparent}`;
@@ -135,26 +135,19 @@ const Layout = () => {
 			</nav>
 			<div className={sass["col-2"]}>
 				<header className={sass.header} >
-					<BookmarksContext.Provider value={debounce(onChangeInput, 500)}>
-						<MainHeader
-							enableSelectGroup={enableSelectGroup}
-							enableGroups={enableGroups}
-							enableSelectTags={enableSelectTags}
-							enableTags={enableTags}
-							enableSelectBg={enableSelectBg}
-							enableBg={enableBg}
-						/>
+					<BookmarksContext.Provider value={contextMainHeader}>
+						<MainHeader state={stateBaseSettings} />
 					</BookmarksContext.Provider>
 				</header>
 				<main className={`${sass.main}`}>
 					<article className={classNameArticle} >
 						<BookmarksContext.Provider
-							value={contextBookmarks}>
+							value={contextMain}>
 							<Outlet />
 						</BookmarksContext.Provider>
 					</article>
 					<aside className={classNamesAside} >
-						<FilterButtons.Provider value={[onClickTags, clearTags, activeTags]}>
+						<FilterButtons.Provider value={contextAside}>
 							<MainAside tags={tagCloud} />
 						</FilterButtons.Provider>
 					</aside>
@@ -169,7 +162,9 @@ const Layout = () => {
 
 export { Layout };
 
-// логотип BM и MN и в центре Bookmarks / Notes
+// onerror img
+
+// при добавлении карточек не обновляется облако тэгов и группы
 
 // баг сортировки при изменении карточки
 

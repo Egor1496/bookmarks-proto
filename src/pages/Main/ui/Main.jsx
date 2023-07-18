@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import sass from "./Main.module.sass"
 
 import { BookmarksContext } from "../../../processes/model/context";
-import { Bookmarks, bookmarksArray } from "../../../widgets";
+import { Bookmarks } from "../../../widgets";
 import { SelectStyleBookmark, GetFile, AddBookmark, LoadBookmark } from "../../../features";
 import { Sort } from "../../../entities";
 import { LocalStorage } from "../../../shared/model";
@@ -12,11 +12,14 @@ const Main = () => {
 
   const [
     bookmarks,
-    onAddBookmarks,
     groupName,
     updateFilter,
     onClickTags,
     onSortSelect,
+    bookmarksArray,
+    setBookmarks,
+    filter,
+    sort
   ] = useContext(BookmarksContext);
 
   const defStyleNumber = LocalStorage.getStore("styleNumber", 1)
@@ -45,23 +48,30 @@ const Main = () => {
           <div className={sass["sort-wrap"]}>
             <AddBookmark
               bookmarks={bookmarks}
-              onAddBookmarks={onAddBookmarks}
-              uploadBookmarks={bookmarksArray.uploadBookmarks}
+              bookmarksArray={bookmarksArray}
               updateFilter={updateFilter}
+              setBookmarks={setBookmarks}
+              filter={filter}
+              sort={sort}
             />
             <LoadBookmark
-              uploadBookmarks={bookmarksArray.uploadBookmarks}
-              onAddBookmarks={onAddBookmarks}
+              bookmarksArray={bookmarksArray}
               updateFilter={updateFilter}
+              setBookmarks={setBookmarks}
+              filter={filter}
+              sort={sort}
             />
           </div>
         </div>
       </div>
       <Bookmarks
         styleNumber={styleNumber}
+        bookmarksArray={bookmarksArray}
         bookmarks={bookmarks}
-        onAddBookmarks={onAddBookmarks}
         updateFilter={updateFilter}
+        setBookmarks={setBookmarks}
+        filter={filter}
+        sort={sort}
         onClickTags={onClickTags}
       />
     </div>

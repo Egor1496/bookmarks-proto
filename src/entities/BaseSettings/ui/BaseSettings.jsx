@@ -11,13 +11,13 @@ import { BaseButton, BaseToggleRadio } from "../../../shared/ui";
 
 const BaseSettings = (props) => {
   const {
-    enableSelectGroup,
-    enableGroups,
-    enableSelectTags,
-    enableTags,
-    enableSelectBg,
-    enableBg
-  } = props;
+    enableGroups: enableGroups,
+    setEnableGroups: setEnableGroups,
+    enableTags: enableTags,
+    setEnableTags: setEnableTags,
+    enableBg: enableBg,
+    setEnableBg: setEnableBg,
+  } = props.state;
 
   const storageTheme = LocalStorage.getStore("themeNumber", 1);
 
@@ -32,6 +32,22 @@ const BaseSettings = (props) => {
   const handlerClickClose = () => {
     setModalActive(false)
   }
+
+  const enableSelectGroup = (isChecked) => {
+    setEnableGroups(isChecked);
+    LocalStorage.setStore("enableGroups", Number(isChecked));
+  }
+
+  const enableSelectTags = (isChecked) => {
+    setEnableTags(isChecked);
+    LocalStorage.setStore("enableTags", Number(isChecked));
+  }
+
+  const enableSelectBg = (isChecked) => {
+    setEnableBg(isChecked);
+    LocalStorage.setStore("enableBg", Number(isChecked));
+  }
+
 
   return (
     <div className={css.settings}>

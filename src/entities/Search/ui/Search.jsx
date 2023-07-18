@@ -1,17 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import sass from "./Search.module.sass"
 import { AiOutlineSearch } from "react-icons/ai"
 
-import { BaseInput } from "../../../shared/ui";
+import { BookmarksContext } from "../../../processes/model/context";
 
-const Search = ({ onChangeInput }) => {
+import { BaseInput } from "../../../shared/ui";
+import { debounce } from "../../../shared/model";
+
+const Search = () => {
 
   const [searchState, setSearchState] = useState("");
 
+  const [
+    bookmarksArray,
+    setBookmarks,
+    filter,
+    sort
+  ] = useContext(BookmarksContext);
+
+  const onChangeInput = (searchState) => setBookmarks(bookmarksArray.getBookmarks(filter, sort, searchState));
+
   const handlerChaneInput = (state) => {
-    setSearchState(state);
-    onChangeInput(state);
+    debounce(() => {
+      setSearchState(state);
+      onChangeInput(state);
+    }, 500)();
   }
 
   return (
