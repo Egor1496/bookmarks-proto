@@ -14,7 +14,7 @@ const MainMenu = ({ groups }) => {
       </Link>
       <Br />
       {/*<BaseDropMenu /> <Br style={{ "margin": "10px 0" }}/>*/}
-      <GroupLinks groups={groups} />
+      <GroupLinks />
       <Br />
       <Link to="/bookmarks-proto" >
         <LogoMyNotes />

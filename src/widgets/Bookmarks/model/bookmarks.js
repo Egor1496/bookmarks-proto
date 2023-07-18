@@ -47,7 +47,6 @@ class BookmarksArray {
 	}
 
 	deleteBookmark(id, setBookmarks) {
-		console.log(this);
 		this.bookmarks.forEach((el, i) => {
 			if (el.id === id) {
 				this.bookmarks.splice(i, 1);

@@ -12,18 +12,17 @@ const Bookmarks = (props) => {
   const {
     bookmarksArray,
     bookmarks,
-    setBookmarks,
-    filter,
-    sort,
-    setTagCloud,
-    setGroupLinks,
     tags,
     groups,
+    filter,
+    sort,
+    setBookmarks,
+    setTagCloud,
+    setGroupLinks,
   } = props.stateUpdateBookamrks;
 
   const {
     styleNumber,
-    onClickTags,
   } = props;
 
   const [deleteModalActive, setDeleteModalActive] = useState(false);
@@ -93,7 +92,6 @@ const Bookmarks = (props) => {
               styleNumber={styleNumber}
               onDeleteBookmark={() => { onDeleteBookmark(elem); }}
               onEditBookmark={() => { onEditBookmark(elem); }}
-              onClickTags={onClickTags}
             />
           })
         }

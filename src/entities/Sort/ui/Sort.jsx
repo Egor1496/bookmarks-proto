@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import sass from "./Sort.module.sass"
 import { TbArrowsTransferDown } from 'react-icons/tb';
 import { FaSortAlphaDown, FaSortAlphaUpAlt } from 'react-icons/fa';
+
+import { BookmarksContext } from "../../../processes/model/context";
 
 import { BaseButton } from "../../../shared/ui";
 import { LocalStorage, JsonHelper } from "../../../shared/model";
@@ -16,7 +18,7 @@ const sortListDefault = [
 
 const ACTIVE_NUM_DEFAULT = 0;
 
-const Sort = ({ onAcept = () => { } }) => {
+const Sort = () => {
 
   const [modalActive, setModalActive] = useState(false);
 
@@ -24,12 +26,25 @@ const Sort = ({ onAcept = () => { } }) => {
 
   const [activeNum, setActiveNum] = useState(Number(LocalStorage.getStore("activeNum")) || ACTIVE_NUM_DEFAULT);
 
+  const {
+    bookmarksArray,
+    filter,
+    setBookmarks,
+    setSort,
+  } = useContext(BookmarksContext);
+
   const getNewList = (prevSortList) => {
     const newList = [...prevSortList];
     return newList;
   }
 
   const newList = getNewList(sortList);
+
+  const onSortSelect = (newSort) => {
+    setSort(newSort);
+    setBookmarks(bookmarksArray.getBookmarks(filter, newSort))
+    LocalStorage.setStore("sort", JsonHelper.getJSON(newSort));
+  };
 
   const handlerClickLi = (i) => {
     if (activeNum !== i) {
@@ -42,7 +57,7 @@ const Sort = ({ onAcept = () => { } }) => {
       setSortList(() => newList)
       LocalStorage.setStore("sortList", JsonHelper.getJSON(newList));
     }
-    onAcept(newList[i]);
+    onSortSelect(newList[i]);
   }
 
   const handlerCallback = (i) => {
@@ -51,7 +66,7 @@ const Sort = ({ onAcept = () => { } }) => {
     setActiveNum(i);
     LocalStorage.setStore("activeNum", i);
     LocalStorage.setStore("sortList", JsonHelper.getJSON(newList));
-    onAcept(newList[i]);
+    onSortSelect(newList[i]);
   }
 
   return (

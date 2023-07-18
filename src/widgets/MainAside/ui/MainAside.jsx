@@ -3,10 +3,10 @@ import sass from "./MainAside.module.sass";
 
 import { TagСloud } from "../../../entities"
 
-const MainAside = ({ tags }) => {
+const MainAside = () => {
   return (
     <div className={sass["mainAsideWrap"]}>
-      <TagСloud tags={tags} />
+      <TagСloud />
     </div>
   );
 }

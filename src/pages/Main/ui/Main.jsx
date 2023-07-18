@@ -11,30 +11,28 @@ import { LocalStorage } from "../../../shared/model";
 const Main = () => {
 
   const {
-    bookmarks,
-    groupName,
-    onClickTags,
-    onSortSelect,
     bookmarksArray,
-    setBookmarks,
-    filter,
-    sort,
-    setTagCloud,
-    setGroupLinks,
+    bookmarks,
     tags,
     groups,
+    filter,
+    sort,
+    setBookmarks,
+    setTagCloud,
+    setGroupLinks,
+    onSortSelect,
   } = useContext(BookmarksContext);
 
   const stateUpdateBookamrks = {
     bookmarks,
     bookmarksArray,
-    setBookmarks,
-    filter,
-    sort,
-    setTagCloud,
-    setGroupLinks,
     tags,
     groups,
+    filter,
+    sort,
+    setBookmarks,
+    setTagCloud,
+    setGroupLinks,
   }
 
   const defStyleNumber = LocalStorage.getStore("styleNumber", 1);
@@ -50,7 +48,7 @@ const Main = () => {
     <div className={sass.main}>
       <div className={sass.mainWrap}>
         <div className={sass.inner}>
-          <div className={sass.countBookmarks}>{groupName || "Всего"} - {bookmarks.length}</div>
+          <div className={sass.countBookmarks}>{filter[0] || "Всего"} - {bookmarks.length}</div>
           <div className={sass.buttonWrap}>
             <Sort onAcept={onSortSelect} />
             <SelectStyleBookmark setStyleNumber={onClickStyleBookmarks} />
@@ -69,7 +67,6 @@ const Main = () => {
       <Bookmarks
         stateUpdateBookamrks={stateUpdateBookamrks}
         styleNumber={styleNumber}
-        onClickTags={onClickTags}
       />
     </div>
   );

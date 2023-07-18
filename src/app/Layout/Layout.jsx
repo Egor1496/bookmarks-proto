@@ -32,95 +32,67 @@ const Layout = () => {
 	const [groupLinks, setGroupLinks] = useState(allGroups);
 	const [tagCloud, setTagCloud] = useState(allTags);
 
-	const onClickGroup = (groupName, isPressed) => {
-		const newText = isPressed ? "" : groupName;
-		const newFilter = [newText, ""];
-		const newBookmark = bookmarksArray.getBookmarks(newFilter, sort);
-		setFilter(newFilter);
-		setBookmarks(newBookmark);
-		setActiveGroup(newText);
-		setTagCloud(tags.getTags(newBookmark));
-		LocalStorage.setStore("activeTags", "");
-		LocalStorage.setStore("activeGroup", newText);
-		setActiveTags("");
-	}
-
-	const onClickTags = (tagName) => {
-		const newFilter = [filter[0], tagName];
-		const newBookmark = bookmarksArray.getBookmarks(newFilter, sort);
-		setFilter(newFilter);
-		setBookmarks(newBookmark);
-		setActiveTags(tagName);
-		setTagCloud(tags.getTags(newBookmark));
-		LocalStorage.setStore("activeTags", tagName);
-	}
-
-	const clearTags = () => {
-		const newFilter = [filter[0], ""];
-		const newBookmark = bookmarksArray.getBookmarks(newFilter, sort);
-		setFilter(newFilter);
-		setBookmarks(newBookmark);
-		setActiveTags("");
-		setTagCloud(tags.getTags(newBookmark));
-		LocalStorage.setStore("activeTags", "");
-	}
-
-	const onClickBookmarkTags = (tagName) => {
-		const newFilter = ["", tagName];
-		const newBookmark = bookmarksArray.getBookmarks(newFilter, sort);
-		setFilter(newFilter);
-		setBookmarks(newBookmark);
-		setActiveTags(tagName);
-		setActiveGroup("");
-		setTagCloud(tags.getTags(newBookmark));
-		LocalStorage.setStore("activeTags", tagName);
-		LocalStorage.setStore("activeGroup", "");
-	}
-
-	const onSortSelect = (newSort) => {
-		setSort(newSort);
-		setBookmarks(bookmarksArray.getBookmarks(filter, newSort))
-		LocalStorage.setStore("sort", JsonHelper.getJSON(newSort));
-	};
-
 	const [enableGroups, setEnableGroups] = useState(Boolean(Number(LocalStorage.getStore("enableGroups") || 1)));
 	const [enableTags, setEnableTags] = useState(Boolean(Number(LocalStorage.getStore("enableTags") || 1)));
 	const [enableBg, setEnableBg] = useState(Boolean(Number(LocalStorage.getStore("enableBg") || 1)));
 
 	const stateBaseSettings = {
 		enableGroups,
-		setEnableGroups,
 		enableTags,
-		setEnableTags,
 		enableBg,
+		setEnableGroups,
+		setEnableTags,
 		setEnableBg,
 	};
 
-	const contextMainMenu = { onClickGroup, activeGroup };
+	const contextMainMenu = {
+		bookmarksArray,
+		tags,
+		groupLinks,
+		sort,
+		setBookmarks,
+		setFilter,
+		setTagCloud,
+		setActiveTags,
+		setActiveGroup,
+		activeGroup
+	};
 
 	const contextMainHeader = {
 		bookmarksArray,
-		setBookmarks,
 		filter,
-		sort
+		sort,
+		setBookmarks
 	};
 
 	const contextMain = {
-		bookmarks,
-		"groupName": filter[0],
-		onClickBookmarkTags,
-		onSortSelect,
 		bookmarksArray,
-		setBookmarks,
-		filter,
-		sort,
-		setTagCloud,
-		setGroupLinks,
+		bookmarks,
 		tags,
 		groups,
+		filter,
+		sort,
+		setFilter,
+		setSort,
+		setBookmarks,
+		setTagCloud,
+		setActiveTags,
+		setGroupLinks,
+		setActiveGroup,
 	};
 
-	const contextAside = { onClickTags, clearTags, activeTags };
+	const contextAside = {
+		tags,
+		tagCloud,
+		activeTags,
+		filter,
+		sort,
+		bookmarksArray,
+		setBookmarks,
+		setFilter,
+		setTagCloud,
+		setActiveTags,
+	};
 
 	const classNamesNav = `${sass.nav} ${!enableGroups && sass.hide}`;
 	const classNameArticle = `${sass.article} ${!enableBg && sass.transparent}`;
@@ -130,7 +102,7 @@ const Layout = () => {
 		<div className={sass.mainWrap}>
 			<nav className={classNamesNav}>
 				<FilterButtons.Provider value={contextMainMenu}>
-					<MainMenu groups={groupLinks} />
+					<MainMenu />
 				</FilterButtons.Provider>
 			</nav>
 			<div className={sass["col-2"]}>
@@ -148,7 +120,7 @@ const Layout = () => {
 					</article>
 					<aside className={classNamesAside} >
 						<FilterButtons.Provider value={contextAside}>
-							<MainAside tags={tagCloud} />
+							<MainAside />
 						</FilterButtons.Provider>
 					</aside>
 				</main>

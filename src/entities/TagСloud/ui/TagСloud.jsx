@@ -7,10 +7,42 @@ import { BiReset } from "react-icons/bi";
 import { FilterButtons } from "../../../processes/model/context"
 
 import { BaseButton } from "../../../shared/ui";
+import { LocalStorage } from "../../../shared/model";
 
-const TagСloud = ({ tags = [] }) => {
+const TagСloud = () => {
 
-  const { onClickTags, clearTags, activeTags } = useContext(FilterButtons);
+  const {
+    tags,
+    tagCloud,
+    activeTags,
+    filter,
+    sort,
+    bookmarksArray,
+    setBookmarks,
+    setFilter,
+    setTagCloud,
+    setActiveTags,
+  } = useContext(FilterButtons);
+
+  const onClickTags = (tagName) => {
+    const newFilter = [filter[0], tagName];
+    const newBookmark = bookmarksArray.getBookmarks(newFilter, sort);
+    setFilter(newFilter);
+    setBookmarks(newBookmark);
+    setActiveTags(tagName);
+    setTagCloud(tags.getTags(newBookmark));
+    LocalStorage.setStore("activeTags", tagName);
+  }
+
+  const clearTags = () => {
+    const newFilter = [filter[0], ""];
+    const newBookmark = bookmarksArray.getBookmarks(newFilter, sort);
+    setFilter(newFilter);
+    setBookmarks(newBookmark);
+    setActiveTags("");
+    setTagCloud(tags.getTags(newBookmark));
+    LocalStorage.setStore("activeTags", "");
+  }
 
   return (
     <>
@@ -31,7 +63,7 @@ const TagСloud = ({ tags = [] }) => {
       }
       <div className={sass.tagsWrap}>
         {
-          [...tags].map((el, i) => {
+          [...tagCloud].map((el, i) => {
             return (
               <BaseButton
                 key={el}

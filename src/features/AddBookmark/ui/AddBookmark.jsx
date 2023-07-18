@@ -12,13 +12,13 @@ const AddBookmark = (props) => {
   const {
     bookmarksArray,
     bookmarks,
-    setBookmarks,
-    filter,
-    sort,
-    setTagCloud,
-    setGroupLinks,
     tags,
     groups,
+    filter,
+    sort,
+    setBookmarks,
+    setTagCloud,
+    setGroupLinks,
   } = props.stateUpdateBookamrks;
 
   const [modalActive, modalSetActive] = useState(false);

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import sass from "./Bookmark.module.sass"
-
-import { BaseButton } from "../../../shared/ui"
-import { fillBookmark } from "../../../features"
 
 import { RxPencil2 } from 'react-icons/rx';
 import { AiOutlineDelete } from 'react-icons/ai';
+
+import { BookmarksContext } from "../../../processes/model/context";
+import { fillBookmark } from "../../../features"
+import { BaseButton } from "../../../shared/ui"
+import { LocalStorage } from "../../../shared/model";
 
 const Bookmark = (props) => {
 
@@ -14,8 +16,30 @@ const Bookmark = (props) => {
     onEditBookmark,
     onDeleteBookmark,
     styleNumber,
-    onClickTags
   } = props;
+
+  const {
+    bookmarksArray,
+    tags,
+    sort,
+    setBookmarks,
+    setFilter,
+    setTagCloud,
+    setActiveTags,
+    setActiveGroup,
+  } = useContext(BookmarksContext);
+
+  const onClickBookmarkTags = (tagName) => {
+    const newFilter = ["", tagName];
+    const newBookmark = bookmarksArray.getBookmarks(newFilter, sort);
+    setFilter(newFilter);
+    setBookmarks(newBookmark);
+    setActiveTags(tagName);
+    setActiveGroup("");
+    setTagCloud(tags.getTags(newBookmark));
+    LocalStorage.setStore("activeTags", tagName);
+    LocalStorage.setStore("activeGroup", "");
+  }
 
   const fB = fillBookmark(bookmark);
 
@@ -42,7 +66,7 @@ const Bookmark = (props) => {
         fB.tags.map((elem, i) =>
           <li key={i} className={`${sass["tags-item"]}`}>
             <BaseButton
-              callBack={(e) => { onClickTags(elem.trim()); e.stopPropagation() }}
+              callBack={(e) => { onClickBookmarkTags(elem.trim()); e.stopPropagation() }}
               text={elem.trim()}
               styleName="smallStyle"
             />
