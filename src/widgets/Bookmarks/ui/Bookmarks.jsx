@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import sass from "./Bookmarks.module.sass";
 
+import { Store } from "../../../processes/model/context";
 import { Bookmark } from "../../../features";
 import { BookmarkModal, DialogModal } from "../../../entities";
 import { Notification } from "../../../shared/ui";
@@ -19,7 +20,7 @@ const Bookmarks = (props) => {
     setBookmarks,
     setTagCloud,
     setGroupLinks,
-  } = props.stateUpdateBookamrks;
+  } = useContext(Store);
 
   const {
     styleNumber,

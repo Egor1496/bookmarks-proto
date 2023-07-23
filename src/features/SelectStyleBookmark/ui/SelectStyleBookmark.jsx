@@ -5,12 +5,18 @@ import { HiOutlineViewGrid } from 'react-icons/hi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import { BaseButton } from "../../../shared/ui";
+import { LocalStorage } from "../../../shared/model";
 
 const SelectStyleBookmark = ({ setStyleNumber }) => {
   const [themeModal, setModalActive] = useState(false);
 
   const onClick = () => {
     setModalActive(!themeModal);
+  }
+
+  const onClickStyleBookmarks = (number) => {
+    LocalStorage.setStore("styleNumber", number);
+    setStyleNumber(number);
   }
 
   return (
@@ -31,7 +37,7 @@ const SelectStyleBookmark = ({ setStyleNumber }) => {
               </div>
               <ul className={sass.listBookmarks}>
 
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(1)}>
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(1)}>
                   <div className={sass.imgPreview}></div>
                   <div className={sass.title}></div>
                   <div className={sass.description}></div>
@@ -41,13 +47,13 @@ const SelectStyleBookmark = ({ setStyleNumber }) => {
                   </div>
                 </li>
 
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(2)}>
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(2)}>
                   <div className={sass.imgPreview}></div>
                   <div className={sass.title}></div>
                   <div className={sass.description}></div>
                 </li>
 
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(3)}>
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(3)}>
                   <div className={sass.imgPreview}></div>
                   <div className={sass.title}></div>
                   <div className={sass.tagsWrap}>
@@ -56,12 +62,12 @@ const SelectStyleBookmark = ({ setStyleNumber }) => {
                   </div>
                 </li>
 
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(4)}>
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(4)}>
                   <div className={sass.imgPreview}></div>
                   <div className={sass.title}></div>
                 </li>
 
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(5)}>
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(5)}>
                   <div className={sass.imgPreview}></div>
                   <div className={sass.tagsWrap}>
                     <div className={sass.tags}></div>
@@ -69,38 +75,12 @@ const SelectStyleBookmark = ({ setStyleNumber }) => {
                   </div>
                 </li>
 
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(6)}>
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(6)}>
                   <div className={sass.imgPreview}></div>
                 </li>
 
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(7)}>
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(7)}>
                   <div className={sass.title}></div>
-                  <div className={sass.description}></div>
-                  <div className={sass.tagsWrap}>
-                    <div className={sass.tags}></div>
-                    <div className={sass.tags}></div>
-                  </div>
-                </li>
-
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(8)}>
-                  <div className={sass.title}></div>
-                  <div className={sass.description}></div>
-                </li>
-
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(9)}>
-                  <div className={sass.title}></div>
-                  <div className={sass.tagsWrap}>
-                    <div className={sass.tags}></div>
-                    <div className={sass.tags}></div>
-                  </div>
-                </li>
-
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(10)}>
-                  <div className={sass.title}></div>
-                </li>
-
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(11)}>
-                  <div className={sass.imgPreview}></div>
                   <div className={sass.description}></div>
                   <div className={sass.tagsWrap}>
                     <div className={sass.tags}></div>
@@ -108,7 +88,25 @@ const SelectStyleBookmark = ({ setStyleNumber }) => {
                   </div>
                 </li>
 
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(12)}>
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(8)}>
+                  <div className={sass.title}></div>
+                  <div className={sass.description}></div>
+                </li>
+
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(9)}>
+                  <div className={sass.title}></div>
+                  <div className={sass.tagsWrap}>
+                    <div className={sass.tags}></div>
+                    <div className={sass.tags}></div>
+                  </div>
+                </li>
+
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(10)}>
+                  <div className={sass.title}></div>
+                </li>
+
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(11)}>
+                  <div className={sass.imgPreview}></div>
                   <div className={sass.description}></div>
                   <div className={sass.tagsWrap}>
                     <div className={sass.tags}></div>
@@ -116,20 +114,28 @@ const SelectStyleBookmark = ({ setStyleNumber }) => {
                   </div>
                 </li>
 
-                <li className={sass.bookmarks} onClick={() => setStyleNumber(13)}>
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(12)}>
+                  <div className={sass.description}></div>
+                  <div className={sass.tagsWrap}>
+                    <div className={sass.tags}></div>
+                    <div className={sass.tags}></div>
+                  </div>
+                </li>
+
+                <li className={sass.bookmarks} onClick={() => onClickStyleBookmarks(13)}>
                   <div className={sass.description}></div>
                 </li>
 
                 <li
                   className={`${sass["bookmarks"]} ${sass["bookmarks--transparent"]}`}
-                  onClick={() => setStyleNumber(14)}
+                  onClick={() => onClickStyleBookmarks(14)}
                 >
                   <div className={sass.imgPreview}></div>
                 </li>
 
                 <li
                   className={`${sass["bookmarks"]} ${sass["bookmarks--transparent"]}`}
-                  onClick={() => setStyleNumber(15)}
+                  onClick={() => onClickStyleBookmarks(15)}
                 >
                   <div className={sass.imgPreview}></div>
                   <div className={sass.tagsWrap}>
@@ -140,14 +146,14 @@ const SelectStyleBookmark = ({ setStyleNumber }) => {
 
                 <li
                   className={`${sass["bookmarks"]} ${sass["bookmarks--transparent-radio"]}`}
-                  onClick={() => setStyleNumber(16)}
+                  onClick={() => onClickStyleBookmarks(16)}
                 >
                   <div className={sass.imgPreview}></div>
                 </li>
 
                 <li
                   className={`${sass["bookmarks"]} ${sass["bookmarks--transparent-radio"]}`}
-                  onClick={() => setStyleNumber(17)}
+                  onClick={() => onClickStyleBookmarks(17)}
                 >
                   <div className={sass.imgPreview}></div>
                   <div className={`${sass["title"]} ${sass["title--abs"]}`}></div>
@@ -155,7 +161,7 @@ const SelectStyleBookmark = ({ setStyleNumber }) => {
 
                 <li
                   className={`${sass["bookmarks"]} ${sass["bookmarks--transparent-radio"]}`}
-                  onClick={() => setStyleNumber(18)}
+                  onClick={() => onClickStyleBookmarks(18)}
                 >
                   <div className={sass.imgPreview}></div>
                   <div className={`${sass["description"]} ${sass["description--abs"]}`}></div>

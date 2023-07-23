@@ -4,7 +4,7 @@ import sass from "./Sort.module.sass"
 import { TbArrowsTransferDown } from 'react-icons/tb';
 import { FaSortAlphaDown, FaSortAlphaUpAlt } from 'react-icons/fa';
 
-import { BookmarksContext } from "../../../processes/model/context";
+import { Store } from "../../../processes/model/context";
 
 import { BaseButton } from "../../../shared/ui";
 import { LocalStorage, JsonHelper } from "../../../shared/model";
@@ -31,7 +31,7 @@ const Sort = () => {
     filter,
     setBookmarks,
     setSort,
-  } = useContext(BookmarksContext);
+  } = useContext(Store);
 
   const getNewList = (prevSortList) => {
     const newList = [...prevSortList];

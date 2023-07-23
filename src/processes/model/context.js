@@ -1,7 +1,5 @@
 import { createContext } from "react";
 
-const FilterButtons = createContext();
+const Store = createContext();
 
-const BookmarksContext = createContext();
-
-export { FilterButtons, BookmarksContext };
+export { Store };

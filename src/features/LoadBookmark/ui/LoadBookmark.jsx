@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import sass from "./LoadBookmark.module.sass"
 
 
 import { AiFillFileText } from 'react-icons/ai';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 
+import { Store } from "../../../processes/model/context";
 import { BaseModal, BaseButton, Notification } from "../../../shared/ui";
 import { FillBookmark, JsonHelper, sendMesageNotification } from "../../../shared/model";
 
-const LoadBookmark = (props) => {
+const LoadBookmark = () => {
 
   const {
     bookmarksArray,
@@ -20,7 +21,7 @@ const LoadBookmark = (props) => {
     setBookmarks,
     setTagCloud,
     setGroupLinks,
-  } = props.stateUpdateBookamrks;
+  } = useContext(Store);
 
   const [modalActive, modalSetActive] = useState(false);
 

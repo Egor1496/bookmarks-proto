@@ -6,7 +6,7 @@ import { FastLinks } from "../../../features";
 import { Search, BaseSettings } from "../../../entities";
 import { HeaderLogo } from "../../../shared/ui";
 
-const MainHeader = ({ state }) => {
+const MainHeader = () => {
 
   return (
     <div className={sass["mainWrap"]}>
@@ -15,7 +15,7 @@ const MainHeader = ({ state }) => {
         <div className={sass["wrap"]}>
           <HeaderLogo text="BookMarks" />
           <FastLinks />
-          <BaseSettings state={state} />
+          <BaseSettings />
         </div>
       </div>
     </div>

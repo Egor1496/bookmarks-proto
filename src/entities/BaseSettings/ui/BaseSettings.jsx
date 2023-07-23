@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import css from "./BaseSettings.module.sass";
 import { IoMdSettings } from "react-icons/io";
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
+import { Store } from "../../../processes/model/context";
 import { ThemeParams } from "../../../features";
 import { ThemeSelect } from "../../../entities";
 import { LocalStorage } from "../../../shared/model";
 import { BaseButton, BaseToggleRadio } from "../../../shared/ui";
 
-const BaseSettings = (props) => {
+const BaseSettings = () => {
   const {
     enableGroups: enableGroups,
     setEnableGroups: setEnableGroups,
@@ -17,7 +18,7 @@ const BaseSettings = (props) => {
     setEnableTags: setEnableTags,
     enableBg: enableBg,
     setEnableBg: setEnableBg,
-  } = props.state;
+  } = useContext(Store);
 
   const storageTheme = LocalStorage.getStore("themeNumber", 1);
 

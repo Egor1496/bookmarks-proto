@@ -1,10 +1,10 @@
 import React from "react";
-import css from "./Br.module.sass";
+import sass from "./Br.module.sass";
 
 const Br = ({ style }) => {
 	return (
-		<div className={css.main} >
-			<div className={`${css.border}`} style={style} />
+		<div className={sass.main} >
+			<div className={`${sass.border}`} style={style} />
 		</div >
 	);
 }

@@ -4,7 +4,7 @@ import sass from "./Bookmark.module.sass"
 import { RxPencil2 } from 'react-icons/rx';
 import { AiOutlineDelete } from 'react-icons/ai';
 
-import { BookmarksContext } from "../../../processes/model/context";
+import { Store } from "../../../processes/model/context";
 import { fillBookmark } from "../../../features"
 import { BaseButton } from "../../../shared/ui"
 import { LocalStorage } from "../../../shared/model";
@@ -27,7 +27,7 @@ const Bookmark = (props) => {
     setTagCloud,
     setActiveTags,
     setActiveGroup,
-  } = useContext(BookmarksContext);
+  } = useContext(Store);
 
   const onClickBookmarkTags = (tagName) => {
     const newFilter = ["", tagName];

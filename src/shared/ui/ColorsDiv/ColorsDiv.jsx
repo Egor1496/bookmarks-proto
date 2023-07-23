@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import css from "./ColorsDiv.module.sass";
+import sass from "./ColorsDiv.module.sass";
 
 function getRandomInt(max) {
 	return Math.floor(Math.random() * max);
@@ -17,7 +17,7 @@ const ColorsDiv = () => {
 				return (
 					<div
 						key={i}
-						className={css.div}
+						className={sass.div}
 						style={{ backgroundColor: `rgb(${r},${g},${b})` }}
 						onClick={() => setTimer(timer + 1)}
 					></div>

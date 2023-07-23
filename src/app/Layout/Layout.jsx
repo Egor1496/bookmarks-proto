@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 import sass from "./Layout.module.sass";
 
-import { FilterButtons, BookmarksContext } from "../../processes/model/context";
+import { Store } from "../../processes/model/context";
 
 import { MainMenu, MainHeader, MainAside, MainFooter, BookmarksArray, DEFAULT_BOOKMARKS_TMP } from "../../widgets";
 import { Groups } from "../../features";
@@ -78,41 +78,42 @@ const Layout = () => {
 	return (
 		<div className={sass.mainWrap}>
 			<nav className={classNamesNav}>
-				<FilterButtons.Provider value={{
+				<Store.Provider value={{
 					...stateBookmarks,
 					...stateFilterSort,
 					...stateTagsGroups
 				}}>
 					<MainMenu />
-				</FilterButtons.Provider>
+				</Store.Provider>
 			</nav>
 			<div className={sass["col-2"]}>
 				<header className={sass.header} >
-					<BookmarksContext.Provider value={{
+					<Store.Provider value={{
 						...stateBookmarks,
-						...stateFilterSort
+						...stateFilterSort,
+						...stateBaseSettings
 					}}>
-						<MainHeader state={stateBaseSettings} />
-					</BookmarksContext.Provider>
+						<MainHeader />
+					</Store.Provider>
 				</header>
 				<main className={`${sass.main}`}>
 					<article className={classNameArticle} >
-						<BookmarksContext.Provider value={{
+						<Store.Provider value={{
 							...stateBookmarks,
 							...stateFilterSort,
 							...stateTagsGroups
 						}}>
 							<Outlet />
-						</BookmarksContext.Provider>
+						</Store.Provider>
 					</article>
 					<aside className={classNamesAside} >
-						<FilterButtons.Provider value={{
+						<Store.Provider value={{
 							...stateBookmarks,
 							...stateFilterSort,
 							...stateTagsGroups
 						}}>
 							<MainAside />
-						</FilterButtons.Provider>
+						</Store.Provider>
 					</aside>
 				</main>
 				<footer className={sass.footer}>

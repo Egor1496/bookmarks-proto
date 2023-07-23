@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import sass from "./AddBookmark.module.sass"
 
 import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 
+import { Store } from "../../../processes/model/context";
 import { BookmarkModal } from "../../../entities";
 import { BaseButton, Notification } from "../../../shared/ui";
 import { sendMesageNotification } from "../../../shared/model";
 
-const AddBookmark = (props) => {
+const AddBookmark = () => {
 
   const {
     bookmarksArray,
@@ -19,7 +20,7 @@ const AddBookmark = (props) => {
     setBookmarks,
     setTagCloud,
     setGroupLinks,
-  } = props.stateUpdateBookamrks;
+  } = useContext(Store);
 
   const [modalActive, modalSetActive] = useState(false);
 
