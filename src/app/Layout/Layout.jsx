@@ -36,6 +36,32 @@ const Layout = () => {
 	const [enableTags, setEnableTags] = useState(Boolean(Number(LocalStorage.getStore("enableTags") || 1)));
 	const [enableBg, setEnableBg] = useState(Boolean(Number(LocalStorage.getStore("enableBg") || 1)));
 
+	const stateBookmarks = {
+		bookmarksArray,
+		bookmarks,
+		setBookmarks,
+	};
+
+	const stateFilterSort = {
+		filter,
+		sort,
+		setFilter,
+		setSort,
+	};
+
+	const stateTagsGroups = {
+		tags,
+		groups,
+		tagCloud,
+		groupLinks,
+		activeTags,
+		activeGroup,
+		setTagCloud,
+		setGroupLinks,
+		setActiveTags,
+		setActiveGroup,
+	}
+
 	const stateBaseSettings = {
 		enableGroups,
 		enableTags,
@@ -45,55 +71,6 @@ const Layout = () => {
 		setEnableBg,
 	};
 
-	const contextMainMenu = {
-		bookmarksArray,
-		tags,
-		groupLinks,
-		sort,
-		setBookmarks,
-		setFilter,
-		setTagCloud,
-		setActiveTags,
-		setActiveGroup,
-		activeGroup
-	};
-
-	const contextMainHeader = {
-		bookmarksArray,
-		filter,
-		sort,
-		setBookmarks
-	};
-
-	const contextMain = {
-		bookmarksArray,
-		bookmarks,
-		tags,
-		groups,
-		filter,
-		sort,
-		setFilter,
-		setSort,
-		setBookmarks,
-		setTagCloud,
-		setActiveTags,
-		setGroupLinks,
-		setActiveGroup,
-	};
-
-	const contextAside = {
-		tags,
-		tagCloud,
-		activeTags,
-		filter,
-		sort,
-		bookmarksArray,
-		setBookmarks,
-		setFilter,
-		setTagCloud,
-		setActiveTags,
-	};
-
 	const classNamesNav = `${sass.nav} ${!enableGroups && sass.hide}`;
 	const classNameArticle = `${sass.article} ${!enableBg && sass.transparent}`;
 	const classNamesAside = `${sass.aside} ${!enableTags && sass.hide}`;
@@ -101,25 +78,39 @@ const Layout = () => {
 	return (
 		<div className={sass.mainWrap}>
 			<nav className={classNamesNav}>
-				<FilterButtons.Provider value={contextMainMenu}>
+				<FilterButtons.Provider value={{
+					...stateBookmarks,
+					...stateFilterSort,
+					...stateTagsGroups
+				}}>
 					<MainMenu />
 				</FilterButtons.Provider>
 			</nav>
 			<div className={sass["col-2"]}>
 				<header className={sass.header} >
-					<BookmarksContext.Provider value={contextMainHeader}>
+					<BookmarksContext.Provider value={{
+						...stateBookmarks,
+						...stateFilterSort
+					}}>
 						<MainHeader state={stateBaseSettings} />
 					</BookmarksContext.Provider>
 				</header>
 				<main className={`${sass.main}`}>
 					<article className={classNameArticle} >
-						<BookmarksContext.Provider
-							value={contextMain}>
+						<BookmarksContext.Provider value={{
+							...stateBookmarks,
+							...stateFilterSort,
+							...stateTagsGroups
+						}}>
 							<Outlet />
 						</BookmarksContext.Provider>
 					</article>
 					<aside className={classNamesAside} >
-						<FilterButtons.Provider value={contextAside}>
+						<FilterButtons.Provider value={{
+							...stateBookmarks,
+							...stateFilterSort,
+							...stateTagsGroups
+						}}>
 							<MainAside />
 						</FilterButtons.Provider>
 					</aside>
@@ -133,8 +124,6 @@ const Layout = () => {
 }
 
 export { Layout };
-
-// упростить { x: x } -> { x }
 
 // onerror img
 

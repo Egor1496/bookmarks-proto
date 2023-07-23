@@ -15,6 +15,7 @@ export * from "./LogoMyNotes/LogoMyNotes.jsx";
 export * from "./HeaderLogo/HeaderLogo.jsx";
 export * from "./Title/Title.jsx";
 export * from "./MyLabel/MyLabel.jsx";
+export * from "./ColorsDiv/ColorsDiv.jsx";
 export * from "./Grid/Grid.jsx";
 export * from "./GridСell/GridСell.jsx";
 export * from "./BaseModal/BaseModal.jsx";

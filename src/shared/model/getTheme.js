@@ -1,3 +1,7 @@
+function getRandomInt(max) {
+	return Math.floor(Math.random() * max);
+}
+
 const BASE_PARAMS = [
 	{
 		color1: "#c2c2c2",
@@ -399,6 +403,39 @@ const BASE_PARAMS = [
 		svgBookamrkHover: "#666666",
 		svgControl: "#D1E8E2",
 		svgControlHover: "#116466",
+	},
+	{
+		color1: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		color2: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		color3: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		color4: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		color5: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		сolorH: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		сolorP: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		сolorA1: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		сolorA2: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		colorLogo: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		colorTitleBookamrk: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		colorDescriptionBookamrk: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		colorControl: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		colorControlHover: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+
+		bgBody: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		bgHeader: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		bgMenu: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		bgMain: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		bgAside: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		bgPreviewBookamrk: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		bgTitleBookamrk: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		bgDescriptionBookamrk: "#D1E8E2",
+		bgControl: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		bgControlHover: "#D1E8E2",
+
+		svgLogo: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		svgBookamrk: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		svgBookamrkHover: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		svgControl: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
+		svgControlHover: `rgb(${getRandomInt(255)},${getRandomInt(255)},${getRandomInt(255)})`,
 	},
 ];
 
