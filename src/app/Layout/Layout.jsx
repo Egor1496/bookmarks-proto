@@ -34,7 +34,7 @@ const Layout = () => {
 	const [bookmarks, setBookmarks] = useState(bookmarksArray.getBookmarks(filter, sort));
 
 	const allTags = tags.getTags(bookmarks);
-	const allGroups = groups.getGroups(bookmarks);
+	const allGroups = groups.getGroups(bookmarksArray.getBookmarks());
 
 	const [groupLinks, setGroupLinks] = useState(allGroups);
 	const [tagCloud, setTagCloud] = useState(allTags);
@@ -134,7 +134,6 @@ const Layout = () => {
 export { Layout };
 
 // onerror img
-// при добавлении карточек не обновляется облако тэгов и группы
 // баг сортировки при изменении карточки
 // перенести из лаяута в процесс закладки и облоко тэгов групп
 // всплывающие подсказки к элементам

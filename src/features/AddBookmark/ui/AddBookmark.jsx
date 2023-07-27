@@ -42,7 +42,7 @@ const AddBookmark = () => {
           const newBookmarksList = bookmarksArray.getBookmarks(filter, sort);
           setBookmarks(bookmarksArray.getBookmarks(filter, sort));
           tags.updateState(setTagCloud, tags.getTags(newBookmarksList));
-          groups.updateState(setGroupLinks, groups.getGroups(newBookmarksList));
+          groups.updateState(setGroupLinks, groups.getGroups(bookmarksArray.getBookmarks()));
           sendMesageNotification({ text: "Добавлена ссылка!" }, setNotification);
         }}
         modalActive={modalActive}

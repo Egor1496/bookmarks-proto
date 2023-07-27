@@ -44,17 +44,16 @@ const Bookmarks = ({ styleNumber }) => {
     const newBookmarksList = bookmarksArray.getBookmarks(filter, sort);
     setBookmarks(newBookmarksList);
     tags.updateState(setTagCloud, tags.getTags(newBookmarksList));
-    groups.updateState(setGroupLinks, groups.getGroups(newBookmarksList));
+    groups.updateState(setGroupLinks, groups.getGroups(bookmarksArray.getBookmarks()));
     sendMesageNotification({ text: "Ссылка редактирована!" }, setNotification);
   }
 
   const handlerAcceptDelete = () => {
-
     bookmarksArray.deleteBookmark(form.id);
     const newBookmarksList = bookmarksArray.getBookmarks(filter, sort);
     setBookmarks(newBookmarksList);
     tags.updateState(setTagCloud, tags.getTags(newBookmarksList));
-    groups.updateState(setGroupLinks, groups.getGroups(newBookmarksList));
+    groups.updateState(setGroupLinks, groups.getGroups(bookmarksArray.getBookmarks()));
     sendMesageNotification({ text: "Ссылка удалена!", alarm: true }, setNotification);
   }
 

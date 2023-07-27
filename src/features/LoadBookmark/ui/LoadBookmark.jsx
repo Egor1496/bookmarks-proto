@@ -35,7 +35,7 @@ const LoadBookmark = () => {
     const newBookmarksList = bookmarksArray.getBookmarks(filter, sort);
     setBookmarks(newBookmarksList);
     tags.updateState(setTagCloud, tags.getTags(newBookmarksList));
-    groups.updateState(setGroupLinks, groups.getGroups(newBookmarksList));
+    groups.updateState(setGroupLinks, groups.getGroups(bookmarksArray.getBookmarks()));
     sendMesageNotification(
       { text: "Загруженно ссылок - " + obgBookmarks.length + "шт." },
       setNotification
