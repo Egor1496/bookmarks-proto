@@ -12,7 +12,6 @@ const AddBookmark = () => {
 
   const {
     bookmarksArray,
-    bookmarks,
     tags,
     groups,
     filter,
@@ -34,22 +33,16 @@ const AddBookmark = () => {
 
   const [notification, setNotification] = useState();
 
-  const updateFilter = () => {
-    setTagCloud(tags.getTags(bookmarks));
-    setGroupLinks(groups.getGroups());
-  }
-
-  const onAddBookmarks = () => {
-    setBookmarks(bookmarksArray.getBookmarks(filter, sort));
-  }
-
   return (
     <div className={sass.main}>
       <Notification state={notification} setState={setNotification} />
       <BookmarkModal
         onАccept={(newBookmark) => {
-          bookmarksArray.uploadBookmarks({ ...newBookmark }, onAddBookmarks);
-          updateFilter();
+          bookmarksArray.uploadBookmarks({ ...newBookmark });
+          const newBookmarksList = bookmarksArray.getBookmarks(filter, sort);
+          setBookmarks(bookmarksArray.getBookmarks(filter, sort));
+          tags.updateState(setTagCloud, tags.getTags(newBookmarksList));
+          groups.updateState(setGroupLinks, groups.getGroups(newBookmarksList));
           sendMesageNotification({ text: "Добавлена ссылка!" }, setNotification);
         }}
         modalActive={modalActive}

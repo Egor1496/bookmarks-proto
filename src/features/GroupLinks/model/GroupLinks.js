@@ -1,26 +1,22 @@
-import { JsonHelper, LocalStorage } from "../../../shared/model";
-
 class Groups {
-	constructor() {
-		this.bookmarks = JsonHelper.getObject(LocalStorage.getStore("bookmarks", "[]"));
-	}
-
 	groups = new Set();
 
-	fillGroups() {
+	getGroups(bookmarks) {
 		this.groups.clear();
-		this.bookmarks.forEach((bookmark) => {
+
+		bookmarks.forEach((bookmark) => {
 			bookmark.group.split(",").forEach((group) => {
 				if (group.trim()) this.groups.add(group.trim());
 			});
 		});
-	}
 
-	getGroups() {
-		this.fillGroups();
 		return [...this.groups].sort((a, b) => {
 			return a.localeCompare(b);
 		});
+	}
+
+	updateState(setState, groups) {
+		setState(groups);
 	}
 }
 

@@ -3,12 +3,13 @@ import React, { useContext, useState } from "react";
 import sass from "./Bookmarks.module.sass";
 
 import { Store } from "../../../processes/model/context";
+
 import { Bookmark } from "../../../features";
 import { BookmarkModal, DialogModal } from "../../../entities";
 import { Notification } from "../../../shared/ui";
 import { sendMesageNotification } from "../../../shared/model";
 
-const Bookmarks = (props) => {
+const Bookmarks = ({ styleNumber }) => {
 
   const {
     bookmarksArray,
@@ -21,10 +22,6 @@ const Bookmarks = (props) => {
     setTagCloud,
     setGroupLinks,
   } = useContext(Store);
-
-  const {
-    styleNumber,
-  } = props;
 
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [editModalActive, editModalSetActive] = useState(false);
@@ -42,24 +39,22 @@ const Bookmarks = (props) => {
     editModalSetActive(true);
   }
 
-  const updateFilter = () => {
-    setTagCloud(tags.getTags(bookmarks));
-    setGroupLinks(groups.getGroups());
-  }
-
-  const onAddBookmarks = () => {
-    setBookmarks(bookmarksArray.getBookmarks(filter, sort));
-  }
-
   const handlerAcceptEdit = (newBookmark) => {
-    bookmarksArray.editBookmark(form.id, newBookmark, onAddBookmarks);
-    // updateFilter(); !!!!
+    bookmarksArray.editBookmark(form.id, newBookmark);
+    const newBookmarksList = bookmarksArray.getBookmarks(filter, sort);
+    setBookmarks(newBookmarksList);
+    tags.updateState(setTagCloud, tags.getTags(newBookmarksList));
+    groups.updateState(setGroupLinks, groups.getGroups(newBookmarksList));
     sendMesageNotification({ text: "Ссылка редактирована!" }, setNotification);
   }
 
   const handlerAcceptDelete = () => {
-    bookmarksArray.deleteBookmark(form.id, onAddBookmarks);
-    updateFilter();
+
+    bookmarksArray.deleteBookmark(form.id);
+    const newBookmarksList = bookmarksArray.getBookmarks(filter, sort);
+    setBookmarks(newBookmarksList);
+    tags.updateState(setTagCloud, tags.getTags(newBookmarksList));
+    groups.updateState(setGroupLinks, groups.getGroups(newBookmarksList));
     sendMesageNotification({ text: "Ссылка удалена!", alarm: true }, setNotification);
   }
 

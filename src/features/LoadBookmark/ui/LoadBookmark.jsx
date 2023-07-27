@@ -7,13 +7,12 @@ import { FaCloudUploadAlt } from 'react-icons/fa';
 
 import { Store } from "../../../processes/model/context";
 import { BaseModal, BaseButton, Notification } from "../../../shared/ui";
-import { FillBookmark, JsonHelper, sendMesageNotification } from "../../../shared/model";
+import { FillBookmark, JsonHelper, sendMesageNotification, LoadFile } from "../../../shared/model";
 
 const LoadBookmark = () => {
 
   const {
     bookmarksArray,
-    bookmarks,
     tags,
     groups,
     filter,
@@ -27,61 +26,20 @@ const LoadBookmark = () => {
 
   const [notification, setNotification] = useState();
 
-  const updateFilter = () => {
-    setTagCloud(tags.getTags(bookmarks));
-    setGroupLinks(groups.getGroups());
-  }
-
-  const onAddBookmarks = () => {
-    setBookmarks(bookmarksArray.getBookmarks(filter, sort));
-  }
-
-  const loadObgectBookmarks = (bookmarks) => {
-    const obgBookmarks = JsonHelper.getObject(bookmarks).bookmarks;
+  const loadObgect = (bookmarksList) => {
+    const obgBookmarks = JsonHelper.getObject(bookmarksList).bookmarks;
     obgBookmarks.forEach(el => {
       el.title = FillBookmark.getTitle(el.title, el.link);
-      bookmarksArray.uploadBookmarks({ ...el }, onAddBookmarks);
+      bookmarksArray.uploadBookmarks({ ...el });
     });
-    updateFilter();
+    const newBookmarksList = bookmarksArray.getBookmarks(filter, sort);
+    setBookmarks(newBookmarksList);
+    tags.updateState(setTagCloud, tags.getTags(newBookmarksList));
+    groups.updateState(setGroupLinks, groups.getGroups(newBookmarksList));
     sendMesageNotification(
       { text: "Загруженно ссылок - " + obgBookmarks.length + "шт." },
       setNotification
     );
-  }
-
-  const dropHandler = (e) => {
-    e.preventDefault();
-
-    if (e.dataTransfer.items) {
-      [...e.dataTransfer.items].forEach((item) => {
-        if (item.kind === "file") {
-          const file = item.getAsFile();
-          const reader = new FileReader();
-          reader.readAsText(file);
-          reader.onload = () => {
-            loadObgectBookmarks(reader.result);
-          };
-          reader.onerror = () => {
-            console.log(reader.error);
-          };
-        }
-      });
-    }
-  }
-
-  const readFile = (input) => {
-    const file = input.files[0];
-    const reader = new FileReader();
-
-    reader.readAsText(file);
-
-    reader.onload = () => {
-      loadObgectBookmarks(reader.result);
-    };
-
-    reader.onerror = () => {
-      console.log(reader.error);
-    };
   }
 
   return (
@@ -96,12 +54,12 @@ const LoadBookmark = () => {
           <label>
             <div
               className={sass.dropZone}
-              onDrop={(e) => { dropHandler(e); modalSetActive(false); }}
+              onDrop={(e) => { LoadFile.onDrop(e, loadObgect); modalSetActive(false); }}
               onDragOver={(e) => e.preventDefault()}>
               <input
                 className={sass.inputFile}
                 type="file"
-                onChange={(e) => { readFile(e.target); modalSetActive(false); }}
+                onChange={(e) => { LoadFile.read(e.target, loadObgect); modalSetActive(false); }}
               />
               <div className={sass.iconUplad}><FaCloudUploadAlt /></div>
               <span className={sass.textUpload}><span>Выберите фаил</span>   или перетащите его сюда</span>

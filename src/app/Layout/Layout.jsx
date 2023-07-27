@@ -5,7 +5,14 @@ import sass from "./Layout.module.sass";
 
 import { Store } from "../../processes/model/context";
 
-import { MainMenu, MainHeader, MainAside, MainFooter, BookmarksArray, DEFAULT_BOOKMARKS_TMP } from "../../widgets";
+import {
+	MainMenu,
+	MainHeader,
+	MainAside,
+	MainFooter,
+	BookmarksArray,
+	DEFAULT_BOOKMARKS_TMP
+} from "../../widgets";
 import { Groups } from "../../features";
 import { Tags } from "../../entities";
 import { LocalStorage, JsonHelper } from "../../shared/model";
@@ -27,7 +34,7 @@ const Layout = () => {
 	const [bookmarks, setBookmarks] = useState(bookmarksArray.getBookmarks(filter, sort));
 
 	const allTags = tags.getTags(bookmarks);
-	const allGroups = groups.getGroups();
+	const allGroups = groups.getGroups(bookmarks);
 
 	const [groupLinks, setGroupLinks] = useState(allGroups);
 	const [tagCloud, setTagCloud] = useState(allTags);
@@ -127,18 +134,8 @@ const Layout = () => {
 export { Layout };
 
 // onerror img
-
 // при добавлении карточек не обновляется облако тэгов и группы
-
 // баг сортировки при изменении карточки
-
 // перенести из лаяута в процесс закладки и облоко тэгов групп
-// облачное хранилище закладок
-
-/*
-	всплывающие подсказки к элементам
-	варнинги на инпут
-	пагинация два вида
-	мини уведомления на инпут, оповищение об обязательых полях
-	красные звездочки на лейбл инпут, оповищение об обязательых полях
-*/
+// всплывающие подсказки к элементам
+// мини уведомления на инпут и красные звездочки, оповещение об обязательых полях

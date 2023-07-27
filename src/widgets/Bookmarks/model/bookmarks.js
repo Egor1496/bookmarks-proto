@@ -46,30 +46,28 @@ class BookmarksArray {
 		if (this.bookmarks.length === 0) this.bookmarks = this.bookmarksTmp;
 	}
 
-	deleteBookmark(id, setBookmarks) {
+	deleteBookmark(id) {
 		this.bookmarks.forEach((el, i) => {
 			if (el.id === id) {
 				this.bookmarks.splice(i, 1);
 				LocalStorage.setStore("bookmarks", JsonHelper.getJSON([...this.bookmarks]));
-				setBookmarks(this.bookmarks);
 			}
 		});
 	}
 
-	editBookmark(id, newBookmark, setBookmarks) {
+	editBookmark(id, newBookmark) {
 		this.bookmarks.forEach((el, i) => {
 			if (el.id === id) {
 				this.bookmarks.splice(i, 1);
 				LocalStorage.setStore("bookmarks", JsonHelper.getJSON([...this.bookmarks]));
-				this.uploadBookmarks(newBookmark, setBookmarks);
+				this.uploadBookmarks(newBookmark);
 			}
 		});
 	}
 
-	uploadBookmarks(bookmark, setState) {
+	uploadBookmarks(bookmark) {
 		this.bookmarks = [...this.bookmarks, { ...bookmark, id: nanoid() }];
 		LocalStorage.setStore("bookmarks", JsonHelper.getJSON(this.bookmarks));
-		setState(this.getBookmarks());
 	}
 
 	getBookmarks(filterName, sortSelected, searchText) {
