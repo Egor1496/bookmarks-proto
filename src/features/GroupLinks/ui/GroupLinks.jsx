@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import sass from "./GroupLinks.module.sass";
 import { AiFillFolderOpen } from 'react-icons/ai';
 
-import { Store } from "../../../processes/model/context"
+import { storage } from "../../../processes"
 
 import { BaseButton } from "../../../shared/ui";
 import { LocalStorage } from "../../../shared/model";
@@ -21,7 +21,7 @@ const GroupLinks = () => {
     setActiveTags,
     setActiveGroup,
     activeGroup
-  } = useContext(Store);
+  } = useContext(storage);
 
   const onClickGroup = (groupName, isPressed) => {
     const newText = isPressed ? "" : groupName;

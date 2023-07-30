@@ -1,7 +1,5 @@
-// ui
 export * from "./ColorsDemo/ui/ColorsDemo.jsx";
 export * from "./Custom/ui/Custom.jsx";
-export * from "./TypographyDemo/ui/TypographyDemo.jsx";
 export * from "./ThemeSelect/ui/ThemeSelect.jsx";
 export * from "./Search/ui/Search.jsx";
 export * from "./Search/model/Search.js";
@@ -14,3 +12,4 @@ export * from "./BookmarkModal/ui/BookmarkModal.jsx";
 export * from "./DialogModal/ui/DialogModal.jsx";
 export * from "./TagСloud/ui/TagСloud.jsx";
 export * from "./TagСloud/model/TagСloud.js";
+export * from "./TypographyDemo/ui/TypographyDemo.jsx";

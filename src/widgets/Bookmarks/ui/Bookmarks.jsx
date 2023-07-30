@@ -2,12 +2,11 @@ import React, { useContext, useState } from "react";
 
 import sass from "./Bookmarks.module.sass";
 
-import { Store } from "../../../processes/model/context";
-
 import { Bookmark } from "../../../features";
 import { BookmarkModal, DialogModal } from "../../../entities";
 import { Notification } from "../../../shared/ui";
 import { sendMesageNotification } from "../../../shared/model";
+import { storage } from "../../../processes";
 
 const Bookmarks = ({ styleNumber }) => {
 
@@ -21,7 +20,7 @@ const Bookmarks = ({ styleNumber }) => {
     setBookmarks,
     setTagCloud,
     setGroupLinks,
-  } = useContext(Store);
+  } = useContext(storage);
 
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [editModalActive, editModalSetActive] = useState(false);

@@ -4,7 +4,7 @@ import sass from "./TagСloud.module.sass"
 import { IoMdPricetag } from "react-icons/io";
 import { BiReset } from "react-icons/bi";
 
-import { Store } from "../../../processes/model/context"
+import { storage } from "../../../processes"
 
 import { BaseButton } from "../../../shared/ui";
 import { LocalStorage } from "../../../shared/model";
@@ -22,7 +22,7 @@ const TagСloud = () => {
     setFilter,
     setTagCloud,
     setActiveTags,
-  } = useContext(Store);
+  } = useContext(storage);
 
   const onClickTags = (tagName) => {
     const newFilter = [filter[0], tagName];

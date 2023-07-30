@@ -1,9 +1,9 @@
 import React from "react";
-import css from "./TypographyDemo.module.sass";
+import sass from "./TypographyDemo.module.sass";
 
 const TypographyDemo = () => {
   return (
-    <div className={css.main}>
+    <div className={sass.main}>
       <h1>This is heading 1 / H1</h1>
       <h2>This is heading 2 / H2</h2>
       <h3>This is heading 3 / H3</h3>

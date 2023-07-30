@@ -4,7 +4,7 @@ import css from "./BaseSettings.module.sass";
 import { IoMdSettings } from "react-icons/io";
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
-import { Store } from "../../../processes/model/context";
+import { storage } from "../../../processes";
 import { ThemeParams } from "../../../features";
 import { ThemeSelect } from "../../../entities";
 import { LocalStorage } from "../../../shared/model";
@@ -18,7 +18,7 @@ const BaseSettings = () => {
     setEnableTags: setEnableTags,
     enableBg: enableBg,
     setEnableBg: setEnableBg,
-  } = useContext(Store);
+  } = useContext(storage);
 
   const storageTheme = LocalStorage.getStore("themeNumber", 1);
 

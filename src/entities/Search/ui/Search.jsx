@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import sass from "./Search.module.sass"
 import { AiOutlineSearch } from "react-icons/ai"
 
-import { Store } from "../../../processes/model/context";
+import { storage } from "../../../processes";
 
 import { BaseInput } from "../../../shared/ui";
 import { debounce } from "../../../shared/model";
@@ -17,7 +17,7 @@ const Search = () => {
     setBookmarks,
     filter,
     sort
-  } = useContext(Store);
+  } = useContext(storage);
 
   const onChangeInput = (searchState) => setBookmarks(bookmarksArray.getBookmarks(filter, sort, searchState));
 

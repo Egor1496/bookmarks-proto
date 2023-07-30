@@ -6,9 +6,8 @@ import "./styles/App.sass";
 import {
 	Error, Main,
 	UIKit, Demo,
+	Layout
 } from "../pages";
-
-import { Layout } from "./Layout/Layout";
 
 const App = () => {
 	return (
