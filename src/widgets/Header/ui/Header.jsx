@@ -1,12 +1,12 @@
 import React from "react";
 
-import sass from "./MainHeader.module.sass";
+import sass from "./Header.module.sass";
 
 import { FastLinks } from "../../../features";
 import { Search, BaseSettings } from "../../../entities";
 import { HeaderLogo } from "../../../shared/ui";
 
-const MainHeader = () => {
+const Header = () => {
 
   return (
     <div className={sass["mainWrap"]}>
@@ -22,4 +22,4 @@ const MainHeader = () => {
   );
 }
 
-export { MainHeader };
+export { Header };

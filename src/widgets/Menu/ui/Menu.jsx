@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import sass from "./MainMenu.module.sass";
+import sass from "./Menu.module.sass";
 
 import { GroupLinks } from "../../../features";
 import { Br, LogoMyNotes, LogoBookMarks } from "../../../shared/ui"; //BaseDropMenu
 
-const MainMenu = ({ groups }) => {
+const Menu = () => {
   return (
-    <div className={sass["mainMenuWrap"]}>
+    <div className={sass["MenuWrap"]}>
       <Link to="/bookmarks-proto" >
         <LogoBookMarks />
       </Link>
@@ -23,4 +23,4 @@ const MainMenu = ({ groups }) => {
   );
 }
 
-export { MainMenu };
+export { Menu };

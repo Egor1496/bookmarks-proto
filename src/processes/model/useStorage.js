@@ -65,13 +65,12 @@ const useStorage = () => {
 		setEnableBg,
 	};
 
-	return { stateBookmarks, stateFilterSort, stateTagsGroups, stateBaseSettings };
+	return {
+		stateBookmarks,
+		stateFilterSort,
+		stateTagsGroups,
+		stateBaseSettings,
+	};
 };
 
 export { useStorage };
-
-// onerror img
-// баг сортировки при изменении карточки
-// перенести из лаяута в процесс закладки и облоко тэгов групп
-// всплывающие подсказки к элементам
-// мини уведомления на инпут и красные звездочки, оповещение об обязательых полях
