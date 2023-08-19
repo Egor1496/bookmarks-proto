@@ -44,11 +44,17 @@ const Bookmark = (props) => {
   const fB = fillBookmark(bookmark);
 
   const baseURL = "https://besticon-demo.herokuapp.com/icon?url=",
-    postfixUrl = "&size=80";
+    postfixUrl = "&size=80..120..200";
 
   const elemImg = fB.imgLink && (
     <div className={`${sass["preview"]}`}>
-      <img src={baseURL + fB.imgLink + postfixUrl} alt="" />
+      <img
+        src={baseURL + fB.imgLink + postfixUrl}
+        alt=""
+        onError={(e) => {
+          console.log(e.target.src);
+        }}
+      />
     </div>
   );
 

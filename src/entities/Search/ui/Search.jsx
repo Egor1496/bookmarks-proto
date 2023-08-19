@@ -6,7 +6,7 @@ import { AiOutlineSearch } from "react-icons/ai"
 import { storage } from "../../../processes";
 
 import { BaseInput } from "../../../shared/ui";
-import { debounce } from "../../../shared/model";
+import { useDebouncedFunction } from "../../../shared/model";
 
 const Search = () => {
 
@@ -21,11 +21,11 @@ const Search = () => {
 
   const onChangeInput = (searchState) => setBookmarks(bookmarksArray.getBookmarks(filter, sort, searchState));
 
+  const deferredSearch = useDebouncedFunction((state) => onChangeInput(state), 500);
+
   const handlerChaneInput = (state) => {
-    debounce(() => {
-      setSearchState(state);
-      onChangeInput(state);
-    }, 500)();
+    setSearchState(state);
+    deferredSearch(state);
   }
 
   return (
@@ -33,8 +33,7 @@ const Search = () => {
       <BaseInput
         placeholder="Поиск"
         state={searchState}
-        setState={setSearchState}
-        onChangeInput={handlerChaneInput}
+        setState={handlerChaneInput} //onChangeInput(searchText)
       >
         <AiOutlineSearch />
       </BaseInput>

@@ -9,11 +9,9 @@ const BaseInput = (props) => {
 		readonly,
 		placeholder = "",
 		children,
-		onChangeInput = () => { }
 	} = props;
 
 	const handlerChangeInput = (e) => {
-		onChangeInput(e.target.value);
 		setState(e.target.value);
 	}
 
