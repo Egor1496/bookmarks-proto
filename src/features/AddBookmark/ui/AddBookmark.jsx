@@ -3,7 +3,7 @@ import sass from "./AddBookmark.module.sass"
 
 import { AiOutlineAppstoreAdd } from 'react-icons/ai';
 
-import { storage } from "../../../processes";
+import { store } from "../../../processes";
 import { BookmarkModal } from "../../../entities";
 import { BaseButton, Notification } from "../../../shared/ui";
 import { sendMesageNotification } from "../../../shared/model";
@@ -19,7 +19,7 @@ const AddBookmark = () => {
     setBookmarks,
     setTagCloud,
     setGroupLinks,
-  } = useContext(storage);
+  } = useContext(store);
 
   const [modalActive, modalSetActive] = useState(false);
 

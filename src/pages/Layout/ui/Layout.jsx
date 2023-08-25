@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 import sass from "./Layout.module.sass";
 
-import { storage, useStorage } from "../../../processes";
+import { store, useStorage } from "../../../processes";
 
 import {
 	Menu,
@@ -26,7 +26,7 @@ const Layout = () => {
 	const classNamesAside = `${sass.aside} ${!stateBaseSettings.enableTags && sass.hide}`;
 
 	return (
-		<storage.Provider value={{
+		<store.Provider value={{
 			...stateBookmarks,
 			...stateFilterSort,
 			...stateTagsGroups,
@@ -53,7 +53,7 @@ const Layout = () => {
 					</footer>
 				</div>
 			</div >
-		</storage.Provider>
+		</store.Provider>
 	);
 }
 

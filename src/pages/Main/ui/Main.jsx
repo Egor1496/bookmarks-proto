@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 
 import sass from "./Main.module.sass"
 
-import { storage } from "../../../processes";
+import { store } from "../../../processes";
 import { Bookmarks } from "../../../widgets";
 import { SelectStyleBookmark, GetFile, AddBookmark, LoadBookmark } from "../../../features";
 import { Sort } from "../../../entities";
@@ -13,7 +13,7 @@ const Main = () => {
   const {
     bookmarks,
     filter,
-  } = useContext(storage);
+  } = useContext(store);
 
   const defStyleNumber = LocalStorage.getStore("styleNumber", 1);
 

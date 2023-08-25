@@ -5,7 +5,7 @@ import sass from "./LoadBookmark.module.sass"
 import { AiFillFileText } from 'react-icons/ai';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 
-import { storage } from "../../../processes";
+import { store } from "../../../processes";
 import { BaseModal, BaseButton, Notification } from "../../../shared/ui";
 import { FillBookmark, JsonHelper, sendMesageNotification, LoadFile } from "../../../shared/model";
 
@@ -20,7 +20,7 @@ const LoadBookmark = () => {
     setBookmarks,
     setTagCloud,
     setGroupLinks,
-  } = useContext(storage);
+  } = useContext(store);
 
   const [modalActive, modalSetActive] = useState(false);
 

@@ -6,7 +6,7 @@ import { Bookmark } from "../../../features";
 import { BookmarkModal, DialogModal } from "../../../entities";
 import { Notification } from "../../../shared/ui";
 import { sendMesageNotification } from "../../../shared/model";
-import { storage } from "../../../processes";
+import { store } from "../../../processes";
 
 const Bookmarks = ({ styleNumber }) => {
 
@@ -20,7 +20,7 @@ const Bookmarks = ({ styleNumber }) => {
     setBookmarks,
     setTagCloud,
     setGroupLinks,
-  } = useContext(storage);
+  } = useContext(store);
 
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [editModalActive, editModalSetActive] = useState(false);
